@@ -11,7 +11,14 @@ export class AppComponent implements OnDestroy  {
 
   mobileQuery: MediaQueryList;
   fillerContent = 'test';
-  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+  fillerNav: Array<{ title: string, path: string}> = [
+    { title: 'Customers', path: 'customers' },
+    { title: 'Stores', path: 'stores' },
+    { title: 'Items', path: 'items' },
+    { title: 'Stocks', path: 'stocks' },
+    { title: 'Orders', path: 'Orders' },
+    { title: 'Transactions', path: 'transactions' },
+  ];
   private _mobileQueryListener: () => void;
 
   constructor(

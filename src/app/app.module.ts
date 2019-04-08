@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { CoreModule } from './modules/core/core.module';
+import { CoreRoutingModule } from './modules/core/core.routing.module';
 
 import { AppComponent } from './app.component';
-import { HelloComponent } from './hello.component';
 
 import { CustomerModule } from './modules/customer/customer.module';
 import { ItemModule } from './modules/item/item.module';
@@ -18,6 +18,7 @@ import { TransactionModule } from './modules/transaction/transaction.module';
     BrowserAnimationsModule,
 
     CoreModule,
+    CoreRoutingModule,
 
     CustomerModule,
     ItemModule,
@@ -26,7 +27,7 @@ import { TransactionModule } from './modules/transaction/transaction.module';
     StoreModule,
     TransactionModule
   ],
-  declarations: [ AppComponent, HelloComponent ],
+  declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
