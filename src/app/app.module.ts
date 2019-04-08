@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {MatButtonModule, MatSnackBarModule } from '@angular/material';
+import { CoreModule } from './modules/core/core.module';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
@@ -17,8 +17,7 @@ import { TransactionModule } from './modules/transaction/transaction.module';
   imports:      [
     BrowserAnimationsModule,
 
-    MatButtonModule,
-    MatSnackBarModule,
+    CoreModule,
 
     CustomerModule,
     ItemModule,
