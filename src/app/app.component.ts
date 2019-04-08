@@ -16,7 +16,7 @@ export class AppComponent implements OnDestroy  {
     { title: 'Stores', path: 'stores' },
     { title: 'Items', path: 'items' },
     { title: 'Stocks', path: 'stocks' },
-    { title: 'Orders', path: 'Orders' },
+    { title: 'Orders', path: 'orders' },
     { title: 'Transactions', path: 'transactions' },
   ];
   private _mobileQueryListener: () => void;
