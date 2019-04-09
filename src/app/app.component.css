@@ -29,3 +29,7 @@ h1.app-app-name {
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
+
+.active-link {
+  background-color: rgba(0,0,0,.1)
+}

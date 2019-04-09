@@ -1,6 +1,6 @@
-import { Component, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatSidenav } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
@@ -9,6 +9,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent implements OnDestroy  {
+
+  @ViewChild('snav') snavRef: MatSidenav;
 
   mobileQuery: MediaQueryList;
   fillerContent = 'test';
@@ -43,7 +45,10 @@ export class AppComponent implements OnDestroy  {
     });
   }
 
-  navigateTo(route: string) {
-    this.router.navigate([route]);
+  navLinkClick(sroute?: string) {
+    if (this.mobileQuery.matches) {
+      this.snavRef.close();
+    }
+    // this.router.navigate([route]);
   }
 }

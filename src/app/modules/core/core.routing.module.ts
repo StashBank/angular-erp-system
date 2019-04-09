@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from '../../app.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'stocks', pathMatch: 'full' },
   { path: 'customers', loadChildren: '../customer/customer.module#CustomerModule' },
   { path: 'items', loadChildren: '../item/item.module#ItemModule' },
   { path: 'orders', loadChildren: '../order/order.module#OrderModule' },
