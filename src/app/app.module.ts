@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { CoreModule } from './modules/core/core.module';
-import { CoreRoutingModule } from './modules/core/core.routing.module';
+import { CoreModule } from './core/core.module';
+import { CoreRoutingModule } from './core/core-routing.module';
 
 import { AppComponent } from './app.component';
 
-import { CustomerModule } from './modules/customer/customer.module';
-import { ItemModule } from './modules/item/item.module';
-import { OrderModule } from './modules/order/order.module';
-import { StockModule } from './modules/stock/stock.module';
-import { StoreModule } from './modules/store/store.module';
-import { TransactionModule } from './modules/transaction/transaction.module';
+import { CustomersModule } from './customers/customers.module';
+import { ItemsModule } from './items/items.module';
+import { OrdersModule } from './orders/orders.module';
+import { StocksModule } from './stocks/stocks.module';
+import { StoresModule } from './stores/stores.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @NgModule({
   imports:      [
@@ -20,12 +20,12 @@ import { TransactionModule } from './modules/transaction/transaction.module';
     CoreModule,
     CoreRoutingModule,
 
-    CustomerModule,
-    ItemModule,
-    OrderModule,
-    StockModule,
-    StoreModule,
-    TransactionModule
+    CustomersModule,
+    ItemsModule,
+    OrdersModule,
+    StocksModule,
+    StoresModule,
+    TransactionsModule
   ],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ]
