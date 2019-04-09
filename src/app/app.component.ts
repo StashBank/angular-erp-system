@@ -1,4 +1,5 @@
 import { Component, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 
@@ -24,7 +25,8 @@ export class AppComponent implements OnDestroy  {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -39,5 +41,9 @@ export class AppComponent implements OnDestroy  {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 }
