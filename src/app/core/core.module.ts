@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   MatButtonModule,
@@ -11,11 +11,21 @@ import {
   MatMenuModule,
   MatListModule,
 } from '@angular/material';
+import { BaseSectionComponent } from './base-section/base-section.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+
+    MatButtonModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatListModule,
   ],
   exports: [
     CommonModule,
@@ -27,7 +37,9 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatListModule,
+
+    BaseSectionComponent
   ],
-  declarations: []
+  declarations: [BaseSectionComponent]
 })
 export class CoreModule { }
