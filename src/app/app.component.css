@@ -33,3 +33,6 @@ h1.app-app-name {
 .active-link {
   background-color: rgba(0,0,0,.1)
 }
+.mat-nav-list {
+  width: 240px;
+}

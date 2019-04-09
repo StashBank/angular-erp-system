@@ -12,6 +12,7 @@ import {
   MatListModule,
 } from '@angular/material';
 import { BaseSectionComponent } from './base-section/base-section.component';
+import { BasePageComponent } from './base-page/base-page.component';
 
 @NgModule({
   imports: [
@@ -38,8 +39,9 @@ import { BaseSectionComponent } from './base-section/base-section.component';
     MatMenuModule,
     MatListModule,
 
-    BaseSectionComponent
+    BaseSectionComponent,
+    BasePageComponent,
   ],
-  declarations: [BaseSectionComponent]
+  declarations: [BaseSectionComponent, BasePageComponent]
 })
 export class CoreModule { }

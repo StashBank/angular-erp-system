@@ -4,7 +4,7 @@ import { MatSnackBar, MatSidenav } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'my-app',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
@@ -22,7 +22,7 @@ export class AppComponent implements OnDestroy  {
     { title: 'Orders', path: 'orders' },
     { title: 'Transactions', path: 'transactions' },
   ];
-  private _mobileQueryListener: () => void;
+  private mobileQueryListener: () => void;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -31,12 +31,12 @@ export class AppComponent implements OnDestroy  {
     private router: Router
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
   openSnackBar(message: string, action: string = null) {
