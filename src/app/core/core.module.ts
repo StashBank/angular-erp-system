@@ -10,6 +10,7 @@ import {
   MatToolbarModule,
   MatMenuModule,
   MatListModule,
+  MatTableModule,
 } from '@angular/material';
 import { BaseSectionComponent } from './base-section/base-section.component';
 import { BasePageComponent } from './base-page/base-page.component';
@@ -27,6 +28,7 @@ import { BasePageComponent } from './base-page/base-page.component';
     MatToolbarModule,
     MatMenuModule,
     MatListModule,
+    MatTableModule,
   ],
   exports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { BasePageComponent } from './base-page/base-page.component';
     MatToolbarModule,
     MatMenuModule,
     MatListModule,
+    MatTableModule,
 
     BaseSectionComponent,
     BasePageComponent,
