@@ -1,5 +1,5 @@
 import { StoreType } from '../enums/store-type.enum';
-import { Stock } from '../../stocks/models/stock.model';
+import { Stock } from '../../stocks/models/stock';
 
 export class Store {
   id: string;
