@@ -27,7 +27,7 @@ export class ItemService {
     return this.firestore.collection('items').snapshotChanges().pipe(
       map(data => {
       console.log(data);
-      return data.map(i => i.payload as any);
+      return data.map(i => i.payload.doc.data() as any);
     })
     );
   }
