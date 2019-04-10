@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-base-page',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasePageComponent implements OnInit {
 
+  @Input() saveButtonDisabled: boolean;
+
+  @Output() save = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSaveButtonClick() {
+    this.save.next();
   }
 
 }

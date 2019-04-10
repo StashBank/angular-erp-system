@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable, of as observableOf } from 'rxjs';
-import { Guid } from "guid-typescript";
+import { Observable, of as observableOf, from } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Guid } from 'guid-typescript';
 
 import { Item } from '../models/item';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class ItemService {
 
-  constructor() { }
+  constructor(
+    private firestore: AngularFirestore
+  ) { }
 
   getAll(): Observable<Array<Item>> {
     const response = [
@@ -20,6 +24,14 @@ export class ItemService {
       {id: Guid.create().toString(), name: 'Item 7', code: '007', price: 10.50, description: 'item' },
     ] as Array<Item>;
     return observableOf(response);
+  }
+
+  createItem(itemDto: any): Observable<Item> {
+    itemDto.id = Guid.create().toString();
+    return from(this.firestore.collection('items')
+      .add(itemDto)).pipe(
+        map(() => itemDto)
+      );
   }
 
 }

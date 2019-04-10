@@ -1,6 +1,25 @@
-<mat-toolbar>
+<!-- <mat-toolbar>
   <mat-toolbar-row>
     <button mat-raised-button color="primary">Save</button>
   </mat-toolbar-row>
-</mat-toolbar>
-<ng-content></ng-content>
+</mat-toolbar> -->
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <ng-content select="[title]'"></ng-content>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <ng-content select="[sub-title]"></ng-content>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-content></ng-content>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="saveButtonDisabled"
+      (click)="onSaveButtonClick()">Save</button>
+  </mat-card-actions>
+</mat-card>

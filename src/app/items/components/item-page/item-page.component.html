@@ -1,5 +1,48 @@
-<app-base-page>
-  <p>
-    item-page works
-  </p>
+<app-base-page
+  [saveButtonDisabled]="form?.invalid"
+  (save)="save()">
+  <span title>Item Page</span>
+  <span sub-title>create new</span>
+  <form [formGroup]="form">
+    <mat-grid-list cols="4" rowHeight="64px">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Code" formControlName="code" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Bar Code" formControlName="barCode" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Type" formControlName="type" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Price" formControlName="price" type="number" />
+        </mat-form-field>
+      </mat-grid-tile>
+  
+      <mat-grid-tile colspan=3>
+        <mat-form-field style="width: 100%; padding: 3px 0 3px 0">
+          <input matInput placeholder="Description" formControlName="description" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+
+    </mat-grid-list>
+  </form>
 </app-base-page>
