@@ -45,7 +45,7 @@ export class AppComponent implements OnDestroy  {
     });
   }
 
-  navLinkClick(sroute?: string) {
+  navLinkClick(route?: string) {
     if (this.mobileQuery.matches) {
       this.snavRef.close();
     }

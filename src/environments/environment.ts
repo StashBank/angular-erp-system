@@ -6,11 +6,11 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: 'AIzaSyB3EuU8JMqcMaiHr4VSAqWHcAR-Q9kvbhw',
-    authDomain: 'localhost',
-    databaseURL: 'https://angular-erp-system.firebaseio.com/',
+    authDomain: 'angular-erp-system.firebaseapp.com',
+    databaseURL: 'https://angular-erp-system.firebaseio.com',
     projectId: 'angular-erp-system',
-    storageBucket: '',
-    // messagingSenderId: YOUR_MESSAGING_SENDER_ID
+    storageBucket: 'angular-erp-system.appspot.com',
+    messagingSenderId: '762384996400'
   }
 };
 
