@@ -12,6 +12,7 @@ import { OrdersModule } from './orders/orders.module';
 import { StocksModule } from './stocks/stocks.module';
 import { StoresModule } from './stores/stores.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports:      [
@@ -27,7 +28,7 @@ import { TransactionsModule } from './transactions/transactions.module';
     StoresModule,
     TransactionsModule
   ],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, HomeComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
