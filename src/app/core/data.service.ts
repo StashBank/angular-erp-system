@@ -4,9 +4,7 @@ import { map, tap } from 'rxjs/operators';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export abstract class DataService<T> {
 
   abstract collectionName: string;

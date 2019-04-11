@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { DataService } from '../../core/data.service';
+import { Transaction } from '../models/transaction';
 
 @Injectable({ providedIn: 'root' })
-export class TransactionService {
+export class TransactionService extends DataService<Transaction> {
 
-  constructor() { }
+  collectionName = 'transaction';
 
 }

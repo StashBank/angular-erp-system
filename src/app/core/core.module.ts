@@ -22,7 +22,6 @@ import {
 } from '@angular/material';
 import { BaseSectionComponent } from './base-section/base-section.component';
 import { BasePageComponent } from './base-page/base-page.component';
-import { DataServiceService } from './data-service.service';
 
 @NgModule({
   imports: [
@@ -71,6 +70,6 @@ import { DataServiceService } from './data-service.service';
     BasePageComponent,
   ],
   declarations: [BaseSectionComponent, BasePageComponent],
-  providers: [DataServiceService]
+  providers: []
 })
 export class CoreModule { }
