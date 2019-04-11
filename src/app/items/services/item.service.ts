@@ -14,30 +14,51 @@ export class ItemService {
   ) { }
 
   getAll(): Observable<Array<Item>> {
-    /*const response = [
-      {id: Guid.create().toString(), name: 'Item 1', code: '001', price: 10.50, description: 'item' },
-      {id: Guid.create().toString(), name: 'Item 2', code: '002', price: 10.50, description: 'item' },
-      {id: Guid.create().toString(), name: 'Item 3', code: '003', price: 10.50, description: 'item' },
-      {id: Guid.create().toString(), name: 'Item 4', code: '004', price: 10.50, description: 'item' },
-      {id: Guid.create().toString(), name: 'Item 5', code: '005', price: 10.50, description: 'item' },
-      {id: Guid.create().toString(), name: 'Item 6', code: '006', price: 10.50, description: 'item' },
-      {id: Guid.create().toString(), name: 'Item 7', code: '007', price: 10.50, description: 'item' },
-    ] as Array<Item>;
-    return observableOf(response).pipe(tap(r => console.log(JSON.stringify(r))));*/
-    return this.firestore.collection('items').snapshotChanges().pipe(
-      map(data => {
-      console.log(data);
-      return data.map(i => i.payload.doc.data() as any);
-    })
+    return this.firestore.collection('items')
+    .snapshotChanges()
+    .pipe(
+      map(
+        data =>  data.map(i => {
+          return {
+            ...i.payload.doc.data(),
+            id: i.payload.doc.id,
+          } as Item;
+        })
+      )
     );
   }
 
-  createItem(itemDto: any): Observable<Item> {
-    itemDto.id = Guid.create().toString();
+  getItemById(id: string): Observable<Item> {
+    return this.firestore.doc<Item>(`items/${id}`).valueChanges().pipe(
+      map(item => {
+        if (item) {
+          item.id = id;
+        }
+        return item;
+      })
+    );
+  }
+
+  createItem(itemDto: any): Observable<string> {
     return from(this.firestore.collection('items')
       .add(itemDto)).pipe(
-        map(() => itemDto)
+        map(
+          resp => resp.id
+        )
       );
   }
+
+  updateItem(id: string, item: Item): Observable<any> {
+    return from(
+      this.firestore.doc<Item>(`items/${id}`).update(item)
+    );
+  }
+
+  removeItem(id: string): Observable<any> {
+    return from(
+      this.firestore.doc<Item>(`items/${id}`).delete()
+    );
+  }
+
 
 }

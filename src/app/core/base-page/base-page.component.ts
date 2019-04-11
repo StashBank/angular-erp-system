@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-base-page',
@@ -11,9 +12,15 @@ export class BasePageComponent implements OnInit {
 
   @Output() save = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private location: Location
+  ) { }
 
   ngOnInit() {
+  }
+
+  onBackButtonClick() {
+    this.location.back();
   }
 
   onSaveButtonClick() {
