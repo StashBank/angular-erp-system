@@ -8,4 +8,5 @@ export class Stock {
   item: Item;
   store: Store;
   qty: number;
+  date: Date;
 }
