@@ -1,5 +1,48 @@
-<app-base-page>
-  <p>
-    store-page works!
-  </p>
+<app-base-page
+  [saveButtonDisabled]="form?.invalid"
+  (save)="save()">
+  <span title>Store Page</span>
+  <span sub-title>{{ id ? 'edit' + store.name : 'create new' }}</span>
+  <form [formGroup]="form">
+    <mat-grid-list cols="4" rowHeight="64px">
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <input matInput placeholder="Code" formControlName="code" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <input matInput placeholder="Type" formControlName="type" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <input matInput placeholder="Status" formControlName="status" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile colspan="1">
+        <mat-form-field>
+          <input matInput placeholder="Phone" formControlName="phone" />
+        </mat-form-field>
+      </mat-grid-tile>
+  
+      <mat-grid-tile colspan="3">
+        <mat-form-field style="width: 100%; padding: 3px 0 3px 0">
+          <input matInput placeholder="Address" formControlName="address" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+
+    </mat-grid-list>
+  </form>
 </app-base-page>

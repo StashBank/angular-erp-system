@@ -1,5 +1,24 @@
-<app-base-page>
-  <p>
-    order-page works
-  </p>
+<app-base-page
+  [saveButtonDisabled]="form?.invalid"
+  (save)="save()">
+  <span title>Order Page</span>
+  <span sub-title>{{ id ? 'edit ' + order.number : 'create new' }}</span>
+  <form [formGroup]="form">
+    <mat-grid-list cols="2" rowHeight="64px">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Number" formControlName="number" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Quantity" formControlName="qty" type="number" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+
+    </mat-grid-list>
+  </form>
 </app-base-page>

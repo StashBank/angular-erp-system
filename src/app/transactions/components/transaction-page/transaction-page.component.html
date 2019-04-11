@@ -1,5 +1,52 @@
-<app-base-page>
-  <p>
-    transaction-page works
-  </p>
+<app-base-page
+  [saveButtonHidden]="true">
+  <span title>Transaction Page</span>
+  <span sub-title>view</span>
+  <form [formGroup]="form">
+    <mat-grid-list cols="2" rowHeight="64px">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Type" formControlName="type" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Status" formControlName="status" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="From" formControlName="from" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="To" formControlName="to" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Order" formControlName="order" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Date" formControlName="date" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Quantity" formControlName="qty" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </form>
 </app-base-page>

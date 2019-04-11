@@ -1,5 +1,41 @@
-<app-base-page>
-  <p>
-    customer-page works
-  </p>
+<app-base-page
+  [saveButtonDisabled]="form?.invalid"
+  (save)="save()">
+  <span title>Customer Page</span>
+  <span sub-title>{{ id ? 'edit ' + customer.name : 'create new' }}</span>
+  <form [formGroup]="form">
+    <mat-grid-list cols="2" rowHeight="64px">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Type" formControlName="type" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Phone" formControlName="phone" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="address" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan=2>
+        <mat-form-field style="width: 100%; padding: 3p 0 3px 0">
+          <input matInput placeholder="Extras" formControlName="extras" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </form>
 </app-base-page>

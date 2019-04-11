@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 export class BasePageComponent implements OnInit {
 
   @Input() saveButtonDisabled: boolean;
+  @Input() saveButtonHidden: boolean;
 
   @Output() save = new EventEmitter();
 

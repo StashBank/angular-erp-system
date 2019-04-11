@@ -2,7 +2,7 @@
   [saveButtonDisabled]="form?.invalid"
   (save)="save()">
   <span title>Item Page</span>
-  <span sub-title>create new</span>
+  <span sub-title>{{ id ? 'edit ' + item.name : 'create new' }}</span>
   <form [formGroup]="form">
     <mat-grid-list cols="4" rowHeight="64px">
 

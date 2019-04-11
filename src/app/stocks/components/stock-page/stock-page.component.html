@@ -1,5 +1,36 @@
-<app-base-page>
-  <p>
-    stock-page works
-  </p>
+<app-base-page
+  [saveButtonDisabled]="form?.invalid"
+  (save)="save()">
+  <span title>Stock Page</span>
+  <span sub-title>{{ id ? 'edit' : 'create new' }}</span>
+  <form [formGroup]="form">
+    <mat-grid-list cols="2" rowHeight="64px">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Item" formControlName="item" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Store" formControlName="store" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Quantity" formControlName="qty" type="number" />
+        </mat-form-field>
+      </mat-grid-tile>
+  
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Status" formControlName="status" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+
+    </mat-grid-list>
+  </form>
 </app-base-page>

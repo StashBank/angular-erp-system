@@ -21,7 +21,7 @@
       color="primary"
       [disabled]="saveButtonDisabled"
       (click)="onBackButtonClick()">Back</button>
-    <button
+    <button *ngIf="!saveButtonHidden"
       mat-raised-button
       color="primary"
       [disabled]="saveButtonDisabled"
