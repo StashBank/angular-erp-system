@@ -33,7 +33,7 @@ export class ItemListComponent implements OnInit {
   }
 
   remove(item: Item) {
-    this.itemService.removeItem(item.id).subscribe(() => null);
+    this.itemService.remove(item.id).subscribe(() => null);
   }
 
 }

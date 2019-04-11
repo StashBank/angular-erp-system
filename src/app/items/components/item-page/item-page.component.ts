@@ -50,10 +50,10 @@ export class ItemPageComponent implements OnInit {
 
   save() {
     if (this.id) {
-      this.itemService.updateItem(this.id, this.form.value).subscribe(() => null);
+      this.itemService.update(this.id, this.form.value).subscribe(() => null);
       return;
     }
-    this.itemService.createItem(this.form.value)
+    this.itemService.create(this.form.value)
       .subscribe(
         // id => this.router.navigate(['..', 'edit', id], { relativeTo: this.route })
         id => this.location.replaceState(`items/edit/${id}`)
@@ -61,7 +61,7 @@ export class ItemPageComponent implements OnInit {
   }
 
   loadItem(id: string) {
-    this.itemService.getItemById(id).subscribe(item => {
+    this.itemService.getById(id).subscribe(item => {
       this.item = item;
       this.form.patchValue(item);
     });
