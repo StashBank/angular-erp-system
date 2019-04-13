@@ -33,7 +33,7 @@ export class StockPageComponent implements OnInit {
         this.id = id;
         this.loadStock(id);
       }
-    })
+    });
   }
 
   createForm() {

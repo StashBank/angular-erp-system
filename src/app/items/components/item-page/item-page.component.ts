@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { ItemService } from '../../services/item.service';
 import { Item } from '../../models/item';
+import { ItemType } from '../../enums/item-type.enum';
 
 @Component({
   selector: 'app-item-page',
@@ -16,6 +17,10 @@ export class ItemPageComponent implements OnInit {
   form: FormGroup;
   id: string;
   item: Item;
+  itemTypes: Array<{ name: string, value: string }> = [
+    { value: ItemType.Goods.toString(), name: 'Goods' },
+    { value: ItemType.Services.toString(), name: 'Services' },
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +38,7 @@ export class ItemPageComponent implements OnInit {
         this.id = id;
         this.loadItem(id);
       }
-    })
+    });
   }
 
   createForm() {

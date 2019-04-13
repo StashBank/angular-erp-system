@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', component: CustomerListComponent, pathMatch: 'full' },
   { path: 'new', component: CustomerPageComponent },
   { path: 'edit/:id', component: CustomerPageComponent },
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

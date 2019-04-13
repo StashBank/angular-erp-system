@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./base-section.component.css']
 })
 export class BaseSectionComponent implements OnInit {
+
+  @Input() saveButtonHidden: boolean;
 
   constructor(
     private router: Router,

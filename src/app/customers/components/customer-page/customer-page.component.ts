@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer';
+import { CustomerType } from '../../enums/customer-type.enum';
 
 @Component({
   selector: 'app-customer-page',
@@ -16,6 +17,10 @@ export class CustomerPageComponent implements OnInit {
   form: FormGroup;
   id: string;
   customer: Customer;
+  customerTypes: Array<{ name: string, value: string }> = [
+    { value: CustomerType.Company.toString(), name: 'Company' },
+    { value: CustomerType.Person.toString(), name: 'Person' },
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +38,7 @@ export class CustomerPageComponent implements OnInit {
         this.id = id;
         this.loadCustomer(id);
       }
-    })
+    });
   }
 
   createForm() {

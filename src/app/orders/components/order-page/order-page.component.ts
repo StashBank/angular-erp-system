@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { OrderService } from '../../services/order.service';
 import { Order } from '../../models/order';
+import { OrderType } from '../../enums/order-type.enum';
 
 @Component({
   selector: 'app-order-page',
@@ -16,6 +17,10 @@ export class OrderPageComponent implements OnInit {
   form: FormGroup;
   id: string;
   order: Order;
+  orderTypes: Array<{ name: string, value: string }> = [
+    { value: OrderType.Inbound.toString(), name: 'Inbound' },
+    { value: OrderType.Outbound.toString(), name: 'Outbound' },
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,13 +38,14 @@ export class OrderPageComponent implements OnInit {
         this.id = id;
         this.loadOrder(id);
       }
-    })
+    });
   }
 
   createForm() {
     this.form = this.formBuilder.group({
       number: [null, [Validators.required]],
-      date: null,
+      type: [null, [Validators.required]],
+      date: new Date(),
       customer: null,
       item: null,
       store: null,

@@ -4,20 +4,48 @@
   <span title>Order Page</span>
   <span sub-title>{{ id ? 'edit ' + order.number : 'create new' }}</span>
   <form [formGroup]="form">
-    <mat-grid-list cols="2" rowHeight="64px">
+    <mat-grid-list cols="3" rowHeight="64px">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of orderTypes" [value]="type.value">
+              {{type.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
           <input matInput placeholder="Number" formControlName="number" />
         </mat-form-field>
       </mat-grid-tile>
-      
+
       <mat-grid-tile>
         <mat-form-field>
           <input matInput placeholder="Quantity" formControlName="qty" type="number" />
         </mat-form-field>
       </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Customer" formControlName="customer" />
+        </mat-form-field>
+      </mat-grid-tile>
       
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Item" formControlName="item" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput placeholder="Store" formControlName="store" />
+        </mat-form-field>
+      </mat-grid-tile>
 
     </mat-grid-list>
   </form>

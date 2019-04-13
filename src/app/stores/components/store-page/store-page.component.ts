@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { StoreService } from '../../services/store.service';
 import { Store } from '../../models/store';
+import { StoreType } from '../../enums/store-type.enum';
 
 @Component({
   selector: 'app-store-page',
@@ -16,6 +17,13 @@ export class StorePageComponent implements OnInit {
   form: FormGroup;
   id: string;
   store: Store;
+  storeTypes: Array<{ name: string, value: string }> = [
+    { value: StoreType.Department.toString(), name: 'Department' },
+    { value: StoreType.BigBox.toString(), name: 'Big-Box' },
+    { value: StoreType.Special.toString(), name: 'Special' },
+    { value: StoreType.Discount.toString(), name: 'Discount' },
+    { value: StoreType.ECommerce.toString(), name: 'E-Commerce' },
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +41,7 @@ export class StorePageComponent implements OnInit {
         this.id = id;
         this.loadStore(id);
       }
-    })
+    });
   }
 
   createForm() {

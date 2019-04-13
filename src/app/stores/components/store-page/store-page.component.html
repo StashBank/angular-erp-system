@@ -20,7 +20,12 @@
 
       <mat-grid-tile colspan="2">
         <mat-form-field>
-          <input matInput placeholder="Type" formControlName="type" />
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of storeTypes" [value]="type.value">
+              {{type.name}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </mat-grid-tile>
 

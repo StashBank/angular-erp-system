@@ -19,6 +19,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatGridListModule,
+  MatSelectModule,
 } from '@angular/material';
 import { BaseSectionComponent } from './base-section/base-section.component';
 import { BasePageComponent } from './base-page/base-page.component';
@@ -41,6 +42,7 @@ import { BasePageComponent } from './base-page/base-page.component';
     MatFormFieldModule,
     MatInputModule,
     MatGridListModule,
+    MatSelectModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -62,6 +64,7 @@ import { BasePageComponent } from './base-page/base-page.component';
     MatFormFieldModule,
     MatInputModule,
     MatGridListModule,
+    MatSelectModule,
 
     AngularFireModule,
     AngularFirestoreModule,

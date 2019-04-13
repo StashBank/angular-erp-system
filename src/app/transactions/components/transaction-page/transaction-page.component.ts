@@ -33,7 +33,7 @@ export class TransactionPageComponent implements OnInit {
         this.id = id;
         this.loadTransaction(id);
       }
-    })
+    });
   }
 
   createForm() {

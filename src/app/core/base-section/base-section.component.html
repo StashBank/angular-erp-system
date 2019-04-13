@@ -1,6 +1,13 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <button mat-raised-button color="primary" (click)="onNewButtonClick()">New</button>
+    <button
+      *ngIf="!saveButtonHidden"
+      mat-raised-button
+      color="primary"
+      (click)="onNewButtonClick()">New</button>
+      <div style="padding-left: 24px; font-size: x-large">
+        <ng-content select="[title]"></ng-content>
+      </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <ng-content></ng-content>
