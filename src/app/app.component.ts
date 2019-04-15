@@ -1,14 +1,15 @@
-import { Component, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSidenav } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
-export class AppComponent implements OnDestroy  {
+export class AppComponent implements OnDestroy {
 
   @ViewChild('snav') snavRef: MatSidenav;
 
@@ -22,21 +23,22 @@ export class AppComponent implements OnDestroy  {
     { title: 'Orders', path: 'orders' },
     { title: 'Transactions', path: 'transactions' },
   ];
-  private mobileQueryListener: () => void;
+  private mobileQueryListener: (ev: MediaQueryListEvent) => void;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private snackBar: MatSnackBar,
-    private router: Router
+    private translate: TranslateService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this.mobileQueryListener);
+    this.mobileQueryListener = _ => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    translate.setDefaultLang('en-US');
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this.mobileQueryListener);
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
 
   openSnackBar(message: string, action: string = null) {
@@ -45,10 +47,9 @@ export class AppComponent implements OnDestroy  {
     });
   }
 
-  navLinkClick(route?: string) {
+  navLinkClick() {
     if (this.mobileQuery.matches) {
       this.snavRef.close();
     }
-    // this.router.navigate([route]);
   }
 }

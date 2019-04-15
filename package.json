@@ -24,6 +24,8 @@
     "@angular/platform-browser-dynamic": "7.2.12",
     "@angular/router": "7.2.12",
     "@firebase/util": "^0.2.11",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
     "core-js": "2.6.5",
     "firebase": "5.9.3",
     "guid-typescript": "1.0.9",

@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { environment } from '../../environments/environment';
 
 import {
@@ -23,12 +25,14 @@ import {
 } from '@angular/material';
 import { BaseSectionComponent } from './base-section/base-section.component';
 import { BasePageComponent } from './base-page/base-page.component';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
     MatButtonModule,
     MatSnackBarModule,
@@ -46,6 +50,8 @@ import { BasePageComponent } from './base-page/base-page.component';
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+
+    TranslateModule.forRoot(),
   ],
   exports: [
     CommonModule,

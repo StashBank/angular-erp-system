@@ -6,3 +6,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-table {
   width: 100%;
 }
+.mat-form-field {
+  width: 100%;
+  padding-left: 9px;
+  padding-right: 9px;
+}

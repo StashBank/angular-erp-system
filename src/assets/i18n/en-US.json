@@ -1,0 +1,14 @@
+{
+  "common": {
+    "edit": "edit {{value}}",
+    "create-new": "create new"
+  },
+  "customers": {
+    "customer-page": "Customer Page",
+    "label.name": "Name",
+    "label.type": "Type",
+    "label.phone": "Phone",
+    "label.address": "Address",
+    "label.notes": "Notes"
+  }
+}
