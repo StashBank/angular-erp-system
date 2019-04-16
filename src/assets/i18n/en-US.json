@@ -35,5 +35,24 @@
     "label.store": "Store",
     "label.quantity": "Quantity",
     "label.status": "Status"
+  },
+  "orders": {
+    "order-page": "Order Page",
+    "label.type": "Type",
+    "label.number": "Number",
+    "label.quantity": "Quantity",
+    "label.customer": "Customer",
+    "label.item": "Item",
+    "label.store": "Store"
+  },
+  "transactions": {
+    "transaction--page": "Transaction Page",
+    "label.type": "Type",
+    "label.status": "Status",
+    "label.from": "From",
+    "label.to": "To",
+    "label.quantity": "Quantity",
+    "label.order": "Order",
+    "label.date": "Date"
   }
 }

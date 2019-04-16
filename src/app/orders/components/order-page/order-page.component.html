@@ -1,16 +1,16 @@
 <app-base-page
-  [saveButtonDisabled]="form?.invalid"
-  (save)="save()">
-  <span title>Order Page</span>
-  <span sub-title>{{ id ? 'edit ' + order.number : 'create new' }}</span>
-  <form [formGroup]="form">
-    <mat-grid-list cols="3" rowHeight="64px">
+  [saveButtonDisabled]="vm.form?.invalid"
+  (save)="vm.save()">
+  <span title>{{ 'orders.order-page' | translate }}</span>
+  <span sub-title>{{ vm.subTitle$ | async }}</span>
+  <form [formGroup]="vm.form">
+    <mat-grid-list [cols]="vm.isMobile ? 1 : 3" rowHeight="64px">
 
       <mat-grid-tile>
         <mat-form-field>
-          <mat-label>Type</mat-label>
+          <mat-label>{{ 'orders.label.type' | translate }}</mat-label>
           <mat-select formControlName="type">
-            <mat-option *ngFor="let type of orderTypes" [value]="type.value">
+            <mat-option *ngFor="let type of vm.orderTypes" [value]="type.value">
               {{type.name}}
             </mat-option>
           </mat-select>
@@ -19,31 +19,31 @@
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Number" formControlName="number" />
+          <input matInput [placeholder]="'orders.label.number' | translate" formControlName="number" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Quantity" formControlName="qty" type="number" />
+          <input matInput [placeholder]="'orders.label.quantity' | translate" formControlName="qty" type="number" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Customer" formControlName="customer" />
+          <input matInput [placeholder]="'orders.label.customer' | translate" formControlName="customer" />
         </mat-form-field>
       </mat-grid-tile>
       
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Item" formControlName="item" />
+          <input matInput [placeholder]="'orders.label.item' | translate" formControlName="item" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Store" formControlName="store" />
+          <input matInput [placeholder]="'orders.label.store' | translate" formControlName="store" />
         </mat-form-field>
       </mat-grid-tile>
 

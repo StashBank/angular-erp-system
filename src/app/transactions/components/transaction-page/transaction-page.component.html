@@ -1,49 +1,49 @@
 <app-base-page
   [saveButtonHidden]="true">
-  <span title>Transaction Page</span>
-  <span sub-title>view</span>
-  <form [formGroup]="form">
-    <mat-grid-list cols="2" rowHeight="64px">
+  <span title>{{ 'transactions.transaction--page' | translate }}</span>
+  <span sub-title>{{ vm.subTitle$ | async }}</span>
+  <form [formGroup]="vm.form">
+    <mat-grid-list [cols]="vm.isMobile ? 1 : 2" rowHeight="64px">
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Type" formControlName="type" />
+          <input matInput [placeholder]="'transactions.label.type' | translate" formControlName="type" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Status" formControlName="status" />
+          <input matInput [placeholder]="'transactions.label.status' | translate" formControlName="status" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="From" formControlName="from" />
+          <input matInput [placeholder]="'transactions.label.from' | translate" formControlName="from" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="To" formControlName="to" />
+          <input matInput [placeholder]="'transactions.label.to' | translate" formControlName="to" />
         </mat-form-field>
       </mat-grid-tile>
       
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Order" formControlName="order" />
+          <input matInput [placeholder]="'transactions.label.order' | translate" formControlName="order" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Date" formControlName="date" />
+          <input matInput [placeholder]="'transactions.label.date' | translate" formControlName="date" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Quantity" formControlName="qty" />
+          <input matInput [placeholder]="'transactions.label.quantity' | translate" formControlName="qty" />
         </mat-form-field>
       </mat-grid-tile>
 
