@@ -10,5 +10,30 @@
     "label.phone": "Phone",
     "label.address": "Address",
     "label.notes": "Notes"
+  },
+  "stores": {
+    "store-page": "Store Page",
+    "label.name": "Name",
+    "label.code": "Code",
+    "label.type": "Type",
+    "label.status": "Status",
+    "label.phone": "Phone",
+    "label.address": "Address"
+  },
+  "items": {
+    "item-page": "Item Page",
+    "label.name": "Name",
+    "label.code": "Code",
+    "label.bar-code": "Bar Code",
+    "label.type": "Type",
+    "label.price": "Price",
+    "label.description": "Description"
+  },
+  "stocks": {
+    "stock-page": "Stock Page",
+    "label.item": "Item",
+    "label.store": "Store",
+    "label.quantity": "Quantity",
+    "label.status": "Status"
   }
 }

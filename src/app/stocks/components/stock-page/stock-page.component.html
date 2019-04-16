@@ -1,32 +1,32 @@
 <app-base-page
-  [saveButtonDisabled]="form?.invalid"
-  (save)="save()">
-  <span title>Stock Page</span>
-  <span sub-title>{{ id ? 'edit' : 'create new' }}</span>
-  <form [formGroup]="form">
-    <mat-grid-list cols="2" rowHeight="64px">
+  [saveButtonDisabled]="vm.form?.invalid"
+  (save)="vm.save()">
+  <span title>{{ 'stocks.stock-page' | translate }}</span>
+  <span sub-title>{{ vm.subTitle$ | async }}</span>
+  <form [formGroup]="vm.form">
+    <mat-grid-list [cols]="vm.isMobile ? 1 : 2" rowHeight="64px">
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Item" formControlName="item" />
+          <input matInput [placeholder]="'stocks.label.item' | translate" formControlName="item" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Store" formControlName="store" />
+          <input matInput [placeholder]="'stocks.label.store' | translate" formControlName="store" />
         </mat-form-field>
       </mat-grid-tile>
       
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Quantity" formControlName="qty" type="number" />
+          <input matInput [placeholder]="'stocks.label.quantity' | translate" formControlName="qty" type="number" />
         </mat-form-field>
       </mat-grid-tile>
   
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput placeholder="Status" formControlName="status" />
+          <input matInput [placeholder]="'stocks.label.status' | translate" formControlName="status" />
         </mat-form-field>
       </mat-grid-tile>
       

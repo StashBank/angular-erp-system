@@ -4,6 +4,7 @@ import { Store } from '../../stores/models/store';
 
 export class Stock {
   id: string;
+  number: string;
   status: StockStatus;
   item: Item;
   store: Store;

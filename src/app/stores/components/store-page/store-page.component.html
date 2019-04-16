@@ -1,49 +1,49 @@
 <app-base-page
-  [saveButtonDisabled]="form?.invalid"
-  (save)="save()">
-  <span title>Store Page</span>
-  <span sub-title>{{ id ? 'edit' + store.name : 'create new' }}</span>
-  <form [formGroup]="form">
-    <mat-grid-list cols="4" rowHeight="64px">
+  [saveButtonDisabled]="vm.form?.invalid"
+  (save)="vm.save()">
+  <span title>{{ 'stores.store-page' | translate }}</span>
+  <span sub-title>{{ vm.subTitle$ | async }}</span>
+  <form [formGroup]="vm.form">
+    <mat-grid-list [cols]="vm.isMobile ? 1 : 4" rowHeight="64px">
 
-      <mat-grid-tile colspan="2">
+      <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">
         <mat-form-field>
-          <input matInput placeholder="Name" formControlName="name" />
+          <input matInput [placeholder]="'stores.label.name' | translate" formControlName="name" />
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="2">
+      <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">
         <mat-form-field>
-          <input matInput placeholder="Code" formControlName="code" />
+          <input matInput [placeholder]="'stores.label.code' | translate" formControlName="code" />
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="2">
+      <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">
         <mat-form-field>
-          <mat-label>Type</mat-label>
+          <mat-label>{{ 'stores.label.type' | translate }}</mat-label>
           <mat-select formControlName="type">
-            <mat-option *ngFor="let type of storeTypes" [value]="type.value">
+            <mat-option *ngFor="let type of vm.storeTypes" [value]="type.value">
               {{type.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="2">
+      <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">
         <mat-form-field>
-          <input matInput placeholder="Status" formControlName="status" />
+          <input matInput [placeholder]="'stores.label.status' | translate" formControlName="status" />
         </mat-form-field>
       </mat-grid-tile>
       
       <mat-grid-tile colspan="1">
         <mat-form-field>
-          <input matInput placeholder="Phone" formControlName="phone" />
+          <input matInput [placeholder]="'stores.label.phone' | translate" formControlName="phone" />
         </mat-form-field>
       </mat-grid-tile>
   
-      <mat-grid-tile colspan="3">
+      <mat-grid-tile [colspan]="vm.isMobile ? 1 : 3">
         <mat-form-field style="width: 100%; padding: 3px 0 3px 0">
-          <input matInput placeholder="Address" formControlName="address" />
+          <input matInput [placeholder]="'stores.label.address' | translate" formControlName="address" />
         </mat-form-field>
       </mat-grid-tile>
       
