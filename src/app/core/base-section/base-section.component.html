@@ -4,7 +4,7 @@
       *ngIf="!saveButtonHidden"
       mat-raised-button
       color="primary"
-      (click)="onNewButtonClick()">New</button>
+      (click)="onNewButtonClick()">{{ 'common.new-button' | translate }}</button>
       <div style="padding-left: 24px; font-size: x-large">
         <ng-content select="[title]"></ng-content>
       </div>

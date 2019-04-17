@@ -1,9 +1,22 @@
 {
   "common": {
+    "app-title": "AT-CORP BPM System",
     "edit": "edit {{value}}",
-    "create-new": "create new"
+    "create-new": "create new",
+    "new-button": "New",
+    "back-button": "Back",
+    "save-button": "Save",
+    "menu": {
+      "customers": "Customers",
+      "stores": "Stores",
+      "items": "Items",
+      "stocks": "Stocks",
+      "orders": "Orders",
+      "transactions": "Transactions"
+    }
   },
   "customers": {
+    "title": "Customers",
     "customer-page": "Customer Page",
     "label.name": "Name",
     "label.type": "Type",
@@ -12,6 +25,7 @@
     "label.notes": "Notes"
   },
   "stores": {
+    "title": "Stores",
     "store-page": "Store Page",
     "label.name": "Name",
     "label.code": "Code",
@@ -21,6 +35,7 @@
     "label.address": "Address"
   },
   "items": {
+    "title": "Items",
     "item-page": "Item Page",
     "label.name": "Name",
     "label.code": "Code",
@@ -30,6 +45,7 @@
     "label.description": "Description"
   },
   "stocks": {
+    "title": "Stocks",
     "stock-page": "Stock Page",
     "label.item": "Item",
     "label.store": "Store",
@@ -37,6 +53,7 @@
     "label.status": "Status"
   },
   "orders": {
+    "title": "Orders",
     "order-page": "Order Page",
     "label.type": "Type",
     "label.number": "Number",
@@ -46,6 +63,7 @@
     "label.store": "Store"
   },
   "transactions": {
+    "title": "Transactions",
     "transaction--page": "Transaction Page",
     "label.type": "Type",
     "label.status": "Status",

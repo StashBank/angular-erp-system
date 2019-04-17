@@ -11,3 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-left: 9px;
   padding-right: 9px;
 }
+
+[spacer] {
+  flex: 1 0 auto;
+}

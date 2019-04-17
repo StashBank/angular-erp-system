@@ -1,0 +1,76 @@
+{
+  "common": {
+    "app-title": "AT-CORP BPM System",
+    "edit": "редагування {{value}}",
+    "create-new": "новий запис",
+    "new-button": "Створити",
+    "back-button": "Назад",
+    "save-button": "Зберегти",
+    "menu": {
+      "customers": "Клієенти",
+      "stores": "Склади",
+      "items": "Товари",
+      "stocks": "Запаси",
+      "orders": "Замовленя",
+      "transactions": "Транзакії"
+    }
+  },
+  "customers": {
+    "title": "Клієнти",
+    "customer-page": "Клієнт",
+    "label.name": "Назва",
+    "label.type": "Тип",
+    "label.phone": "Телефон",
+    "label.address": "Адреса",
+    "label.notes": "Примітки"
+  },
+  "stores": {
+    "title": "Склади",
+    "store-page": "Склад",
+    "label.name": "Назва",
+    "label.code": "Код",
+    "label.type": "Тип",
+    "label.status": "Статус",
+    "label.phone": "Телефон",
+    "label.address": "Адреса"
+  },
+  "items": {
+    "title": "Товари",
+    "item-page": "Товар",
+    "label.name": "Назва",
+    "label.code": "Код",
+    "label.bar-code": "Штрих код",
+    "label.type": "Тип",
+    "label.price": "Ціна",
+    "label.description": "Опис"
+  },
+  "stocks": {
+    "title": "Запаси",
+    "stock-page": "Запас",
+    "label.item": "Товар",
+    "label.store": "Склад/Магазин",
+    "label.quantity": "Кількість",
+    "label.status": "Статус"
+  },
+  "orders": {
+    "title": "Замовлення",
+    "order-page": "Замовлення",
+    "label.type": "Тип",
+    "label.number": "Номер",
+    "label.quantity": "Кількість",
+    "label.customer": "Клієнт",
+    "label.item": "Товар",
+    "label.store": "Склад/Магазин"
+  },
+  "transactions": {
+    "title": "Транзакції",
+    "transaction--page": "Транзакція",
+    "label.type": "Тип",
+    "label.status": "Статус",
+    "label.from": "З",
+    "label.to": "До",
+    "label.quantity": "Кількість",
+    "label.order": "Замовленя",
+    "label.date": "Дата"
+  }
+}

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AppService } from 'src/app/app.service';
 
 export abstract class BaseViewModel {
 
@@ -13,6 +14,7 @@ export abstract class BaseViewModel {
   public form: FormGroup;
   public id: string;
 
+  protected appService: AppService;
   protected mobileQuery: MediaQueryList;
   protected translate: TranslateService;
   protected formBuilder: FormBuilder;
@@ -39,7 +41,8 @@ export abstract class BaseViewModel {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = _ => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
-    this.translate.setDefaultLang('en-US');
+    this.translate.setDefaultLang(this.appService.currentLang);
+    this.appService.currentLangChanged.subscribe(lang => this.translate.use(lang));
   }
 
   // abstract init();
@@ -52,6 +55,7 @@ export abstract class BaseViewModel {
   }
 
   private setUpDeps() {
+    this.appService = this.injector.get(AppService);
     this.translate = this.injector.get(TranslateService);
     this.formBuilder = this.injector.get(FormBuilder);
     this.route = this.injector.get(ActivatedRoute);

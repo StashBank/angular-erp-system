@@ -1,5 +1,5 @@
 <app-base-section [saveButtonHidden]="true">
-  <span title>Transactions</span>
+  <span title>{{ 'transactions.title' | translate }}</span>
   <table mat-table [dataSource]="transactionList" class="mat-elevation-z6">
     <!-- Type Column -->
     <ng-container matColumnDef="type">

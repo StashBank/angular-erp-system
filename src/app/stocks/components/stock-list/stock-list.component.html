@@ -1,5 +1,5 @@
 <app-base-section>
-  <span title>Stocks</span>
+  <span title>{{ 'stocks.title' | translate }}</span>
   <table mat-table [dataSource]="stockList" class="mat-elevation-z6">
     <!-- Status Column -->
     <ng-container matColumnDef="status">

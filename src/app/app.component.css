@@ -36,3 +36,8 @@ h1.app-app-name {
 .mat-nav-list {
   width: 240px;
 }
+
+.lang-control {
+  width: 72px;
+  font-size: medium
+}

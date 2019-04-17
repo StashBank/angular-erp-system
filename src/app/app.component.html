@@ -1,7 +1,13 @@
 <div class="app-container" [class.app-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="app-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="app-app-name" routerLink="." style="cursor: pointer">AT-CORP ERP</h1>
+    <h1 class="app-app-name" routerLink="." style="cursor: pointer">{{ 'common.app-title' | translate }}</h1>
+    <div spacer></div>
+    <div class="lang-control">
+      <mat-select [formControl]="langControl">
+        <mat-option *ngFor="let lang of langs" [value]="lang.value">{{ lang.title }}</mat-option>
+      </mat-select>
+    </div>
   </mat-toolbar>
 
   <mat-sidenav-container class="app-sidenav-container"
@@ -16,7 +22,7 @@
           routerLinkActive="active-link"
           [routerLink]="nav.path"
           (click)="navLinkClick()"
-        >{{nav.title}}</a>
+        >{{nav.title | translate }}</a>
       </mat-nav-list>
     </mat-sidenav>
 

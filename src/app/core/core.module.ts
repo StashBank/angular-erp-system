@@ -57,6 +57,7 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
 
     MatButtonModule,
     MatSnackBarModule,
