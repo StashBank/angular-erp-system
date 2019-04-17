@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { environment } from '../../environments/environment';
 
@@ -26,6 +26,7 @@ import {
 import { BaseSectionComponent } from './base-section/base-section.component';
 import { BasePageComponent } from './base-page/base-page.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { AppTranslateService } from '../app-translate.service';
 
 @NgModule({
   imports: [
@@ -80,6 +81,8 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
     BasePageComponent,
   ],
   declarations: [BaseSectionComponent, BasePageComponent],
-  providers: []
+  providers: [
+    { provide: TranslateService, useClass: AppTranslateService }
+  ]
 })
 export class CoreModule { }

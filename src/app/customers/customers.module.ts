@@ -8,6 +8,7 @@ import { CoreModule } from '../core/core.module';
 import { CustomersRoutingModule } from './customers-routing.module';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { CustomerPageComponent } from './components/customer-page/customer-page.component';
+import { AppTranslateService } from '../app-translate.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -21,6 +22,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient]},
     })
   ],
-  declarations: [CustomerListComponent, CustomerPageComponent]
+  declarations: [CustomerListComponent, CustomerPageComponent],
+  providers: [
+    { provide: TranslateService, useExisting: AppTranslateService }
+  ]
 })
 export class CustomersModule { }
