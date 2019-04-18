@@ -22,11 +22,13 @@ import {
   MatInputModule,
   MatGridListModule,
   MatSelectModule,
+  MatDialogModule,
 } from '@angular/material';
 import { BaseSectionComponent } from './base-section/base-section.component';
 import { BasePageComponent } from './base-page/base-page.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { AppTranslateService } from '../app-translate.service';
+import { LookupDialogComponent } from './lookup-dialog/lookup-dialog.component';
 
 @NgModule({
   imports: [
@@ -48,6 +50,7 @@ import { AppTranslateService } from '../app-translate.service';
     MatInputModule,
     MatGridListModule,
     MatSelectModule,
+    MatDialogModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -73,14 +76,17 @@ import { AppTranslateService } from '../app-translate.service';
     MatInputModule,
     MatGridListModule,
     MatSelectModule,
+    MatDialogModule,
 
     AngularFireModule,
     AngularFirestoreModule,
 
     BaseSectionComponent,
     BasePageComponent,
+    LookupDialogComponent,
   ],
-  declarations: [BaseSectionComponent, BasePageComponent],
+  declarations: [BaseSectionComponent, BasePageComponent, LookupDialogComponent],
+  entryComponents: [LookupDialogComponent],
   providers: [
     { provide: TranslateService, useClass: AppTranslateService }
   ]
