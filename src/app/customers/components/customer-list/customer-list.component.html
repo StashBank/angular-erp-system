@@ -3,23 +3,23 @@
     <table mat-table [dataSource]="customerList" class="mat-elevation-z6">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <th mat-header-cell *matHeaderCellDef>{{ 'customers.caption.name' | translate }}</th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
       <!-- Phone Column -->
       <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <th mat-header-cell *matHeaderCellDef>{{ 'customers.caption.phone' | translate }}</th>
         <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
       </ng-container>
       <!-- Address Column -->
       <ng-container matColumnDef="address">
-        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <th mat-header-cell *matHeaderCellDef>{{ 'customers.caption.address' | translate }}</th>
         <td mat-cell *matCellDef="let element"> {{element.address}} </td>
       </ng-container>
 
       <!-- Menu Column -->
       <ng-container matColumnDef="menu">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <th mat-header-cell *matHeaderCellDef>{{ 'common.caption.actions' | translate }}</th>
         <td mat-cell *matCellDef="let element">
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
@@ -27,11 +27,11 @@
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="edit(element)">
               <mat-icon>edit</mat-icon>
-              <span>Edit</span>
+              <span>{{ 'common.menu.edit' | translate }}</span>
             </button>
             <button mat-menu-item (click)="remove(element)">
               <mat-icon>delete</mat-icon>
-              <span>Remove</span>
+              <span>{{ 'common.menu.remove' | translate }}</span>
             </button>
           </mat-menu>
         </td>

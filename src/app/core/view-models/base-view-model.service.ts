@@ -1,11 +1,9 @@
 import { ChangeDetectorRef, Injector, Type } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { AppService } from 'src/app/app.service';
 
 export abstract class BaseViewModel {
 
