@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AppService } from 'src/app/app.service';
+import { MatDialog } from '@angular/material';
+import { LookupDialogComponent, DialogData } from '../lookup-dialog/lookup-dialog.component';
 
 export abstract class BaseViewModel {
 
@@ -20,6 +22,7 @@ export abstract class BaseViewModel {
   protected route: ActivatedRoute;
   protected router: Router;
   protected location: Location;
+  protected dialog: MatDialog;
 
   private mobileQueryListener: (ev: MediaQueryListEvent) => void;
 
@@ -51,11 +54,27 @@ export abstract class BaseViewModel {
     this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
 
+  public openLookup(collectionName: string, formControlName: string, displayedColumns: Array<{ path: string, title: string }>) {
+    const dialogRef = this.dialog.open(LookupDialogComponent, {
+      width: this.isMobile ? '320px' : '800px',
+      data: {
+        collectionName,
+        displayedColumns
+      } as DialogData
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && formControlName) {
+        this.form.get(formControlName).setValue(result.name || result.code || result.number || result);
+      }
+    });
+  }
+
   private setUpDeps() {
     this.translate = this.injector.get(TranslateService);
     this.formBuilder = this.injector.get(FormBuilder);
     this.route = this.injector.get(ActivatedRoute);
     this.router = this.injector.get(Router);
     this.location = this.injector.get(Location);
+    this.dialog = this.injector.get(MatDialog);
   }
 }

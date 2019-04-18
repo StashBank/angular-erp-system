@@ -9,7 +9,7 @@
     <!-- Date Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.date?.toDate() | date:'dd.MM.yyyy' }} </td>
     </ng-container>
     <!-- Quantity Column -->
     <ng-container matColumnDef="qty">
@@ -19,17 +19,17 @@
     <!-- Customer Column -->
     <ng-container matColumnDef="customer">
       <th mat-header-cell *matHeaderCellDef> Customer </th>
-      <td mat-cell *matCellDef="let element"> {{element.customer?.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.customer?.name || element.customer}} </td>
     </ng-container>
     <!-- Item Column -->
     <ng-container matColumnDef="item">
       <th mat-header-cell *matHeaderCellDef> Item </th>
-      <td mat-cell *matCellDef="let element"> {{element.item?.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.item?.name || element.item}} </td>
     </ng-container>
     <!-- Store Column -->
     <ng-container matColumnDef="store">
       <th mat-header-cell *matHeaderCellDef> Store </th>
-      <td mat-cell *matCellDef="let element"> {{element.store?.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.store?.name || element.store}} </td>
     </ng-container>
 
     <!-- Menu Column -->
