@@ -9,12 +9,12 @@
     <!-- Item Column -->
     <ng-container matColumnDef="item">
       <th mat-header-cell *matHeaderCellDef>{{ 'stocks.caption.item' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{ element?.item.name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.item.name || element?.item }}</td>
     </ng-container>
     <!-- Store Column -->
     <ng-container matColumnDef="store">
       <th mat-header-cell *matHeaderCellDef>{{ 'stocks.caption.store' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{ element?.store.name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.store.name || element?.store }}</td>
     </ng-container>
     <!-- Quantity Column -->
     <ng-container matColumnDef="qty">

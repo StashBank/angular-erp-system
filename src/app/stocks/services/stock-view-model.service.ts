@@ -4,16 +4,32 @@ import { Observable } from 'rxjs';
 import { BaseViewModel } from '../../core/view-models/base-view-model.service';
 import { Stock } from '../models/stock';
 import { StockService } from './stock.service';
+import { StockStatus } from '../enums/stock-status.enum';
 
 @Injectable()
 export class StockViewModelService extends BaseViewModel {
 
   entitySchemaName: 'stocks';
   stock: Stock;
+  stockStatuses: Array<{ name: string, value: string }> = [
+    { value: StockStatus.Available.toString(), name: 'Available' },
+    { value: StockStatus.InTransit.toString(), name: 'In Transit' },
+    { value: StockStatus.OnHold.toString(), name: 'On Hold' },
+    { value: StockStatus.OnService.toString(), name: 'On Service' },
+  ];
+  itemsDisplayedColumns = [
+    { path: 'name', title: 'items.caption.name' },
+    { path: 'code', title: 'items.caption.code' },
+    { path: 'barCode', title: 'items.caption.bar-code' },
+  ];
+  storesDisplayedColumns = [
+    { path: 'name', title: 'stores.caption.name' },
+    { path: 'code', title: 'items.caption.code' },
+  ];
 
   public get subTitle$(): Observable<string> {
     return this.id
-      ? this.translate.get('common.edit', { value: this.stock && this.stock.number })
+      ? this.translate.get('common.edit', { value: this.stock && this.stock.number || '' })
       : this.translate.get('common.create-new');
   }
 
@@ -37,7 +53,7 @@ export class StockViewModelService extends BaseViewModel {
       item: [null, [Validators.required]],
       store: [null, [Validators.required]],
       qty: [null, [Validators.required]],
-      status: null,
+      status: StockStatus.Available,
     });
   }
 

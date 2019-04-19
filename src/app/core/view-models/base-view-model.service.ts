@@ -44,9 +44,9 @@ export abstract class BaseViewModel {
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
   }
 
-  // abstract init();
-  // abstract createForm();
-  // abstract save();
+  abstract init();
+  abstract createForm();
+  abstract save();
   // abstract loadEntity();
 
   public dispose() {
