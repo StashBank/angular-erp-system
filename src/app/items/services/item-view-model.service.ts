@@ -16,6 +16,12 @@ export class ItemViewModelService extends BaseViewModel {
     { value: ItemType.Goods.toString(), name: 'Goods' },
     { value: ItemType.Services.toString(), name: 'Services' },
   ];
+  contractorDisplayColumns: Array<{ path: string, title: string }> = [
+    { path: 'name', title: 'customers.label.name' },
+    { path: 'phone', title: 'customers.label.phone' },
+    { path: 'email', title: 'customers.label.email' },
+    { path: 'address', title: 'customers.label.address' },
+  ];
 
   public get subTitle$(): Observable<string> {
     return this.id
@@ -46,6 +52,7 @@ export class ItemViewModelService extends BaseViewModel {
       type: null,
       description: null,
       price: [0, [Validators.min(0.001)]],
+      contractor: [],
       image: null
     });
   }

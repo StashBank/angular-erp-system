@@ -4,6 +4,7 @@ export class Customer {
   name: string;
   type: CustomerType;
   phone: string;
+  email: string;
   address: string;
   extras: string;
 }

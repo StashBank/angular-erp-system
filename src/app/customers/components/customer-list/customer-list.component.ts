@@ -12,7 +12,7 @@ import { Customer } from '../../models/customer';
 export class CustomerListComponent implements OnInit {
 
   customerList: Array<Customer>;
-  displayedColumns: string[] = ['name', 'phone', 'address', 'menu'];
+  displayedColumns: string[] = ['number', 'name', 'phone', 'email', 'address', 'menu'];
 
   constructor(
     private customerService: CustomerService,

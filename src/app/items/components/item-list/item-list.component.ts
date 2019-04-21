@@ -12,7 +12,7 @@ import { Item } from '../../models/item';
 export class ItemListComponent implements OnInit {
 
   itemList: Array<Item>;
-  displayedColumns: string[] = ['name', 'code', 'price', 'description', 'menu'];
+  displayedColumns: string[] = ['name', 'code', 'barCode', 'price', 'contractor', 'menu'];
 
   constructor(
     private itemService: ItemService,

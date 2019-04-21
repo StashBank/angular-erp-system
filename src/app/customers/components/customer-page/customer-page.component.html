@@ -8,6 +8,12 @@
 
       <mat-grid-tile>
         <mat-form-field>
+          <input matInput [placeholder]="'customers.label.number' | translate" formControlName="number" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
           <input matInput [placeholder]="'customers.label.name' | translate" formControlName="name" />
         </mat-form-field>
       </mat-grid-tile>
@@ -26,6 +32,12 @@
       <mat-grid-tile>
         <mat-form-field>
           <input matInput [placeholder]="'customers.label.phone' | translate" formControlName="phone" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput [placeholder]="'customers.label.email' | translate" formControlName="email" />
         </mat-form-field>
       </mat-grid-tile>
 

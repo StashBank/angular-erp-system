@@ -11,15 +11,20 @@
       <th mat-header-cell *matHeaderCellDef>{{ 'items.caption.code' | translate }}</th>
       <td mat-cell *matCellDef="let element"> {{element.code}} </td>
     </ng-container>
+    <!-- Bar Code Column -->
+    <ng-container matColumnDef="barCode">
+      <th mat-header-cell *matHeaderCellDef>{{ 'items.caption.bar-code' | translate }}</th>
+      <td mat-cell *matCellDef="let element"> {{element.barCode}} </td>
+    </ng-container>
     <!-- Price Column -->
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef>{{ 'items.caption.price' | translate }}</th>
       <td mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
-    <!-- Description Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef>{{ 'items.caption.description' | translate }}</th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    <!-- Contractor Column -->
+    <ng-container matColumnDef="contractor">
+      <th mat-header-cell *matHeaderCellDef>{{ 'items.caption.contractor' | translate }}</th>
+      <td mat-cell *matCellDef="let element"> {{element.contractor?.name || element.contractor}} </td>
     </ng-container>
 
     <!-- Menu Column -->

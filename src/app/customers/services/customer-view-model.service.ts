@@ -39,9 +39,11 @@ export class CustomerViewModelService extends BaseViewModel {
 
   createForm() {
     this.form = this.formBuilder.group({
+      number: { value: null, disabled: true},
       name: [null, [Validators.required]],
       type: null,
       phone: null,
+      email: null,
       address: null,
       notes: null
     });
