@@ -12,8 +12,8 @@ export class CustomerViewModelService extends BaseViewModel {
   entitySchemaName: 'customers';
   customer: Customer;
   customerTypes: Array<{ name: string, value: string }> = [
-    { value: CustomerType.Company.toString(), name: 'Company' },
-    { value: CustomerType.Person.toString(), name: 'Person' },
+    { value: CustomerType.Company.toString(), name: 'customers.enums.type.company' },
+    { value: CustomerType.Person.toString(), name: 'customers.enums.type.person' },
   ];
 
   public get subTitle$(): Observable<string> {

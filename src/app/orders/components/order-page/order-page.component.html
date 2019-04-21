@@ -11,7 +11,7 @@
           <mat-label>{{ 'orders.label.type' | translate }}</mat-label>
           <mat-select formControlName="type">
             <mat-option *ngFor="let type of vm.orderTypes" [value]="type.value">
-              {{type.name}}
+              {{type.name | translate}}
             </mat-option>
           </mat-select>
         </mat-form-field>

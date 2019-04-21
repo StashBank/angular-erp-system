@@ -12,10 +12,10 @@ export class StockViewModelService extends BaseViewModel {
   entitySchemaName: 'stocks';
   stock: Stock;
   stockStatuses: Array<{ name: string, value: string }> = [
-    { value: StockStatus.Available.toString(), name: 'Available' },
-    { value: StockStatus.InTransit.toString(), name: 'In Transit' },
-    { value: StockStatus.OnHold.toString(), name: 'On Hold' },
-    { value: StockStatus.OnService.toString(), name: 'On Service' },
+    { value: StockStatus.Available.toString(), name: 'stocks.enums.status.available' },
+    { value: StockStatus.InTransit.toString(), name: 'stocks.enums.status.in-transit' },
+    { value: StockStatus.OnHold.toString(), name: 'stocks.enums.status.on-hold' },
+    { value: StockStatus.OnService.toString(), name: 'stocks.enums.status.on-service' },
   ];
   itemsDisplayedColumns = [
     { path: 'name', title: 'items.caption.name' },

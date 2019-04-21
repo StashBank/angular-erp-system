@@ -23,7 +23,7 @@
           <mat-label>{{'customers.label.type' | translate}}</mat-label>
           <mat-select formControlName="type">
             <mat-option *ngFor="let type of vm.customerTypes" [value]="type.value">
-              {{type.name}}
+              {{type.name | translate}}
             </mat-option>
           </mat-select>
         </mat-form-field>

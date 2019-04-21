@@ -42,8 +42,8 @@
         <mat-form-field>
           <mat-label>{{ 'stocks.label.status' | translate }}</mat-label>
           <mat-select formControlName="status">
-            <mat-option *ngFor="let stock of vm.stockStatuses" [value]="stock.value">
-              {{stock.name}}
+            <mat-option *ngFor="let status of vm.stockStatuses" [value]="status.value">
+              {{status.name | translate}}
             </mat-option>
           </mat-select>
         </mat-form-field>

@@ -13,8 +13,8 @@ export class ItemViewModelService extends BaseViewModel {
   entitySchemaName: 'items';
   item: Item;
   itemTypes: Array<{ name: string, value: string }> = [
-    { value: ItemType.Goods.toString(), name: 'Goods' },
-    { value: ItemType.Services.toString(), name: 'Services' },
+    { value: ItemType.Goods.toString(), name: 'items.enums.type.goods' },
+    { value: ItemType.Services.toString(), name: 'items.enums.type.services' },
   ];
   contractorDisplayColumns: Array<{ path: string, title: string }> = [
     { path: 'name', title: 'customers.label.name' },
