@@ -64,7 +64,9 @@ export class CustomerViewModelService extends BaseViewModel {
 
   loadCustomer(id: string) {
     this.customerService.getById(id).subscribe(customer => {
-      this.customer = customer;
+      this.customer = Object.assign(new Customer(), customer);
+      const metaData = Reflect.getMetadata('model', Customer);
+      console.log(metaData);
       this.form.patchValue(customer);
     });
   }
