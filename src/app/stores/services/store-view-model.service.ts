@@ -68,7 +68,7 @@ export class StoreViewModelService extends BaseViewModel {
 
   loadStore(id: string) {
     this.storeService.getById(id).subscribe(store => {
-      this.store = store;
+      this.store = Object.assign(new Store(), store);
       this.form.patchValue(store);
     });
   }

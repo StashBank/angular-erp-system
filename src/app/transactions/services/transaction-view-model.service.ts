@@ -55,7 +55,7 @@ export class TransactionViewModelService extends BaseViewModel {
 
   loadTransaction(id: string) {
     this.transactionService.getById(id).subscribe(transaction => {
-      this.transaction = transaction;
+      this.transaction = Object.assign(new Transaction(), transaction);
       this.form.patchValue(transaction);
     });
   }

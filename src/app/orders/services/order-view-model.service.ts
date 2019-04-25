@@ -77,7 +77,7 @@ export class OrderViewModelService extends BaseViewModel {
 
   loadOrder(id: string) {
     this.orderService.getById(id).subscribe(order => {
-      this.order = order;
+      this.order = Object.assign(new Order(), order);
       this.form.patchValue(order);
     });
   }

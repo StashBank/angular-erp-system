@@ -71,7 +71,7 @@ export class ItemViewModelService extends BaseViewModel {
 
   loadItem(id: string) {
     this.itemService.getById(id).subscribe(item => {
-      this.item = item;
+      this.item = Object.assign(new Item(), item);
       this.form.patchValue(item);
     });
   }

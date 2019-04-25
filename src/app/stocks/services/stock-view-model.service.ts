@@ -71,7 +71,7 @@ export class StockViewModelService extends BaseViewModel {
 
   loadStock(id: string) {
     this.stockService.getById(id).subscribe(stock => {
-      this.stock = stock;
+      this.stock = Object.assign(new Stock(), stock);
       this.form.patchValue(stock);
     });
   }

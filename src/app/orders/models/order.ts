@@ -3,14 +3,28 @@ import { Customer } from '../../customers/models/customer';
 import { Item } from '../../items/models/item';
 import { Store } from '../../stores/models/store';
 import { OrderType } from '../enums/order-type.enum';
+import { Model } from 'src/app/core/decorators/model.decorator';
+import { BaseModel } from 'src/app/core/models/base.model';
+import { ModelProperty } from 'src/app/core/decorators/property.decorator';
 
-export class Order {
-  id: string;
+@Model({
+  name: 'orders'
+})
+export class Order extends BaseModel {
+  @ModelProperty()
   number: string;
+  @ModelProperty()
   type: OrderType;
+  @ModelProperty()
+  status: OrderStatus;
+  @ModelProperty()
   date: Date;
+  @ModelProperty()
   customer: Customer;
+  @ModelProperty()
   item: Item;
+  @ModelProperty()
   store: Store;
+  @ModelProperty()
   qty: number;
 }
