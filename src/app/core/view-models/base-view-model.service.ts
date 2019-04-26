@@ -1,20 +1,20 @@
-import { ChangeDetectorRef, Injector, Type } from '@angular/core';
+import { ChangeDetectorRef, Injector } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { LookupDialogComponent, DialogData } from '../lookup-dialog/lookup-dialog.component';
+import { DataService } from '../data.service';
+import { BaseModel } from '../models/base.model';
 
 export abstract class BaseViewModel {
-
-  abstract entitySchemaName: string;
 
   public form: FormGroup;
   public id: string;
 
+  protected dataService: DataService<BaseModel>;
   protected mobileQuery: MediaQueryList;
   protected translate: TranslateService;
   protected formBuilder: FormBuilder;
@@ -22,6 +22,8 @@ export abstract class BaseViewModel {
   protected router: Router;
   protected location: Location;
   protected dialog: MatDialog;
+
+  protected entity: BaseModel;
 
   private mobileQueryListener: (ev: MediaQueryListEvent) => void;
 
@@ -31,9 +33,14 @@ export abstract class BaseViewModel {
 
   // abstract get subTitle$(): Observable<string>;
 
+  protected collectionName(): string {
+    return this.entity.getModelDescriptor().name;
+  }
+
   constructor(
-    private injector: Injector,
+    private injector: Injector
   ) {
+    this.entity = this.createModel();
     this.setUpDeps();
 
     const changeDetectorRef = this.injector.get(ChangeDetectorRef);
@@ -44,10 +51,52 @@ export abstract class BaseViewModel {
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
   }
 
-  abstract init();
-  abstract createForm();
-  abstract save();
-  // abstract loadEntity();
+  public init() {
+    this.createForm();
+    this.route.params.subscribe(params => {
+      const { id } = params;
+      if (id && id !== this.id) {
+        this.id = id;
+        this.loadEntity(id);
+      }
+    });
+  }
+
+  protected createModel(): BaseModel {
+    return new BaseModel();
+  }
+
+  createForm() {
+    const formGroupConfig = this.entity.getModelProperties()
+    .reduce((config, propertyName) => {
+      const propertyDescriptor = this.entity.getPropertyDescriptor(propertyName);
+      const validators = propertyDescriptor && propertyDescriptor.validators || [];
+      if (propertyDescriptor && propertyDescriptor.required) {
+        validators.push(Validators.required);
+      }
+      config[propertyName] = [propertyDescriptor && propertyDescriptor.defaultValue, validators];
+      return config;
+    }, {});
+    this.form = this.formBuilder.group(formGroupConfig);
+  }
+
+  public save() {
+    if (this.id) {
+      this.dataService.update(this.id, this.form.value).subscribe(() => null);
+      return;
+    }
+    this.dataService.create(this.form.value)
+      .subscribe(
+        id => this.location.replaceState(`${this.collectionName}/edit/${id}`)
+      );
+  }
+
+  public loadEntity(id: string) {
+    this.dataService.getById(id).subscribe(entity => {
+      this.entity = Object.assign(this.entity, entity);
+      this.form.patchValue(entity);
+    });
+  }
 
   public dispose() {
     this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
@@ -69,6 +118,7 @@ export abstract class BaseViewModel {
   }
 
   private setUpDeps() {
+    this.dataService = this.injector.get(DataService);
     this.translate = this.injector.get(TranslateService);
     this.formBuilder = this.injector.get(FormBuilder);
     this.route = this.injector.get(ActivatedRoute);

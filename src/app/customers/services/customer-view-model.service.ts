@@ -5,12 +5,12 @@ import { Validators } from '@angular/forms';
 import { Customer } from '../models/customer';
 import { CustomerType } from '../enums/customer-type.enum';
 import { CustomerService } from './customer.service';
+import { BaseModel } from 'src/app/core/models/base.model';
 
 @Injectable()
 export class CustomerViewModelService extends BaseViewModel {
 
-  entitySchemaName: 'customers';
-  customer: Customer;
+  entity: Customer;
   customerTypes: Array<{ name: string, value: string }> = [
     { value: CustomerType.Company.toString(), name: 'customers.enums.type.company' },
     { value: CustomerType.Person.toString(), name: 'customers.enums.type.person' },
@@ -18,7 +18,7 @@ export class CustomerViewModelService extends BaseViewModel {
 
   public get subTitle$(): Observable<string> {
     return this.id
-      ? this.translate.get('common.edit', { value: this.customer && this.customer.name })
+      ? this.translate.get('common.edit', { value: this.entity && this.entity.name })
       : this.translate.get('common.create-new');
   }
 
@@ -26,47 +26,8 @@ export class CustomerViewModelService extends BaseViewModel {
     super(injector);
   }
 
-  init() {
-    this.createForm();
-    this.route.params.subscribe(params => {
-      const { id } = params;
-      if (id && id !== this.id) {
-        this.id = id;
-        this.loadCustomer(id);
-      }
-    });
-  }
-
-  createForm() {
-    this.form = this.formBuilder.group({
-      number: { value: null, disabled: true},
-      name: [null, [Validators.required]],
-      type: null,
-      phone: null,
-      email: null,
-      address: null,
-      notes: null
-    });
-  }
-
-
-  save() {
-    if (this.id) {
-      this.customerService.update(this.id, this.form.value).subscribe(() => null);
-      return;
-    }
-    this.customerService.create(this.form.value)
-      .subscribe(
-        // id => this.router.navigate(['..', 'edit', id], { relativeTo: this.route })
-        id => this.location.replaceState(`customers/edit/${id}`)
-      );
-  }
-
-  loadCustomer(id: string) {
-    this.customerService.getById(id).subscribe(customer => {
-      this.customer = Object.assign(new Customer(), customer);
-      this.form.patchValue(customer);
-    });
+  protected createModel(): BaseModel {
+    return new Customer();
   }
 
 }
