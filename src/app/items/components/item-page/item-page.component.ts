@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ItemViewModelService } from '../../services/item-view-model.service';
+import { DataService } from '../../../core/data.service';
+import { ItemService } from '../../services/item.service';
 
 @Component({
   selector: 'app-item-page',
   templateUrl: './item-page.component.html',
   styleUrls: ['./item-page.component.css'],
   providers: [
-    ItemViewModelService
+    ItemViewModelService,
+    { provide: DataService, useExisting: ItemService }
   ]
 })
 export class ItemPageComponent implements OnInit {

@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material';
 import { LookupDialogComponent, DialogData } from '../lookup-dialog/lookup-dialog.component';
 import { DataService } from '../data.service';
 import { BaseModel } from '../models/base.model';
+import { Observable } from 'rxjs';
+import { DataValueType, LookupConfig } from '../decorators/property.decorator';
 
 export abstract class BaseViewModel {
 
@@ -24,6 +26,7 @@ export abstract class BaseViewModel {
   protected dialog: MatDialog;
 
   protected entity: BaseModel;
+  protected entitySchemaName: string;
 
   private mobileQueryListener: (ev: MediaQueryListEvent) => void;
 
@@ -31,7 +34,7 @@ export abstract class BaseViewModel {
     return this.mobileQuery && this.mobileQuery.matches;
   }
 
-  // abstract get subTitle$(): Observable<string>;
+  abstract get subTitle$(): Observable<string>;
 
   protected collectionName(): string {
     return this.entity.getModelDescriptor().name;
@@ -40,7 +43,6 @@ export abstract class BaseViewModel {
   constructor(
     private injector: Injector
   ) {
-    this.entity = this.createModel();
     this.setUpDeps();
 
     const changeDetectorRef = this.injector.get(ChangeDetectorRef);
@@ -52,6 +54,7 @@ export abstract class BaseViewModel {
   }
 
   public init() {
+    this.entity = this.createEntity(this.entitySchemaName);
     this.createForm();
     this.route.params.subscribe(params => {
       const { id } = params;
@@ -62,11 +65,41 @@ export abstract class BaseViewModel {
     });
   }
 
-  protected createModel(): BaseModel {
-    return new BaseModel();
+  protected createEntity(entitySchemaName: string): BaseModel {
+    const models = Reflect.getMetadata('models', Object.prototype) as Array<any>;
+    const model = models.find(x => x.name === entitySchemaName);
+    const entity = Object.create(model.ctor.prototype);
+    return entity as BaseModel;
   }
 
-  createForm() {
+  protected setEntityColumnsValues(entity: BaseModel, values) {
+    if (!entity || !values) {
+      return;
+    }
+    const columnNames = Object.keys(values);
+    columnNames.forEach(key => {
+      const value = values[key];
+      const propertyMetaData = entity.getPropertyDescriptor(key);
+      if (propertyMetaData) {
+        const valueType = propertyMetaData.dataValueType;
+        if (valueType === DataValueType.Lookup || valueType === DataValueType.DropDown) {
+          const lookupConfig = propertyMetaData.dateValueTypeConfig as LookupConfig;
+          const refSchemaName = lookupConfig && lookupConfig.refModel && lookupConfig.refModel.name;
+          if (refSchemaName) {
+            const refEntity = this.createEntity(refSchemaName);
+            this.setEntityColumnsValues(refEntity, value);
+            entity[key] = refEntity;
+          } else {
+            entity[key] = value;
+          }
+        } else {
+          entity[key] = value;
+        }
+      }
+    });
+  }
+
+  protected createForm() {
     const formGroupConfig = this.entity.getModelProperties()
     .reduce((config, propertyName) => {
       const propertyDescriptor = this.entity.getPropertyDescriptor(propertyName);
@@ -92,9 +125,9 @@ export abstract class BaseViewModel {
   }
 
   public loadEntity(id: string) {
-    this.dataService.getById(id).subscribe(entity => {
-      this.entity = Object.assign(this.entity, entity);
-      this.form.patchValue(entity);
+    this.dataService.getById(id).subscribe(dto => {
+      this.setEntityColumnsValues(this.entity, dto);
+      this.form.patchValue(this.entity);
     });
   }
 

@@ -1,7 +1,7 @@
 import { CustomerType } from '../enums/customer-type.enum';
-import { Model } from 'src/app/core/decorators/model.decorator';
-import { ModelProperty } from 'src/app/core/decorators/property.decorator';
-import { BaseModel } from 'src/app/core/models/base.model';
+import { Model } from '../../core/decorators/model.decorator';
+import { ModelProperty } from '../../core/decorators/property.decorator';
+import { BaseModel } from '../../core/models/base.model';
 
 @Model({
   name: 'customers'
@@ -11,6 +11,8 @@ export class Customer extends BaseModel {
   @ModelProperty()
   name: string;
   @ModelProperty()
+  number: string;
+  @ModelProperty()
   type: CustomerType;
   @ModelProperty()
   phone: string;
@@ -19,5 +21,5 @@ export class Customer extends BaseModel {
   @ModelProperty()
   address: string;
   @ModelProperty()
-  extras: string;
+  notes: string;
 }

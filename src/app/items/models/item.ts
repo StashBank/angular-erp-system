@@ -1,9 +1,9 @@
 import { ItemFeature } from './item-feature';
 import { ItemType } from '../enums/item-type.enum';
-import { Customer } from 'src/app/customers/models/customer';
-import { Model } from 'src/app/core/decorators/model.decorator';
-import { ModelProperty } from 'src/app/core/decorators/property.decorator';
-import { BaseModel } from 'src/app/core/models/base.model';
+import { Customer } from '../../customers/models/customer';
+import { Model } from '../../core/decorators/model.decorator';
+import { ModelProperty } from '../../core/decorators/property.decorator';
+import { BaseModel } from '../../core/models/base.model';
 
 @Model({
   name: 'items'

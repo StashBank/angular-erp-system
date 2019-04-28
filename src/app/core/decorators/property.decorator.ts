@@ -2,6 +2,7 @@
 import { ValidatorFn } from '@angular/forms';
 import { BaseModel } from '../models/base.model';
 
+// #region Configs
 export enum DataValueType {
   Text = 'text',
   RichText = 'richText',
@@ -17,7 +18,7 @@ export enum DataValueType {
 }
 
 export class DropDownConfig {
-  refModel: BaseModel;
+  refModel: any;
   filters?: any;
 }
 
@@ -46,7 +47,7 @@ export class ModelPropertyDescriptor {
   defaultValue?: any;
   dataLocalizationPath?: string;
 }
-
+// #endregion
 
 export function ModelProperty(descriptor?: ModelPropertyDescriptor): PropertyDecorator {
   descriptor = Object.assign(new ModelPropertyDescriptor(), descriptor);

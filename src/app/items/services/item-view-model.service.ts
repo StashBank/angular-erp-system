@@ -10,8 +10,9 @@ import { ItemService } from './item.service';
 @Injectable()
 export class ItemViewModelService extends BaseViewModel {
 
-  entitySchemaName: 'items';
-  item: Item;
+  protected entitySchemaName = 'Item';
+  protected entity: Item;
+
   itemTypes: Array<{ name: string, value: string }> = [
     { value: ItemType.Goods.toString(), name: 'items.enums.type.goods' },
     { value: ItemType.Services.toString(), name: 'items.enums.type.services' },
@@ -25,55 +26,12 @@ export class ItemViewModelService extends BaseViewModel {
 
   public get subTitle$(): Observable<string> {
     return this.id
-      ? this.translate.get('common.edit', { value: this.item && this.item.name })
+      ? this.translate.get('common.edit', { value: this.entity && this.entity.name })
       : this.translate.get('common.create-new');
   }
 
   constructor(injector: Injector, protected itemService: ItemService) {
     super(injector);
-  }
-
-  init() {
-    this.createForm();
-    this.route.params.subscribe(params => {
-      const { id } = params;
-      if (id && id !== this.id) {
-        this.id = id;
-        this.loadItem(id);
-      }
-    });
-  }
-
-  createForm() {
-    this.form = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      code: null,
-      barCode: null,
-      type: null,
-      description: null,
-      price: [0, [Validators.min(0.001)]],
-      contractor: [],
-      image: null
-    });
-  }
-
-  save() {
-    if (this.id) {
-      this.itemService.update(this.id, this.form.value).subscribe(() => null);
-      return;
-    }
-    this.itemService.create(this.form.value)
-      .subscribe(
-        // id => this.router.navigate(['..', 'edit', id], { relativeTo: this.route })
-        id => this.location.replaceState(`items/edit/${id}`)
-      );
-  }
-
-  loadItem(id: string) {
-    this.itemService.getById(id).subscribe(item => {
-      this.item = Object.assign(new Item(), item);
-      this.form.patchValue(item);
-    });
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomerViewModelService } from '../../services/customer-view-model.service';
-import { DataService } from 'src/app/core/data.service';
+import { DataService } from '../../../core/data.service';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({

@@ -9,6 +9,18 @@ export class ModelDescriptor {
 export function Model(descriptor: ModelDescriptor): ClassDecorator {
   descriptor = Object.assign(new ModelDescriptor(), descriptor);
   return target => {
+    let models = Reflect.getMetadata('models', Object.prototype) as Array<any>;
+    if (!models) {
+      models = [];
+      Reflect.defineMetadata('models', models, Object.prototype);
+    }
+    if (!models.includes(x => x.name === target.name)) {
+      models.push({
+        name: target.name,
+        ctor: target,
+        descriptor
+      });
+    }
     Reflect.defineMetadata('model', descriptor, target);
   };
 }

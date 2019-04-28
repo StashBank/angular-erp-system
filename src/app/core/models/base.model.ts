@@ -2,8 +2,14 @@ import { ModelProperty, ModelPropertyDescriptor } from '../decorators/property.d
 import { Model, ModelDescriptor } from '../decorators/model.decorator';
 
 export class BaseModel {
-  @ModelProperty()
+
   id: string;
+
+  toString() {
+    const displayColumnName = this.getDisplayColumnName();
+    const stringValue = this[displayColumnName];
+    return stringValue;
+  }
 
   getModelDescriptor(): ModelDescriptor {
     return Model.getDescriptor(this.constructor);
