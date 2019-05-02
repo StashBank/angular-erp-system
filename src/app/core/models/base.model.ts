@@ -5,7 +5,11 @@ export class BaseModel {
 
   id: string;
 
-  toString() {
+  static toString(): string {
+    return 'BaseModel';
+  }
+
+  toString(): string {
     const displayColumnName = this.getDisplayColumnName();
     const stringValue = this[displayColumnName];
     return stringValue;

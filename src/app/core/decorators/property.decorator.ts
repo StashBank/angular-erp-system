@@ -40,7 +40,7 @@ export class DateConfig {}
 
 export class ModelPropertyDescriptor {
   dataValueType: DataValueType = DataValueType.Text;
-  dateValueTypeConfig?: LookupConfig | DropDownConfig | DecimalConfig | IntegerConfig | DateConfig;
+  dataValueTypeConfig?: LookupConfig | DropDownConfig | DecimalConfig | IntegerConfig | DateConfig;
   required?: boolean;
   readOnly?: boolean;
   validators?: Array<ValidatorFn>;

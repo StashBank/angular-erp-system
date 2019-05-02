@@ -83,7 +83,7 @@ export abstract class BaseViewModel {
       if (propertyMetaData) {
         const valueType = propertyMetaData.dataValueType;
         if (valueType === DataValueType.Lookup || valueType === DataValueType.DropDown) {
-          const lookupConfig = propertyMetaData.dateValueTypeConfig as LookupConfig;
+          const lookupConfig = propertyMetaData.dataValueTypeConfig as LookupConfig;
           const refSchemaName = lookupConfig && lookupConfig.refModel && lookupConfig.refModel.name;
           if (refSchemaName) {
             const refEntity = this.createEntity(refSchemaName);
@@ -135,7 +135,9 @@ export abstract class BaseViewModel {
     this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
 
-  public openLookup(collectionName: string, formControlName: string, displayedColumns: Array<{ path: string, title: string }>) {
+  public openLookup(entitySchemaName: string, formControlName: string, displayedColumns: Array<{ path: string, title: string }>) {
+    const entity = this.createEntity(entitySchemaName);
+    const collectionName = entity.getCollectionName();
     const dialogRef = this.dialog.open(LookupDialogComponent, {
       width: this.isMobile ? '320px' : '800px',
       data: {
@@ -145,7 +147,8 @@ export abstract class BaseViewModel {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result && formControlName) {
-        this.form.get(formControlName).setValue(result.name || result.code || result.number || result);
+        this.setEntityColumnsValues(entity, result);
+        this.form.get(formControlName).setValue(entity);
       }
     });
   }
