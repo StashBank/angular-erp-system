@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-customer-list',
@@ -11,7 +12,7 @@ import { Customer } from '../../models/customer';
 })
 export class CustomerListComponent implements OnInit {
 
-  customerList: Array<Customer>;
+  customerList: MatTableDataSource<Customer>;
   displayedColumns: string[] = ['number', 'name', 'phone', 'email', 'address', 'menu'];
 
   constructor(
@@ -25,7 +26,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   loadCustomers() {
-    this.customerService.getAll().subscribe(customers => this.customerList = customers);
+    this.customerService.getAll().subscribe(customers => this.customerList = new MatTableDataSource(customers));
   }
 
   edit(customer: Customer) {
