@@ -4,7 +4,8 @@ import { ModelProperty } from '../../core/decorators/property.decorator';
 import { BaseModel } from '../../core/models/base.model';
 
 @Model({
-  name: 'customers'
+  name: 'Customer',
+  collectionName: 'customers'
 })
 export class Customer extends BaseModel {
 

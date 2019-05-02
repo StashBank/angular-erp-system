@@ -6,7 +6,8 @@ import { BaseModel } from '../../core/models/base.model';
 import { ModelProperty } from '../../core/decorators/property.decorator';
 
 @Model({
-  name: 'stocks'
+  name: 'Stock',
+  collectionName: 'stocks'
 })
 export class Stock extends BaseModel {
   @ModelProperty()

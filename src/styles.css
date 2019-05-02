@@ -3,9 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/*.mat-table {
+.mat-table {
   width: 100%;
-}*/
+}
+
 .mat-form-field {
   width: 100%;
   padding-left: 9px;
@@ -16,7 +17,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   flex: 1 0 auto;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 600px) {
   .mat-table {
     border: 0;
     vertical-align: middle

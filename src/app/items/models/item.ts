@@ -6,7 +6,8 @@ import { ModelProperty, DataValueType, LookupConfig } from '../../core/decorator
 import { BaseModel } from '../../core/models/base.model';
 
 @Model({
-  name: 'items'
+  name: 'Item',
+  collectionName: 'items'
 })
 export class Item extends BaseModel {
   @ModelProperty()

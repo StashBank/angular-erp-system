@@ -1,6 +1,7 @@
 
 export class ModelDescriptor {
   name: string;
+  collectionName: string;
   primaryPropertyName ? = 'id';
   displayPropertyName ? = 'name';
   imagePropertyName ? = 'image';
@@ -14,9 +15,9 @@ export function Model(descriptor: ModelDescriptor): ClassDecorator {
       models = [];
       Reflect.defineMetadata('models', models, Object.prototype);
     }
-    if (!models.includes(x => x.name === target.name)) {
+    if (!models.includes(x => x.name === descriptor.name)) {
       models.push({
-        name: target.name,
+        name: descriptor.name,
         ctor: target,
         descriptor
       });

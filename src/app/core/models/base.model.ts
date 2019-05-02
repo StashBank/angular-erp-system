@@ -44,6 +44,6 @@ export class BaseModel {
 
   getCollectionName(): string {
     const metaData = this.getModelDescriptor();
-    return metaData && metaData.name;
+    return metaData && metaData.collectionName;
   }
 }

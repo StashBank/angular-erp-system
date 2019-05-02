@@ -8,7 +8,8 @@ import { BaseModel } from '../../core/models/base.model';
 import { ModelProperty } from '../../core/decorators/property.decorator';
 
 @Model({
-  name: 'transactions'
+  name: 'Transaction',
+  collectionName: 'transactions'
 })
 export class Transaction extends BaseModel {
   @ModelProperty()
