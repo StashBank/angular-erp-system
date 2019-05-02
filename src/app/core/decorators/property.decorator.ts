@@ -1,6 +1,5 @@
 
 import { ValidatorFn } from '@angular/forms';
-import { BaseModel } from '../models/base.model';
 
 // #region Configs
 export enum DataValueType {
@@ -20,6 +19,7 @@ export enum DataValueType {
 export class DropDownConfig {
   refModel: any;
   filters?: any;
+  colums?: Array<string>;
 }
 
 export class LookupConfig extends DropDownConfig {
@@ -39,6 +39,7 @@ export class DecimalConfig extends NumberConfig {}
 export class DateConfig {}
 
 export class ModelPropertyDescriptor {
+  caption: string;
   dataValueType: DataValueType = DataValueType.Text;
   dataValueTypeConfig?: LookupConfig | DropDownConfig | DecimalConfig | IntegerConfig | DateConfig;
   required?: boolean;

@@ -6,6 +6,7 @@ import { ModelProperty, DataValueType, LookupConfig } from '../../core/decorator
 import { BaseModel } from '../../core/models/base.model';
 
 @Model({
+  caption: 'items.title',
   name: 'Item',
   collectionName: 'items'
 })

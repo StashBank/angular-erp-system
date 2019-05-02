@@ -5,6 +5,7 @@ import { BaseModel } from '../../core/models/base.model';
 import { ModelProperty } from '../../core/decorators/property.decorator';
 
 @Model({
+  caption: 'stores.title',
   name: 'Store',
   collectionName: 'stores'
 })

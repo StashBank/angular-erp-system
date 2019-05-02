@@ -65,6 +65,7 @@
   "items.label.price": "Цена",
   "items.label.contractor": "Поставщик",
   "items.label.description": "Описание",
+  "item-feature.title": "Характеристики товара",
   "stocks.title": "Запасы",
   "stocks.caption.status": "Статус",
   "stocks.caption.item": "Товар",

@@ -34,6 +34,11 @@ export abstract class BaseViewModel {
     return this.mobileQuery && this.mobileQuery.matches;
   }
 
+  public get title(): Observable<string> {
+    const caption = this.entity.getCaption();
+    return this.translate.get(caption);
+  }
+
   abstract get subTitle$(): Observable<string>;
 
   protected collectionName(): string {

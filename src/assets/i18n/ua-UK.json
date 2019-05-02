@@ -63,6 +63,7 @@
   "items.label.price": "Ціна",
   "items.label.contractor": "Постачальник",
   "items.label.description": "Опис",
+  "item-feature.title": "Характеристики товару",
   "items.enums.type.goods": "Товари",
   "items.enums.type.services": "Послуги",
   "stocks.title": "Запаси",

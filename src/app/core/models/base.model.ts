@@ -46,4 +46,9 @@ export class BaseModel {
     const metaData = this.getModelDescriptor();
     return metaData && metaData.collectionName;
   }
+
+  getCaption(): string {
+    const metaData = this.getModelDescriptor();
+    return metaData && metaData.caption;
+  }
 }

@@ -4,6 +4,7 @@ import { BaseModel } from '../../core/models/base.model';
 import { ModelProperty } from '../../core/decorators/property.decorator';
 
 @Model({
+  caption: 'item-feature.title',
   name: 'ItemFeature',
   collectionName: 'itemFeatures'
 })

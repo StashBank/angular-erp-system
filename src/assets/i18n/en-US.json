@@ -65,6 +65,7 @@
   "items.label.description": "Description",
   "items.enums.type.goods": "Goods",
   "items.enums.type.services": "Services",
+  "item-feature.title": "Item Features",
   "stocks.title": "Stocks",
   "stocks.caption.status": "Status",
   "stocks.caption.item": "Item",

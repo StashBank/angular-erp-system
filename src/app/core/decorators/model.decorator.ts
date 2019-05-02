@@ -1,6 +1,7 @@
 
 export class ModelDescriptor {
   name: string;
+  caption: string;
   collectionName: string;
   primaryPropertyName ? = 'id';
   displayPropertyName ? = 'name';
