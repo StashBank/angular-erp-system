@@ -13,13 +13,14 @@ export enum DataValueType {
   DropDown = 'dropDown',
   Boolean = 'boolean',
   Image = 'image',
+  Array = 'array',
   Custom = 'custom'
 }
 
 export class DropDownConfig {
   refModel: any;
   filters?: any;
-  colums?: Array<string>;
+  columns?: Array<string>;
 }
 
 export class LookupConfig extends DropDownConfig {
@@ -50,7 +51,7 @@ export class ModelPropertyDescriptor {
 }
 // #endregion
 
-export function ModelProperty(descriptor?: ModelPropertyDescriptor): PropertyDecorator {
+export function ModelProperty(descriptor: ModelPropertyDescriptor): PropertyDecorator {
   descriptor = Object.assign(new ModelPropertyDescriptor(), descriptor);
   return (target, propertyKey) => {
     let modelProperties = Reflect.getMetadata('modelProperties', target.constructor) as Array<string | symbol>;

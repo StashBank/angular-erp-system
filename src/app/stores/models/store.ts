@@ -2,7 +2,8 @@ import { StoreType } from '../enums/store-type.enum';
 import { Stock } from '../../stocks/models/stock';
 import { Model } from '../../core/decorators/model.decorator';
 import { BaseModel } from '../../core/models/base.model';
-import { ModelProperty } from '../../core/decorators/property.decorator';
+import { ModelProperty, DataValueType, DropDownConfig } from '../../core/decorators/property.decorator';
+import { Validators } from '@angular/forms';
 
 @Model({
   caption: 'stores.title',
@@ -10,16 +11,50 @@ import { ModelProperty } from '../../core/decorators/property.decorator';
   collectionName: 'stores'
 })
 export class Store extends BaseModel {
-  @ModelProperty()
-  type: StoreType;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'stores.caption.name',
+    dataValueType: DataValueType.Text,
+    required: true
+  })
   name: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'stores.caption.type',
+    dataValueType: DataValueType.DropDown,
+    dataValueTypeConfig: {
+      refModel: StoreType
+    } as DropDownConfig,
+    required: true
+  })
+  type: StoreType;
+
+  @ModelProperty({
+    caption: 'stores.caption.code',
+    dataValueType: DataValueType.Text,
+    required: true
+  })
   code: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'stores.caption.address',
+    dataValueType: DataValueType.Text,
+    required: true
+  })
   address: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'stores.caption.address',
+    dataValueType: DataValueType.Text,
+    required: true,
+    validators: [Validators.pattern(/^0\d{9}$/)]
+  })
   phone: string;
-  @ModelProperty()
-  stocks: Array<Stock>;
+
+  @ModelProperty({
+    caption: 'stores.caption.stocks',
+    dataValueType: DataValueType.Array
+  })
+  stocks?: Array<Stock>;
+
 }

@@ -5,7 +5,7 @@ import { Customer } from '../../customers/models/customer';
 import { Order } from '../../orders/models/order';
 import { Model } from '../../core/decorators/model.decorator';
 import { BaseModel } from '../../core/models/base.model';
-import { ModelProperty } from '../../core/decorators/property.decorator';
+import { ModelProperty, DataValueType, DropDownConfig, LookupConfig } from '../../core/decorators/property.decorator';
 
 @Model({
   caption: 'transactions.title',
@@ -13,18 +13,61 @@ import { ModelProperty } from '../../core/decorators/property.decorator';
   collectionName: 'transactions'
 })
 export class Transaction extends BaseModel {
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'transactions.caption.type',
+    dataValueType: DataValueType.DropDown,
+    dataValueTypeConfig: {
+      refModel: TransactionType
+    } as DropDownConfig,
+    readOnly: true
+  })
   type: TransactionType;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'transactions.caption.type',
+    dataValueType: DataValueType.DropDown,
+    dataValueTypeConfig: {
+      refModel: TransactionType
+    } as DropDownConfig,
+    readOnly: true,
+    defaultValue: TransactionStatus.New
+  })
   status: TransactionStatus;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'transactions.caption.from',
+    dataValueType: DataValueType.Custom,
+    readOnly: true
+  })
   from: Store;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'transactions.caption.to',
+    dataValueType: DataValueType.Custom,
+    readOnly: true
+  })
   to: Store | Customer;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'transactions.caption.order',
+    dataValueType: DataValueType.Custom,
+    readOnly: true
+  })
   order: Order;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'transactions.caption.date',
+    dataValueType: DataValueType.Date,
+    readOnly: true
+  })
   date: Date;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'transactions.caption.date',
+    dataValueType: DataValueType.Integer,
+    readOnly: true
+  })
   qty: number;
+
 }

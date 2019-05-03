@@ -1,7 +1,7 @@
 import { ItemFeatureType } from '../enums/item-feature-type.enum';
 import { Model } from '../../core/decorators/model.decorator';
 import { BaseModel } from '../../core/models/base.model';
-import { ModelProperty } from '../../core/decorators/property.decorator';
+import { ModelProperty, DataValueType, DropDownConfig } from '../../core/decorators/property.decorator';
 
 @Model({
   caption: 'item-feature.title',
@@ -9,12 +9,36 @@ import { ModelProperty } from '../../core/decorators/property.decorator';
   collectionName: 'itemFeatures'
 })
 export class ItemFeature extends BaseModel {
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'item-features.caption.item',
+    dataValueType: DataValueType.Text,
+    required: true
+  })
   itemId: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'item-features.caption.name',
+    dataValueType: DataValueType.Text,
+    required: true
+  })
   name: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'item-features.caption.value',
+    dataValueType: DataValueType.Text,
+    required: true
+  })
   value: any;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'item-features.caption.type',
+    dataValueType: DataValueType.DropDown,
+    dataValueTypeConfig: {
+      refModel: ItemFeatureType
+    } as DropDownConfig,
+    required: true
+  })
   type: ItemFeatureType;
+
 }

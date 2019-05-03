@@ -5,7 +5,8 @@ import { Store } from '../../stores/models/store';
 import { OrderType } from '../enums/order-type.enum';
 import { Model } from '../../core/decorators/model.decorator';
 import { BaseModel } from '../../core/models/base.model';
-import { ModelProperty } from '../../core/decorators/property.decorator';
+import { ModelProperty, DataValueType, DropDownConfig, LookupConfig } from '../../core/decorators/property.decorator';
+import { Validators } from '@angular/forms';
 
 @Model({
   caption: 'orders.title',
@@ -13,20 +14,83 @@ import { ModelProperty } from '../../core/decorators/property.decorator';
   collectionName: 'orders'
 })
 export class Order extends BaseModel {
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'orders.caption.number',
+    dataValueType: DataValueType.Text,
+    readOnly: true
+  })
   number: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'orders.caption.type',
+    dataValueType: DataValueType.DropDown,
+    dataValueTypeConfig: {
+      refModel: OrderType
+    } as DropDownConfig,
+    required: true
+  })
   type: OrderType;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'orders.caption.status',
+    dataValueType: DataValueType.DropDown,
+    dataValueTypeConfig: {
+      refModel: OrderStatus
+    } as DropDownConfig,
+    readOnly: true,
+    defaultValue: OrderStatus.New
+  })
   status: OrderStatus;
-  @ModelProperty()
+
+  // TODO: Add validator - More then today
+  @ModelProperty({
+    caption: 'orders.caption.number',
+    dataValueType: DataValueType.Date,
+    required: true,
+    defaultValue: () => new Date()
+  })
   date: Date;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'orders.caption.customer',
+    dataValueType: DataValueType.Lookup,
+    dataValueTypeConfig: {
+      refModel: Customer,
+      displayColumns: ['code', 'phone', 'email'],
+      columns: ['code', 'phone', 'email'],
+    } as LookupConfig
+  })
   customer: Customer;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'orders.caption.item',
+    dataValueType: DataValueType.Lookup,
+    dataValueTypeConfig: {
+      refModel: Item,
+      displayColumns: ['code', 'barCode', 'price'],
+      columns: ['code', 'barCode', 'price'],
+    } as LookupConfig
+  })
   item: Item;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'orders.caption.store',
+    dataValueType: DataValueType.Lookup,
+    dataValueTypeConfig: {
+      refModel: Store,
+      displayColumns: ['code', 'phone', 'email', 'address'],
+      columns: ['code', 'phone'],
+    } as LookupConfig
+  })
   store: Store;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'orders.caption.quantity',
+    dataValueType: DataValueType.Integer,
+    required: true,
+    validators: [Validators.min(0)]
+  })
   qty: number;
+
 }

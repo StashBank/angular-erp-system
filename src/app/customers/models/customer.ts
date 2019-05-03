@@ -1,7 +1,8 @@
 import { CustomerType } from '../enums/customer-type.enum';
 import { Model } from '../../core/decorators/model.decorator';
-import { ModelProperty } from '../../core/decorators/property.decorator';
+import { ModelProperty, DataValueType, DropDownConfig } from '../../core/decorators/property.decorator';
 import { BaseModel } from '../../core/models/base.model';
+import { Validators } from '@angular/forms';
 
 @Model({
   caption: 'customers.title',
@@ -10,18 +11,55 @@ import { BaseModel } from '../../core/models/base.model';
 })
 export class Customer extends BaseModel {
 
-  @ModelProperty()
+  @ModelProperty({
+    caption: 'customers.caption.name',
+    dataValueType: DataValueType.Text,
+    required: true
+  })
   name: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'customers.caption.number',
+    dataValueType: DataValueType.Text,
+    readOnly: true
+  })
   number: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'customers.caption.type',
+    dataValueType: DataValueType.DropDown,
+    dataValueTypeConfig: {
+      refModel: CustomerType
+    } as DropDownConfig,
+    required: true
+  })
   type: CustomerType;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'customers.caption.phone',
+    dataValueType: DataValueType.Text,
+    validators: [Validators.pattern(/^0\d{9}$/)],
+    required: true
+  })
   phone: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'customers.caption.email',
+    dataValueType: DataValueType.Text,
+    validators: [Validators.email]
+  })
   email: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'customers.caption.address',
+    dataValueType: DataValueType.Text
+  })
   address: string;
-  @ModelProperty()
+
+  @ModelProperty({
+    caption: 'customers.caption.notes',
+    dataValueType: DataValueType.RichText
+  })
   notes: string;
+
 }
