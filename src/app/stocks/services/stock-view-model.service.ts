@@ -1,13 +1,13 @@
 import { Injectable, Injector } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { BaseViewModel } from '../../core/view-models/base-view-model.service';
+import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
 import { Stock } from '../models/stock';
 import { StockService } from './stock.service';
 import { StockStatus } from '../enums/stock-status.enum';
 
 @Injectable()
-export class StockViewModelService extends BaseViewModel {
+export class StockViewModelService extends BasePageViewModel {
 
   entitySchemaName: 'stocks';
   stock: Stock;

@@ -1,11 +1,11 @@
 import { Injectable, Injector } from '@angular/core';
-import { BaseViewModel } from '../../core/view-models/base-view-model.service';
+import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
 import { Transaction } from '../models/transaction';
 import { TransactionService } from './transaction.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class TransactionViewModelService extends BaseViewModel {
+export class TransactionViewModelService extends BasePageViewModel {
 
   entitySchemaName: 'transactions';
   transaction: Transaction;

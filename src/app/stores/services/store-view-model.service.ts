@@ -3,13 +3,13 @@ import { Injectable, Injector } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 
-import { BaseViewModel } from '../../core/view-models/base-view-model.service';
+import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
 import { Store } from '../models/store';
 import { StoreType } from '../enums/store-type.enum';
 import { StoreService } from './store.service';
 import { Observable } from 'rxjs';
 @Injectable()
-export class StoreViewModelService extends BaseViewModel {
+export class StoreViewModelService extends BasePageViewModel {
 
   entitySchemaName: 'stores';
 

@@ -1,12 +1,12 @@
 import { Injectable, Injector } from '@angular/core';
-import { BaseViewModel } from '../../core/view-models/base-view-model.service';
+import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer';
 import { CustomerType } from '../enums/customer-type.enum';
 import { CustomerService } from './customer.service';
 
 @Injectable()
-export class CustomerViewModelService extends BaseViewModel {
+export class CustomerViewModelService extends BasePageViewModel {
 
   protected entitySchemaName = 'Customer';
   protected entity: Customer;

@@ -2,13 +2,13 @@ import { Injectable, Injector } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { BaseViewModel } from '../../core/view-models/base-view-model.service';
+import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
 import { Item } from '../models/item';
 import { ItemType } from '../enums/item-type.enum';
 import { ItemService } from './item.service';
 
 @Injectable()
-export class ItemViewModelService extends BaseViewModel {
+export class ItemViewModelService extends BasePageViewModel {
 
   protected entitySchemaName = 'Item';
   protected entity: Item;

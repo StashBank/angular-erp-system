@@ -2,14 +2,14 @@ import { Injectable, Injector } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { BaseViewModel } from '../../core/view-models/base-view-model.service';
+import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
 
 import { Order } from '../models/order';
 import { OrderType } from '../enums/order-type.enum';
 import { OrderService } from './order.service';
 
 @Injectable()
-export class OrderViewModelService extends BaseViewModel {
+export class OrderViewModelService extends BasePageViewModel {
 
   entitySchemaName: 'orders';
   order: Order;

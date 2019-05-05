@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
+import { BaseModel } from '../models/base.model';
 
 @Component({
   selector: 'app-base-section',
@@ -8,18 +11,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class BaseSectionComponent implements OnInit {
 
-  @Input() saveButtonHidden: boolean;
-
   constructor(
-    private router: Router,
-    private route: ActivatedRoute
+    public vm: BaseSectionViewModel
   ) { }
 
   ngOnInit() {
-  }
-
-  onNewButtonClick() {
-    this.router.navigate(['new'], { relativeTo: this.route });
+    this.vm.init();
   }
 
 }

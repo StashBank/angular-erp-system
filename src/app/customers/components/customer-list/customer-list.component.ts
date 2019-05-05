@@ -4,37 +4,25 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer';
 import { MatTableDataSource } from '@angular/material';
+import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
+import { CustomerSectionViewModelService } from '../../services/customer-section-view-model.service';
+import { DataService } from 'src/app/core/data.service';
 
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.css']
+  styleUrls: ['./customer-list.component.css'],
+  providers: [
+    { provide: BaseSectionViewModel, useClass: CustomerSectionViewModelService },
+    { provide: DataService, useClass: CustomerService }
+  ]
 })
 export class CustomerListComponent implements OnInit {
 
-  customerList: MatTableDataSource<Customer>;
-  displayedColumns: string[] = ['number', 'name', 'phone', 'email', 'address', 'menu'];
-
   constructor(
-    private customerService: CustomerService,
-    private router: Router,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.loadCustomers();
-  }
-
-  loadCustomers() {
-    this.customerService.getAll().subscribe(customers => this.customerList = new MatTableDataSource(customers));
-  }
-
-  edit(customer: Customer) {
-    this.router.navigate(['edit', customer.id], { relativeTo: this.route});
-  }
-
-  remove(customer: Customer) {
-    this.customerService.remove(customer.id).subscribe(() => null);
   }
 
 }

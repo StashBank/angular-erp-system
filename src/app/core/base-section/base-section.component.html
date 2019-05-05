@@ -1,13 +1,51 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <button
-      *ngIf="!saveButtonHidden"
+      *ngIf="!vm.saveButtonHidden"
       mat-raised-button
       color="primary"
-      (click)="onNewButtonClick()">{{ 'common.new-button' | translate }}</button>
-      <div style="padding-left: 24px; font-size: x-large">
-        <ng-content select="[title]"></ng-content>
-      </div>
+      (click)="vm.onNewButtonClick()">{{ 'common.new-button' | translate }}</button>
+      <span class="title">{{ 'customers.title' | translate }}</span>
   </mat-toolbar-row>
 </mat-toolbar>
+<div style="padding-left: 24px; font-size: x-large">
+  <div class="mat-elevation-z8">
+    <!-- TODO: try use https://stackblitz.com/edit/mat-table-responsive -->
+    <mat-table [dataSource]="vm.dataSource">
+      <!-- Columns -->
+      <div *ngFor="let column of vm.columnsToDisplay">
+        <ng-container [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef>{{ 'customers.caption.' + column | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let element" [attr.data-label]="'customers.caption.' + 'column' | translate">
+            {{element[column]}}
+          </mat-cell>
+        </ng-container>
+      </div>
+
+      <!-- Menu Column -->
+      <ng-container matColumnDef="menu" *ngIf="vm.displayedColumns?.includes('menu')">
+        <mat-header-cell *matHeaderCellDef>{{ 'common.caption.actions' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element" [attr.data-label]="'common.caption.actions' | translate">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="vm.edit(element)">
+              <mat-icon>edit</mat-icon>
+              <span>{{ 'common.menu.edit' | translate }}</span>
+            </button>
+            <button mat-menu-item (click)="vm.remove(element)">
+              <mat-icon>delete</mat-icon>
+              <span>{{ 'common.menu.remove' | translate }}</span>
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="vm.displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: vm.displayedColumns;"></mat-row>
+
+    </mat-table>
+  </div>
+</div>
 <ng-content></ng-content>
