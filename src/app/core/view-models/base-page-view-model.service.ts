@@ -17,15 +17,6 @@ export abstract class BasePageViewModel extends BaseViewModel {
   public form: FormGroup;
   public id: string;
 
-  protected dataService: DataService<BaseModel>;
-  protected mobileQuery: MediaQueryList;
-  protected translate: TranslateService;
-  protected formBuilder: FormBuilder;
-  protected route: ActivatedRoute;
-  protected router: Router;
-  protected location: Location;
-  protected dialog: MatDialog;
-
   protected entity: BaseModel;
 
   private mobileQueryListener: (ev: MediaQueryListEvent) => void;

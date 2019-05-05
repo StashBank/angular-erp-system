@@ -13,7 +13,12 @@ export abstract class BaseSectionViewModel extends BaseViewModel {
     return this.displayedColumns!.filter(x => x !== 'menu');
   }
 
-  loadCustomers() {
+  init() {
+    super.init();
+    this.loadData();
+  }
+
+  loadData() {
     this.dataService.getAll().subscribe(data => this.dataSource = new MatTableDataSource(data));
   }
 

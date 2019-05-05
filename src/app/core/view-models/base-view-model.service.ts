@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { Location } from '@angular/common';
 
 export abstract class BaseViewModel {
 
