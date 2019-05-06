@@ -1,6 +1,8 @@
 import { BaseViewModel } from './base-view-model.service';
 import { MatTableDataSource } from '@angular/material';
 import { BaseModel } from '../models/base.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export abstract class BaseSectionViewModel extends BaseViewModel {
 
@@ -8,18 +10,39 @@ export abstract class BaseSectionViewModel extends BaseViewModel {
   saveButtonHidden: boolean;
   displayedColumns: Array<string>;
 
+  protected entitySchema: BaseModel;
+
   get columnsToDisplay(): Array<string> {
     // tslint:disable-next-line:no-non-null-assertion
     return this.displayedColumns!.filter(x => x !== 'menu');
   }
 
+  get title(): Observable<string> {
+    const caption = this.entitySchema && this.entitySchema.getModelDescriptor().caption;
+    return caption && this.translate && this.translate.get(caption);
+  }
+
+
   init() {
     super.init();
+    this.entitySchema = this.createEntity(this.entitySchemaName);
     this.loadData();
   }
 
   loadData() {
-    this.dataService.getAll().subscribe(data => this.dataSource = new MatTableDataSource(data));
+    this.dataService.getAll()
+    .pipe(
+      map(
+        data => Array.isArray(data) && data.map(x => {
+          const entity = this.createEntity(this.entitySchemaName);
+          this.setEntityColumnsValues(entity, x);
+          return entity;
+        })
+      )
+    )
+    .subscribe(
+      data => this.dataSource = new MatTableDataSource(data)
+    );
   }
 
   onNewButtonClick() {
@@ -32,6 +55,11 @@ export abstract class BaseSectionViewModel extends BaseViewModel {
 
   remove(element: BaseModel) {
     this.dataService.remove(element.id).subscribe(() => null);
+  }
+
+  getColumnCaption(columnName: string): Observable<string> {
+    const column = this.entitySchema && this.entitySchema.getPropertyDescriptor(columnName);
+    return column ? this.translate.get(column.caption) : null;
   }
 
 }

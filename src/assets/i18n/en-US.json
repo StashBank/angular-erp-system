@@ -1,5 +1,6 @@
 {
   "common.app-title": "AT-CORP BPM System",
+  "common.id": "Identity",
   "common.edit": "edit {{value}}",
   "common.create-new": "create new",
   "common.new-button": "New",
@@ -64,12 +65,19 @@
   "orders.caption.item": "Item",
   "orders.caption.store": "Store",
   "orders.order-page": "Order Page",
-  "transactions.title": "Transactions",
   "stores.caption.type": "Type",
   "stores.caption.status": "Status",
   "stores.caption.from": "From",
   "stores.caption.to": "To",
   "stores.caption.date": "Date",
   "stores.caption.quantity": "Quantity",
-  "transactions.transaction--page": "Transaction Page"
+  "transactions.title": "Transactions",
+  "transactions.transaction-page": "Transaction Page",
+  "transactions.caption.type": "Type",
+  "transactions.caption.status": "Status",
+  "transactions.caption.from": "From",
+  "transactions.caption.to": "To",
+  "transactions.caption.order": "Order #",
+  "transactions.caption.date": "Date",
+  "transactions.caption.quantity": "Quantity"
 }

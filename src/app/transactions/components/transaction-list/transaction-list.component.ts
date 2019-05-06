@@ -1,39 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
+import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
+import { TransactionSectionViewModelService } from '../../services/transaction-section-view-model.service';
+import { DataService } from 'src/app/core/data.service';
 import { TransactionService } from '../../services/transaction.service';
-import { Transaction } from '../../models/transaction';
 
 @Component({
   selector: 'app-transaction-list',
   templateUrl: './transaction-list.component.html',
-  styleUrls: ['./transaction-list.component.css']
+  styleUrls: ['./transaction-list.component.css'],
+  providers: [
+    { provide: BaseSectionViewModel, useClass: TransactionSectionViewModelService },
+    { provide: DataService, useClass: TransactionService }
+  ]
 })
 export class TransactionListComponent implements OnInit {
 
-  transactionList: Array<Transaction>;
-  displayedColumns: string[] = ['type', 'status', 'from', 'to', 'date', 'qty', 'menu'];
-
   constructor(
-    private transactionService: TransactionService,
-    private router: Router,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.loadTransactions();
-  }
-
-  loadTransactions() {
-    this.transactionService.getAll().subscribe(transactions => this.transactionList = transactions);
-  }
-
-  edit(transaction: Transaction) {
-    this.router.navigate(['edit', transaction.id], { relativeTo: this.route});
-  }
-
-  remove(transaction: Transaction) {
-    this.transactionService.remove(transaction.id).subscribe(() => null);
   }
 
 }

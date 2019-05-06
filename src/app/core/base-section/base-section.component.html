@@ -1,11 +1,11 @@
 <mat-toolbar>
   <mat-toolbar-row>
+    <span class="title">{{ vm.title | async }}</span>
     <button
       *ngIf="!vm.saveButtonHidden"
       mat-raised-button
       color="primary"
       (click)="vm.onNewButtonClick()">{{ 'common.new-button' | translate }}</button>
-      <span class="title">{{ 'customers.title' | translate }}</span>
   </mat-toolbar-row>
 </mat-toolbar>
 <div style="padding-left: 24px; font-size: x-large">
@@ -15,9 +15,11 @@
       <!-- Columns -->
       <div *ngFor="let column of vm.columnsToDisplay">
         <ng-container [matColumnDef]="column">
-          <mat-header-cell *matHeaderCellDef>{{ 'customers.caption.' + column | translate }}</mat-header-cell>
-          <mat-cell *matCellDef="let element" [attr.data-label]="'customers.caption.' + 'column' | translate">
-            {{element[column]}}
+          <mat-header-cell *matHeaderCellDef>{{ vm.getColumnCaption(column) | async }}</mat-header-cell>
+          <mat-cell *matCellDef="let element" [attr.data-label]="vm.getColumnCaption(column) | async" (dblclick)="vm.edit(element)">
+            <span *ngIf="vm.isDate(element[column]); then dateSpan else span"></span>
+            <ng-template  #span>{{element[column]}}</ng-template>
+            <ng-template #dateSpan>{{element[column] | date:'dd.MM.yyyy'}}</ng-template>
           </mat-cell>
         </ng-container>
       </div>

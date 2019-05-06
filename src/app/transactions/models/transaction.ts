@@ -15,6 +15,12 @@ import { ModelProperty, DataValueType, DropDownConfig, LookupConfig } from '../.
 export class Transaction extends BaseModel {
 
   @ModelProperty({
+    caption: 'common.id',
+    dataValueType: DataValueType.Text,
+  })
+  id: string;
+
+  @ModelProperty({
     caption: 'transactions.caption.type',
     dataValueType: DataValueType.DropDown,
     dataValueTypeConfig: {
@@ -25,7 +31,7 @@ export class Transaction extends BaseModel {
   type: TransactionType;
 
   @ModelProperty({
-    caption: 'transactions.caption.type',
+    caption: 'transactions.caption.status',
     dataValueType: DataValueType.DropDown,
     dataValueTypeConfig: {
       refModel: TransactionType
@@ -64,7 +70,7 @@ export class Transaction extends BaseModel {
   date: Date;
 
   @ModelProperty({
-    caption: 'transactions.caption.date',
+    caption: 'transactions.caption.quantity',
     dataValueType: DataValueType.Integer,
     readOnly: true
   })

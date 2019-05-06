@@ -14,6 +14,12 @@ import { Validators } from '@angular/forms';
 export class Stock extends BaseModel {
 
   @ModelProperty({
+    caption: 'common.id',
+    dataValueType: DataValueType.Text,
+  })
+  id: string;
+
+  @ModelProperty({
     caption: 'stocks.caption.number',
     dataValueType: DataValueType.Text,
     readOnly: true

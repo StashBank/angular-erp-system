@@ -1,46 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
+import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
+import { DataService } from 'src/app/core/data.service';
 import { StockService } from '../../services/stock.service';
-import { Stock } from '../../models/stock';
-import { StockStatus } from '../../enums/stock-status.enum';
+import { StockSectionViewModelService } from '../../services/stock-section-view-model.service';
 
 @Component({
   selector: 'app-stock-list',
   templateUrl: './stock-list.component.html',
-  styleUrls: ['./stock-list.component.css']
+  styleUrls: ['./stock-list.component.css'],
+  providers: [
+    { provide: BaseSectionViewModel, useClass: StockSectionViewModelService },
+    { provide: DataService, useClass: StockService }
+  ]
 })
 export class StockListComponent implements OnInit {
 
-  stockList: Array<Stock>;
-  displayedColumns: string[] = ['status', 'item', 'store', 'qty', 'menu'];
-  stockStatuses: { [key: number]: string } = {
-    [StockStatus.Available]: 'stocks.enums.status.available',
-    [StockStatus.InTransit]: 'stocks.enums.status.in-transit',
-    [StockStatus.OnHold]: 'stocks.enums.status.on-hold',
-    [StockStatus.OnService]: 'stocks.enums.status.on-service',
-  };
-
   constructor(
-    private stockService: StockService,
-    private router: Router,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.loadStocks();
   }
 
-  loadStocks() {
-    this.stockService.getAll().subscribe(stocks => this.stockList = stocks);
-  }
-
-  edit(stock: Stock) {
-    this.router.navigate(['edit', stock.id], { relativeTo: this.route});
-  }
-
-  remove(stock: Stock) {
-    this.stockService.remove(stock.id).subscribe(() => null);
-  }
 
 }

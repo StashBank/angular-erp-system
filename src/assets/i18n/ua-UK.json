@@ -1,5 +1,6 @@
 {
   "common.app-title": "AT-CORP BPM System",
+  "common.id": "Ідентифікатор",
   "common.edit": "редагування {{value}}",
   "common.create-new": "новий запис",
   "common.new-button": "Створити",
@@ -77,12 +78,19 @@
   "orders.caption.item": "Товар",
   "orders.caption.store": "Склад",
   "orders.order-page": "Замовлення",
-  "transactions.title": "Транзакції",
   "stores.caption.type": "Тип",
   "stores.caption.status": "Статус",
   "stores.caption.from": "Від",
   "stores.caption.to": "До",
   "stores.caption.date": "Дата",
   "stores.caption.quantity": "Кількість",
-  "transactions.transaction--page": "Транзакція"
+  "transactions.title": "Транзакції",
+  "transactions.transaction-page": "Транзакція",
+  "transactions.caption.type": "Тип",
+  "transactions.caption.status": "Статус",
+  "transactions.caption.from": "Від кого",
+  "transactions.caption.to": "Кому",
+  "transactions.caption.order": "№ ордеру",
+  "transactions.caption.date": "Дата",
+  "transactions.caption.quantity": "Кількість"
 }

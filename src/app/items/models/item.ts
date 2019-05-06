@@ -15,6 +15,12 @@ import { CustomerType } from 'src/app/customers/enums/customer-type.enum';
 export class Item extends BaseModel {
 
   @ModelProperty({
+    caption: 'common.id',
+    dataValueType: DataValueType.Text,
+  })
+  id: string;
+
+  @ModelProperty({
     caption: 'items.caption.name',
     dataValueType: DataValueType.Text,
     required: true

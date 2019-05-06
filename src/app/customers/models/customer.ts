@@ -12,6 +12,12 @@ import { Validators } from '@angular/forms';
 export class Customer extends BaseModel {
 
   @ModelProperty({
+    caption: 'common.id',
+    dataValueType: DataValueType.Text,
+  })
+  id: string;
+
+  @ModelProperty({
     caption: 'customers.caption.name',
     dataValueType: DataValueType.Text,
     required: true

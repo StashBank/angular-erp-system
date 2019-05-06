@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 export class CustomerSectionViewModelService extends BaseSectionViewModel {
 
   displayedColumns: string[] = ['number', 'name', 'phone', 'email', 'address', 'menu'];
-  entitySchemaName = 'Customers';
+  entitySchemaName = 'Customer';
 
 }

@@ -16,6 +16,12 @@ import { Validators } from '@angular/forms';
 export class Order extends BaseModel {
 
   @ModelProperty({
+    caption: 'common.id',
+    dataValueType: DataValueType.Text,
+  })
+  id: string;
+
+  @ModelProperty({
     caption: 'orders.caption.number',
     dataValueType: DataValueType.Text,
     readOnly: true

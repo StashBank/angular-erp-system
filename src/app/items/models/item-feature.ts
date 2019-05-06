@@ -11,6 +11,12 @@ import { ModelProperty, DataValueType, DropDownConfig } from '../../core/decorat
 export class ItemFeature extends BaseModel {
 
   @ModelProperty({
+    caption: 'common.id',
+    dataValueType: DataValueType.Text,
+  })
+  id: string;
+
+  @ModelProperty({
     caption: 'item-features.caption.item',
     dataValueType: DataValueType.Text,
     required: true

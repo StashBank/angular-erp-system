@@ -1,39 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
 import { ItemService } from '../../services/item.service';
-import { Item } from '../../models/item';
+import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
+import { ItemSectionViewModelService } from '../../services/item-section-view-model.service';
+import { DataService } from 'src/app/core/data.service';
 
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css']
+  styleUrls: ['./item-list.component.css'],
+  providers: [
+    { provide: BaseSectionViewModel, useClass: ItemSectionViewModelService },
+    { provide: DataService, useClass: ItemService }
+  ]
 })
 export class ItemListComponent implements OnInit {
 
-  itemList: Array<Item>;
-  displayedColumns: string[] = ['name', 'code', 'barCode', 'price', 'contractor', 'menu'];
-
   constructor(
-    private itemService: ItemService,
-    private router: Router,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.loadItems();
-  }
-
-  loadItems() {
-    this.itemService.getAll().subscribe(items => this.itemList = items);
-  }
-
-  edit(item: Item) {
-    this.router.navigate(['edit', item.id], { relativeTo: this.route});
-  }
-
-  remove(item: Item) {
-    this.itemService.remove(item.id).subscribe(() => null);
   }
 
 }

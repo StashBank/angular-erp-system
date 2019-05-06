@@ -27,7 +27,11 @@ export abstract class BaseViewModel {
     this.setUpDeps();
   }
 
-  public init() {}
+  init() {}
+
+  isDate(value): boolean {
+    return value && value.constructor === Date;
+  }
 
   protected setUpDeps() {
     this.dataService = this.injector.get(DataService);
@@ -52,14 +56,17 @@ export abstract class BaseViewModel {
     }
     const columnNames = Object.keys(values);
     columnNames.forEach(key => {
-      const value = values[key];
+      let value = values[key];
+      if (value && value.constructor.name === 'Timestamp') {
+        value = value.toDate();
+      }
       const propertyMetaData = entity.getPropertyDescriptor(key);
       if (propertyMetaData) {
         const valueType = propertyMetaData.dataValueType;
         if (valueType === DataValueType.Lookup || valueType === DataValueType.DropDown) {
           const lookupConfig = propertyMetaData.dataValueTypeConfig as LookupConfig;
           const refSchemaName = lookupConfig && lookupConfig.refModel && lookupConfig.refModel.name;
-          if (refSchemaName) {
+          if (refSchemaName && typeof value === 'object') {
             const refEntity = this.createEntity(refSchemaName);
             this.setEntityColumnsValues(refEntity, value);
             entity[key] = refEntity;
