@@ -51,7 +51,7 @@ export class Order extends BaseModel {
 
   // TODO: Add validator - More then today
   @ModelProperty({
-    caption: 'orders.caption.number',
+    caption: 'orders.caption.date',
     dataValueType: DataValueType.Date,
     required: true,
     defaultValue: () => new Date()
