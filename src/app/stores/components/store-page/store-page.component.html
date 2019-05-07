@@ -8,19 +8,19 @@
 
       <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">
         <mat-form-field>
-          <input matInput [placeholder]="'stores.label.name' | translate" formControlName="name" />
+          <input matInput [placeholder]="'stores.caption.name' | translate" formControlName="name" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">
         <mat-form-field>
-          <input matInput [placeholder]="'stores.label.code' | translate" formControlName="code" />
+          <input matInput [placeholder]="'stores.caption.code' | translate" formControlName="code" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">
         <mat-form-field>
-          <mat-label>{{ 'stores.label.type' | translate }}</mat-label>
+          <mat-label>{{ 'stores.caption.type' | translate }}</mat-label>
           <mat-select formControlName="type">
             <mat-option *ngFor="let type of vm.storeTypes" [value]="type.value">
               {{type.name | translate}}
@@ -31,19 +31,19 @@
 
       <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">
         <mat-form-field>
-          <input matInput [placeholder]="'stores.label.status' | translate" formControlName="status" />
+          <input matInput [placeholder]="'stores.caption.status' | translate" formControlName="status" />
         </mat-form-field>
       </mat-grid-tile>
       
       <mat-grid-tile colspan="1">
         <mat-form-field>
-          <input matInput [placeholder]="'stores.label.phone' | translate" formControlName="phone" />
+          <input matInput [placeholder]="'stores.caption.phone' | translate" formControlName="phone" />
         </mat-form-field>
       </mat-grid-tile>
   
       <mat-grid-tile [colspan]="vm.isMobile ? 1 : 3">
         <mat-form-field style="width: 100%; padding: 3px 0 3px 0">
-          <input matInput [placeholder]="'stores.label.address' | translate" formControlName="address" />
+          <input matInput [placeholder]="'stores.caption.address' | translate" formControlName="address" />
         </mat-form-field>
       </mat-grid-tile>
       

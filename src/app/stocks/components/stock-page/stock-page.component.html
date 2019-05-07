@@ -8,7 +8,7 @@
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput [placeholder]="'stocks.label.item' | translate" formControlName="item" />
+          <input matInput [placeholder]="'stocks.caption.item' | translate" formControlName="item" />
           <button mat-button matSuffix mat-icon-button *ngIf="vm.form?.get('item').value"
             (click)="vm.form.get('item').setValue(null)">
             <mat-icon>clear</mat-icon>
@@ -21,7 +21,7 @@
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput [placeholder]="'stocks.label.store' | translate" formControlName="store" />
+          <input matInput [placeholder]="'stocks.caption.store' | translate" formControlName="store" />
           <button mat-button matSuffix mat-icon-button *ngIf="vm.form?.get('store').value"
             (click)="vm.form.get('store').setValue(null)">
             <mat-icon>clear</mat-icon>
@@ -34,13 +34,13 @@
       
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput [placeholder]="'stocks.label.quantity' | translate" formControlName="qty" type="number" />
+          <input matInput [placeholder]="'stocks.caption.quantity' | translate" formControlName="qty" type="number" />
         </mat-form-field>
       </mat-grid-tile>
   
       <mat-grid-tile>
         <mat-form-field>
-          <mat-label>{{ 'stocks.label.status' | translate }}</mat-label>
+          <mat-label>{{ 'stocks.caption.status' | translate }}</mat-label>
           <mat-select formControlName="status">
             <mat-option *ngFor="let status of vm.stockStatuses" [value]="status.value">
               {{status.name | translate}}

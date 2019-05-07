@@ -18,10 +18,10 @@ export class ItemViewModelService extends BasePageViewModel {
     { value: ItemType.Services.toString(), name: 'items.enums.type.services' },
   ];
   contractorDisplayColumns: Array<{ path: string, title: string }> = [
-    { path: 'name', title: 'customers.label.name' },
-    { path: 'phone', title: 'customers.label.phone' },
-    { path: 'email', title: 'customers.label.email' },
-    { path: 'address', title: 'customers.label.address' },
+    { path: 'name', title: 'customers.caption.name' },
+    { path: 'phone', title: 'customers.caption.phone' },
+    { path: 'email', title: 'customers.caption.email' },
+    { path: 'address', title: 'customers.caption.address' },
   ];
 
   public get subTitle$(): Observable<string> {

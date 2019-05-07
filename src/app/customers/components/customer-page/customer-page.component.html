@@ -8,19 +8,19 @@
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput [placeholder]="'customers.label.number' | translate" formControlName="number" />
+          <input matInput [placeholder]="'customers.caption.number' | translate" formControlName="number" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput [placeholder]="'customers.label.name' | translate" formControlName="name" />
+          <input matInput [placeholder]="'customers.caption.name' | translate" formControlName="name" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <mat-label>{{'customers.label.type' | translate}}</mat-label>
+          <mat-label>{{'customers.caption.type' | translate}}</mat-label>
           <mat-select formControlName="type">
             <mat-option *ngFor="let type of vm.customerTypes" [value]="type.value">
               {{type.name | translate}}
@@ -31,25 +31,25 @@
       
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput [placeholder]="'customers.label.phone' | translate" formControlName="phone" />
+          <input matInput [placeholder]="'customers.caption.phone' | translate" formControlName="phone" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput [placeholder]="'customers.label.email' | translate" formControlName="email" />
+          <input matInput [placeholder]="'customers.caption.email' | translate" formControlName="email" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput [placeholder]="'customers.label.address' | translate" formControlName="address" />
+          <input matInput [placeholder]="'customers.caption.address' | translate" formControlName="address" />
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile [colspan]="vm.isMobile ? null : 2">
         <mat-form-field style="width: 100%; padding: 3p 0 3px 0">
-          <input matInput [placeholder]="'customers.label.notes' | translate" formControlName="notes" />
+          <input matInput [placeholder]="'customers.caption.notes' | translate" formControlName="notes" />
         </mat-form-field>
       </mat-grid-tile>
 
