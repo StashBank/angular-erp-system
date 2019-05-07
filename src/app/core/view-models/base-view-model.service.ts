@@ -1,12 +1,13 @@
 import { Injector } from '@angular/core';
 import { BaseModel } from '../models/base.model';
-import { DataValueType, LookupConfig } from '../decorators/property.decorator';
+import { DataValueType, LookupConfig, DropDownConfig } from '../decorators/property.decorator';
 import { DataService } from '../data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
+import { EnumDescriptor } from '../decorators/enum.decorator';
 
 export abstract class BaseViewModel {
 
@@ -56,28 +57,37 @@ export abstract class BaseViewModel {
     }
     const columnNames = Object.keys(values);
     columnNames.forEach(key => {
-      let value = values[key];
-      if (value && value.constructor.name === 'Timestamp') {
-        value = value.toDate();
-      }
-      const propertyMetaData = entity.getPropertyDescriptor(key);
-      if (propertyMetaData) {
-        const valueType = propertyMetaData.dataValueType;
-        if (valueType === DataValueType.Lookup || valueType === DataValueType.DropDown) {
-          const lookupConfig = propertyMetaData.dataValueTypeConfig as LookupConfig;
-          const refSchemaName = lookupConfig && lookupConfig.refModel && lookupConfig.refModel.name;
-          if (refSchemaName && typeof value === 'object') {
-            const refEntity = this.createEntity(refSchemaName);
-            this.setEntityColumnsValues(refEntity, value);
-            entity[key] = refEntity;
-          } else {
-            entity[key] = value;
-          }
-        } else {
-          entity[key] = value;
+      const value = values[key];
+      this.setEntityColumnValue(entity, key, value);
+    });
+  }
+
+  // TODO: refactoring
+  protected setEntityColumnValue(entity: BaseModel, key: string, value) {
+    if (value && value.constructor.name === 'Timestamp') {
+      value = value.toDate();
+    }
+    const propertyMetaData = entity.getPropertyDescriptor(key);
+    if (propertyMetaData) {
+      const valueType = propertyMetaData.dataValueType;
+      if (valueType === DataValueType.Lookup) {
+        const lookupConfig = propertyMetaData.dataValueTypeConfig as LookupConfig;
+        const refSchemaName = lookupConfig && lookupConfig.refModel && lookupConfig.refModel.name;
+        if (refSchemaName && typeof value === 'object') {
+          const refEntity = this.createEntity(refSchemaName);
+          this.setEntityColumnsValues(refEntity, value);
+          value = refEntity;
+        }
+      } else if (valueType === DataValueType.DropDown) {
+        const dropDownConfig = propertyMetaData.dataValueTypeConfig as DropDownConfig;
+        const refSchema = dropDownConfig && dropDownConfig.refModel;
+        if (refSchema && refSchema.getMetaData) {
+          const enumMetaData = refSchema.getMetaData() as EnumDescriptor;
+          value = `${enumMetaData.translatePath}.${value}`;
         }
       }
-    });
+      entity[key] = value;
+    }
   }
 
 }

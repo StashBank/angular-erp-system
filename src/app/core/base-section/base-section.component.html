@@ -18,7 +18,7 @@
           <mat-header-cell *matHeaderCellDef>{{ vm.getColumnCaption(column) | async }}</mat-header-cell>
           <mat-cell *matCellDef="let element" [attr.data-label]="vm.getColumnCaption(column) | async" (dblclick)="vm.edit(element)">
             <span *ngIf="vm.isDate(element[column]); then dateSpan else span"></span>
-            <ng-template  #span>{{element[column]}}</ng-template>
+            <ng-template  #span>{{(element[column] || '').toString() | translate }}</ng-template>
             <ng-template #dateSpan>{{element[column] | date:'dd.MM.yyyy'}}</ng-template>
           </mat-cell>
         </ng-container>
