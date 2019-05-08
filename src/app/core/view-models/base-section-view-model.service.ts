@@ -10,22 +10,19 @@ export abstract class BaseSectionViewModel extends BaseViewModel {
   saveButtonHidden: boolean;
   displayedColumns: Array<string>;
 
-  protected entitySchema: BaseModel;
-
   get columnsToDisplay(): Array<string> {
     // tslint:disable-next-line:no-non-null-assertion
     return this.displayedColumns!.filter(x => x !== 'menu');
   }
 
   get title(): Observable<string> {
-    const caption = this.entitySchema && this.entitySchema.getModelDescriptor().caption;
+    const caption = this.entitySchema && this.entitySchema.caption;
     return caption && this.translate && this.translate.get(caption);
   }
 
 
   init() {
     super.init();
-    this.entitySchema = this.createEntity(this.entitySchemaName);
     this.loadData();
   }
 

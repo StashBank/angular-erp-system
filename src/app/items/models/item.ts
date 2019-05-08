@@ -75,14 +75,19 @@ export class Item extends BaseModel {
   contractor: Customer;
 
   @ModelProperty({
-    caption: 'customers.caption.image',
+    caption: 'items.caption.image',
     dataValueType: DataValueType.Image
   })
   imageData?: string;
 
   @ModelProperty({
-    caption: 'customers.caption.features',
-    dataValueType: DataValueType.Array
+    caption: 'items.caption.features',
+    dataValueType: DataValueType.Array,
+    dataValueTypeConfig: {
+      refModel: ItemFeature,
+      displayColumns: ['name', 'value'],
+      columns: ['name', 'value', 'type']
+    } as LookupConfig
   })
   features: Array<ItemFeature>;
 

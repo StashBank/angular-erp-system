@@ -9,8 +9,8 @@ import { StockStatus } from '../enums/stock-status.enum';
 @Injectable()
 export class StockViewModelService extends BasePageViewModel {
 
-  entitySchemaName: 'stocks';
-  stock: Stock;
+  entitySchemaName: 'Stock';
+  entity = new Stock();
   stockStatuses: Array<{ name: string, value: string }> = [
     { value: StockStatus.Available.toString(), name: 'stocks.enums.status.available' },
     { value: StockStatus.InTransit.toString(), name: 'stocks.enums.status.in-transit' },
@@ -29,51 +29,12 @@ export class StockViewModelService extends BasePageViewModel {
 
   public get subTitle$(): Observable<string> {
     return this.id
-      ? this.translate.get('common.edit', { value: this.stock && this.stock.number || '' })
+      ? this.translate.get('common.edit', { value: this.entity && this.entity.number || '' })
       : this.translate.get('common.create-new');
   }
 
   constructor(injector: Injector, protected stockService: StockService) {
     super(injector);
-  }
-
-  init() {
-    this.createForm();
-    this.route.params.subscribe(params => {
-      const { id } = params;
-      if (id && id !== this.id) {
-        this.id = id;
-        this.loadStock(id);
-      }
-    });
-  }
-
-  createForm() {
-    this.form = this.formBuilder.group({
-      item: [null, [Validators.required]],
-      store: [null, [Validators.required]],
-      qty: [null, [Validators.required]],
-      status: StockStatus.Available,
-    });
-  }
-
-  save() {
-    if (this.id) {
-      this.stockService.update(this.id, this.form.value).subscribe(() => null);
-      return;
-    }
-    this.stockService.create(this.form.value)
-      .subscribe(
-        // id => this.router.navigate(['..', 'edit', id], { relativeTo: this.route })
-        id => this.location.replaceState(`stocks/edit/${id}`)
-      );
-  }
-
-  loadStock(id: string) {
-    this.stockService.getById(id).subscribe(stock => {
-      this.stock = Object.assign(new Stock(), stock);
-      this.form.patchValue(stock);
-    });
   }
 
 }

@@ -24,6 +24,7 @@ import {
   MatGridListModule,
   MatSelectModule,
   MatDialogModule,
+  MatExpansionModule,
 } from '@angular/material';
 import { BaseSectionComponent } from './base-section/base-section.component';
 import { BasePageComponent } from './base-page/base-page.component';
@@ -52,6 +53,7 @@ import { LookupDialogComponent } from './lookup-dialog/lookup-dialog.component';
     MatGridListModule,
     MatSelectModule,
     MatDialogModule,
+    MatExpansionModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -78,6 +80,7 @@ import { LookupDialogComponent } from './lookup-dialog/lookup-dialog.component';
     MatGridListModule,
     MatSelectModule,
     MatDialogModule,
+    MatExpansionModule,
 
     AngularFireModule,
     AngularFirestoreModule,

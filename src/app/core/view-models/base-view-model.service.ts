@@ -1,6 +1,6 @@
 import { Injector } from '@angular/core';
 import { BaseModel } from '../models/base.model';
-import { DataValueType, LookupConfig, DropDownConfig } from '../decorators/property.decorator';
+import { DataValueType, LookupConfig, DropDownConfig, ModelPropertyDescriptor } from '../decorators/property.decorator';
 import { DataService } from '../data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder } from '@angular/forms';
@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
 import { EnumDescriptor } from '../decorators/enum.decorator';
+import { SchemaDescriptor, Model, ModelDescriptor } from '../decorators/model.decorator';
 
 export abstract class BaseViewModel {
 
@@ -21,6 +22,7 @@ export abstract class BaseViewModel {
   protected dialog: MatDialog;
 
   protected entitySchemaName: string;
+  protected entitySchema: ModelDescriptor;
 
   constructor(
     protected injector: Injector
@@ -28,10 +30,20 @@ export abstract class BaseViewModel {
     this.setUpDeps();
   }
 
-  init() {}
+  init() {
+    this.entitySchema = Model.getModelDescriptor(this.entitySchemaName);
+  }
 
   isDate(value): boolean {
     return value && value.constructor === Date;
+  }
+
+  getEntitySchemaByName(entitySchemaName: string): ModelDescriptor {
+    return Model.getModelDescriptor(entitySchemaName);
+  }
+
+  getEntitySchemaPropertyByName(propertyName: string): ModelPropertyDescriptor {
+    return this.entitySchema.getPropertyDescriptor(propertyName);
   }
 
   protected setUpDeps() {
@@ -72,7 +84,8 @@ export abstract class BaseViewModel {
       const valueType = propertyMetaData.dataValueType;
       if (valueType === DataValueType.Lookup) {
         const lookupConfig = propertyMetaData.dataValueTypeConfig as LookupConfig;
-        const refSchemaName = lookupConfig && lookupConfig.refModel && lookupConfig.refModel.name;
+        const refSchema = lookupConfig && lookupConfig.refModel as Function;
+        const refSchemaName = refSchema && refSchema.name;
         if (refSchemaName && typeof value === 'object') {
           const refEntity = this.createEntity(refSchemaName);
           this.setEntityColumnsValues(refEntity, value);
@@ -80,11 +93,14 @@ export abstract class BaseViewModel {
         }
       } else if (valueType === DataValueType.DropDown) {
         const dropDownConfig = propertyMetaData.dataValueTypeConfig as DropDownConfig;
-        const refSchema = dropDownConfig && dropDownConfig.refModel;
+        const refSchema = dropDownConfig && dropDownConfig.refModel as any;
         if (refSchema && refSchema.getMetaData) {
           const enumMetaData = refSchema.getMetaData() as EnumDescriptor;
           value = `${enumMetaData.translatePath}.${value}`;
         }
+      } else if (valueType === DataValueType.Array) {
+        //TODO: map each element ot create inner entity;
+        value = Array.isArray(value) ? value : [];
       }
       entity[key] = value;
     }

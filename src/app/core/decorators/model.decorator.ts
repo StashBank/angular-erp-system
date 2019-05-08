@@ -1,3 +1,5 @@
+// tslint:disable: ban-types
+import { ModelPropertyDescriptor, ModelProperty } from './property.decorator';
 
 export class ModelDescriptor {
   name: string;
@@ -6,6 +8,14 @@ export class ModelDescriptor {
   primaryPropertyName ? = 'id';
   displayPropertyName ? = 'name';
   imagePropertyName ? = 'image';
+  getPropertyDescriptor?: (name) => ModelPropertyDescriptor;
+  getProperties?: () => Array<ModelPropertyDescriptor>;
+}
+
+export class SchemaDescriptor {
+  name: string;
+  ctor: Function;
+  descriptor: ModelDescriptor;
 }
 
 export function Model(descriptor: ModelDescriptor): ClassDecorator {
@@ -27,10 +37,23 @@ export function Model(descriptor: ModelDescriptor): ClassDecorator {
   };
 }
 
-Model.getModelProperties = (target): Array<string | symbol> => {
+Model.getModelProperties = (target: Function): Array<string | symbol> => {
   return Reflect.getMetadata('modelProperties', target) as Array<string | symbol>;
 };
 
-Model.getDescriptor = (target): ModelDescriptor => {
+Model.getDescriptor = (target: Function): ModelDescriptor => {
   return Reflect.getMetadata('model', target);
+};
+
+Model.getModelDescriptor = (name: string): ModelDescriptor => {
+  const metaData = Reflect.getMetadata('models', Object.prototype) as Array<SchemaDescriptor>;
+  const schema = metaData.find(x => x.name === name);
+  return {
+    ... schema.descriptor,
+    getPropertyDescriptor: (propertyName: string): ModelPropertyDescriptor => ModelProperty.getDescriptor(propertyName, schema.ctor),
+    getProperties: (): Array<ModelPropertyDescriptor> => Model.getModelProperties(schema.ctor)
+    .map(
+      (propertyName: string) => ModelProperty.getDescriptor(propertyName, schema.ctor)
+    )
+  };
 };

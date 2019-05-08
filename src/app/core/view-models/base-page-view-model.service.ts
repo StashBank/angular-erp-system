@@ -9,8 +9,9 @@ import { LookupDialogComponent, DialogData } from '../lookup-dialog/lookup-dialo
 import { DataService } from '../data.service';
 import { BaseModel } from '../models/base.model';
 import { Observable } from 'rxjs';
-import { DataValueType, LookupConfig } from '../decorators/property.decorator';
+import { DataValueType, LookupConfig, ModelPropertyDescriptor } from '../decorators/property.decorator';
 import { BaseViewModel } from './base-view-model.service';
+import { ModelDescriptor, Model, SchemaDescriptor } from '../decorators/model.decorator';
 
 export abstract class BasePageViewModel extends BaseViewModel {
 
@@ -47,7 +48,7 @@ export abstract class BasePageViewModel extends BaseViewModel {
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
 
     this.entity = this.createEntity(this.entitySchemaName);
-    this.createForm();
+    this.initForm();
     this.route.params.subscribe(params => {
       const { id } = params;
       if (id && id !== this.id) {
@@ -97,18 +98,28 @@ export abstract class BasePageViewModel extends BaseViewModel {
     });
   }
 
-  protected createForm() {
-    const formGroupConfig = this.entity.getModelProperties()
+  protected initForm() {
+    const properties = this.entity.getModelProperties().map(x => x.toString());
+    this.form = this.createForm(properties, this.entitySchema);
+  }
+
+  protected createForm(properties: Array<string>, entitySchema: ModelDescriptor): FormGroup {
+    const formGroupConfig = properties
       .reduce((config, propertyName) => {
-        const propertyDescriptor = this.entity.getPropertyDescriptor(propertyName);
+        const propertyDescriptor = entitySchema.getPropertyDescriptor(propertyName) || {} as ModelPropertyDescriptor;
         const validators = propertyDescriptor && propertyDescriptor.validators || [];
         if (propertyDescriptor && propertyDescriptor.required) {
           validators.push(Validators.required);
         }
-        config[propertyName] = [propertyDescriptor && propertyDescriptor.defaultValue, validators];
+        config[propertyName] = propertyDescriptor.dataValueType === DataValueType.Array
+          ? this.formBuilder.array([])
+          : [{
+            value: propertyDescriptor.defaultValue,
+            disabled: propertyDescriptor.readOnly
+          }, validators];
         return config;
       }, {});
-    this.form = this.formBuilder.group(formGroupConfig);
+    return this.formBuilder.group(formGroupConfig);
   }
 
 }

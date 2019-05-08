@@ -18,7 +18,7 @@ export enum DataValueType {
 }
 
 export class DropDownConfig {
-  refModel: any;
+  refModel: Function | Object;
   filters?: any;
   columns?: Array<string>;
 }
@@ -40,6 +40,7 @@ export class DecimalConfig extends NumberConfig {}
 export class DateConfig {}
 
 export class ModelPropertyDescriptor {
+  name?: string;
   caption: string;
   dataValueType: DataValueType = DataValueType.Text;
   dataValueTypeConfig?: LookupConfig | DropDownConfig | DecimalConfig | IntegerConfig | DateConfig;
@@ -62,7 +63,7 @@ export function ModelProperty(descriptor: ModelPropertyDescriptor): PropertyDeco
     if (!modelProperties.includes(propertyKey)) {
       modelProperties.push(propertyKey);
     }
-    Reflect.defineMetadata(`model->${propertyKey.toString()}`, descriptor, target.constructor);
+    Reflect.defineMetadata(`model->${propertyKey.toString()}`, { ...descriptor, name: propertyKey }, target.constructor);
   };
 }
 

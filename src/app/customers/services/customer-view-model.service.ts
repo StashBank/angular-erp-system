@@ -9,7 +9,7 @@ import { CustomerService } from './customer.service';
 export class CustomerViewModelService extends BasePageViewModel {
 
   protected entitySchemaName = 'Customer';
-  protected entity: Customer;
+  protected entity = new Customer();
 
   customerTypes: Array<{ name: string, value: string }> = [
     { value: CustomerType.Company.toString(), name: 'customers.enums.type.company' },
