@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../services/item.service';
-import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
 import { ItemSectionViewModelService } from '../../services/item-section-view-model.service';
-import { DataService } from 'src/app/core/data.service';
+import { BaseSectionViewModel } from '../../../core/view-models/base-section-view-model.service';
+import { DataService } from '../../../core/data.service';
 
 @Component({
   selector: 'app-item-list',

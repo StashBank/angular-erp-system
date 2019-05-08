@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
 import { StoreSectionViewModelService } from '../../services/store-section-view-model.service';
-import { DataService } from 'src/app/core/data.service';
+import { BaseSectionViewModel } from '../../../core/view-models/base-section-view-model.service';
+import { DataService } from '../../../core/data.service';
 import { StoreService } from '../../services/store.service';
 
 @Component({

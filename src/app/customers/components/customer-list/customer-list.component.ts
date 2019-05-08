@@ -4,9 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer';
 import { MatTableDataSource } from '@angular/material';
-import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
 import { CustomerSectionViewModelService } from '../../services/customer-section-view-model.service';
-import { DataService } from 'src/app/core/data.service';
+import { BaseSectionViewModel } from '../../../core/view-models/base-section-view-model.service';
+import { DataService } from '../../../core/data.service';
 
 @Component({
   selector: 'app-customer-list',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StockViewModelService } from '../../services/stock-view-model.service';
-import { DataService } from 'src/app/core/data.service';
+import { DataService } from '../../../core/data.service';
 import { StockService } from '../../services/stock.service';
 
 @Component({

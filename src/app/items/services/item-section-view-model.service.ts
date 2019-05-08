@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
+import { BaseSectionViewModel } from '../../core/view-models/base-section-view-model.service';
 
 @Injectable()
 export class ItemSectionViewModelService extends BaseSectionViewModel {

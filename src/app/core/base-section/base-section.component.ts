@@ -1,4 +1,4 @@
-import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
+import { BaseSectionViewModel } from '../../core/view-models/base-section-view-model.service';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';

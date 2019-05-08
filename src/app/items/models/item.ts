@@ -5,7 +5,7 @@ import { Model } from '../../core/decorators/model.decorator';
 import { ModelProperty, DataValueType, LookupConfig, DropDownConfig } from '../../core/decorators/property.decorator';
 import { BaseModel } from '../../core/models/base.model';
 import { Validators } from '@angular/forms';
-import { CustomerType } from 'src/app/customers/enums/customer-type.enum';
+import { CustomerType } from '../../customers/enums/customer-type.enum';
 
 @Model({
   caption: 'items.title',

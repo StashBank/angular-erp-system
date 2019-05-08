@@ -1,4 +1,4 @@
-import { Enum } from 'src/app/core/decorators/enum.decorator';
+import { Enum } from '../../core/decorators/enum.decorator';
 
 export enum OrderType {
   Inbound,

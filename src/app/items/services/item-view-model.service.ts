@@ -6,7 +6,7 @@ import { BasePageViewModel } from '../../core/view-models/base-page-view-model.s
 import { Item } from '../models/item';
 import { ItemType } from '../enums/item-type.enum';
 import { ItemService } from './item.service';
-import { LookupConfig } from 'src/app/core/decorators/property.decorator';
+import { LookupConfig } from '../../core/decorators/property.decorator';
 import { ItemFeature } from '../models/item-feature';
 
 @Injectable()

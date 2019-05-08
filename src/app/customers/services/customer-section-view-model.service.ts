@@ -1,4 +1,4 @@
-import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
+import { BaseSectionViewModel } from '../../core/view-models/base-section-view-model.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TransactionViewModelService } from '../../services/transaction-view-model.service';
-import { DataService } from 'src/app/core/data.service';
+import { DataService } from '../../../core/data.service';
 import { TransactionService } from '../../services/transaction.service';
 
 @Component({

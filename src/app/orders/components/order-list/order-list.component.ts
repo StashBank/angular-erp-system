@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../../models/order';
-import { BaseSectionViewModel } from 'src/app/core/view-models/base-section-view-model.service';
 import { OrderSectionViewModelService } from '../../services/order-section-view-model.service';
-import { DataService } from 'src/app/core/data.service';
 import { OrderService } from '../../services/order.service';
+import { BaseSectionViewModel } from '../../../core/view-models/base-section-view-model.service';
+import { DataService } from '../../../core/data.service';
 
 @Component({
   selector: 'app-order-list',
