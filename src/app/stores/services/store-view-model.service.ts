@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class StoreViewModelService extends BasePageViewModel {
 
-  entitySchemaName: 'Store';
+  entitySchemaName = 'Store';
   entity = new Store();
 
   storeTypes: Array<{ name: string, value: string }> = [

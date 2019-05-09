@@ -1,3 +1,5 @@
+import { MatSnackBar } from '@angular/material';
+// tslint:disable:ban-types
 import { Injector } from '@angular/core';
 import { BaseModel } from '../models/base.model';
 import { DataValueType, LookupConfig, DropDownConfig, ModelPropertyDescriptor } from '../decorators/property.decorator';
@@ -20,6 +22,7 @@ export abstract class BaseViewModel {
   protected router: Router;
   protected location: Location;
   protected dialog: MatDialog;
+  protected snackBar: MatSnackBar;
 
   protected entitySchemaName: string;
   protected entitySchema: ModelDescriptor;
@@ -54,6 +57,7 @@ export abstract class BaseViewModel {
     this.router = this.injector.get(Router);
     this.location = this.injector.get(Location);
     this.dialog = this.injector.get(MatDialog);
+    this.snackBar = this.injector.get(MatSnackBar);
   }
 
   protected createEntity(entitySchemaName: string): BaseModel {
@@ -99,8 +103,15 @@ export abstract class BaseViewModel {
           value = `${enumMetaData.translatePath}.${value}`;
         }
       } else if (valueType === DataValueType.Array) {
-        //TODO: map each element ot create inner entity;
-        value = Array.isArray(value) ? value : [];
+        // TODO: map each element ot create inner entity;
+        value = (Array.isArray(value) ? value : []) as Array<BaseModel>;
+        const dropDownConfig = propertyMetaData.dataValueTypeConfig as DropDownConfig;
+        const refSchema = dropDownConfig && dropDownConfig.refModel as Function;
+        value = value.map(v => {
+          const e = this.createEntity(refSchema.name);
+          this.setEntityColumnsValues(e, v);
+          return e;
+        });
       }
       entity[key] = value;
     }

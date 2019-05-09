@@ -1,13 +1,14 @@
 import 'reflect-metadata';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { environment } from '../../environments/environment';
 
 import {
   MatButtonModule,
@@ -25,12 +26,14 @@ import {
   MatSelectModule,
   MatDialogModule,
   MatExpansionModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
 import { BaseSectionComponent } from './base-section/base-section.component';
 import { BasePageComponent } from './base-page/base-page.component';
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { AppTranslateService } from '../app-translate.service';
 import { LookupDialogComponent } from './lookup-dialog/lookup-dialog.component';
+
+import { environment } from '../../environments/environment';
 
 @NgModule({
   imports: [
@@ -41,6 +44,7 @@ import { LookupDialogComponent } from './lookup-dialog/lookup-dialog.component';
 
     MatButtonModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatIconModule,
     MatToolbarModule,
@@ -68,6 +72,7 @@ import { LookupDialogComponent } from './lookup-dialog/lookup-dialog.component';
 
     MatButtonModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatIconModule,
     MatToolbarModule,

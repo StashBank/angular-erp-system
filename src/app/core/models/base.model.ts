@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript';
 import { ModelProperty, ModelPropertyDescriptor } from '../decorators/property.decorator';
 import { Model, ModelDescriptor } from '../decorators/model.decorator';
 
@@ -8,6 +9,7 @@ export class BaseModel {
   static toString(): string {
     return 'BaseModel';
   }
+
 
   toString(): string {
     const displayColumnName = this.getDisplayColumnName();

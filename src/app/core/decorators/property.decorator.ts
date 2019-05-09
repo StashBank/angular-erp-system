@@ -18,6 +18,7 @@ export enum DataValueType {
 }
 
 export class DropDownConfig {
+  // tslint:disable-next-line:ban-types
   refModel: Function | Object;
   filters?: any;
   columns?: Array<string>;

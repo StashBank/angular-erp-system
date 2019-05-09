@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Injector } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { TranslateService } from '@ngx-translate/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material';
@@ -9,9 +9,10 @@ import { LookupDialogComponent, DialogData } from '../lookup-dialog/lookup-dialo
 import { DataService } from '../data.service';
 import { BaseModel } from '../models/base.model';
 import { Observable } from 'rxjs';
-import { DataValueType, LookupConfig, ModelPropertyDescriptor } from '../decorators/property.decorator';
+import { DataValueType, LookupConfig, ModelPropertyDescriptor, DropDownConfig } from '../decorators/property.decorator';
 import { BaseViewModel } from './base-view-model.service';
 import { ModelDescriptor, Model, SchemaDescriptor } from '../decorators/model.decorator';
+import { Guid } from 'guid-typescript';
 
 export abstract class BasePageViewModel extends BaseViewModel {
 
@@ -33,7 +34,7 @@ export abstract class BasePageViewModel extends BaseViewModel {
 
   abstract get subTitle$(): Observable<string>;
 
-  protected collectionName(): string {
+  protected get collectionName(): string {
     return this.entity.getModelDescriptor().name;
   }
 
@@ -59,19 +60,23 @@ export abstract class BasePageViewModel extends BaseViewModel {
   }
 
   public save() {
+    const values = this.form.getRawValue();
+    const dto = this.createEntity(this.entitySchemaName);
+    this.setEntityColumnsValues(dto, values);
     if (this.id) {
-      this.dataService.update(this.id, this.form.value).subscribe(() => null);
-      return;
+      this.dataService.update(this.id, dto).subscribe(() => this.onSaved());
+    } else {
+      this.dataService.create(dto).subscribe(id => {
+        this.onSaved();
+        this.location.replaceState(`${this.collectionName}/edit/${id}`);
+      });
     }
-    this.dataService.create(this.form.value)
-      .subscribe(
-        id => this.location.replaceState(`${this.collectionName}/edit/${id}`)
-      );
   }
 
   public loadEntity(id: string) {
     this.dataService.getById(id).subscribe(dto => {
       this.setEntityColumnsValues(this.entity, dto);
+      this.createFormArrays(this.entity);
       this.form.patchValue(this.entity);
     });
   }
@@ -120,6 +125,36 @@ export abstract class BasePageViewModel extends BaseViewModel {
         return config;
       }, {});
     return this.formBuilder.group(formGroupConfig);
+  }
+
+  protected createFormArrays(values: BaseModel) {
+    if (values) {
+      Object.keys(values)
+        .map(key => this.getEntitySchemaPropertyByName(key))
+        .filter(metadata => metadata.dataValueType === DataValueType.Array)
+        .forEach(metadata => {
+          const arr = values[metadata.name];
+          if (Array.isArray(arr)) {
+            const formArray = this.form.get(metadata.name) as FormArray;
+            if (formArray) {
+              const config = metadata.dataValueTypeConfig as DropDownConfig;
+              // tslint:disable-next-line:ban-types
+              const refSchema = this.getEntitySchemaByName((config.refModel as Function).name);
+              const properties = refSchema.getProperties().map(p => p.name);
+              formArray.controls = arr.map(v => this.createForm(properties, refSchema));
+            }
+          }
+        });
+    }
+  }
+
+  protected onSaved() {
+    const message = this.translate.instant('common.messages.saved');
+    this.snackBar.open(message, null, {
+      duration: 800
+    });
+    this.form.markAsPristine();
+    this.form.markAsUntouched();
   }
 
 }

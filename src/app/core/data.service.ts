@@ -4,6 +4,7 @@ import { map, tap } from 'rxjs/operators';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BaseModel } from './models/base.model';
+import { Guid } from 'guid-typescript';
 
 @Injectable()
 export abstract class DataService<T> {
@@ -41,19 +42,20 @@ export abstract class DataService<T> {
   }
 
   create(dto: any): Observable<string> {
-    this.prepareDto(dto);
-    return from(this.firestore.collection(this.collectionName)
-      .add(dto)).pipe(
-        map(
-          resp => resp.id
-        )
-      );
+    dto = this.prepareDto(dto);
+    return from(
+      this.firestore.collection(this.collectionName).doc(dto.id).set(dto)
+    ).pipe(
+      map(() => dto.id)
+    );
   }
 
   update(id: string, dto: T): Observable<any> {
-    this.prepareDto(dto);
+    dto = this.prepareDto(dto);
     return from(
-      this.firestore.doc<T>(`${this.collectionName}/${id}`).update(dto)
+      this.firestore.collection(this.collectionName).doc(id).set(dto)
+    ).pipe(
+      map(() => id)
     );
   }
 
@@ -63,7 +65,7 @@ export abstract class DataService<T> {
     );
   }
 
-  private prepareDto(dto): any {
+  protected prepareDto(dto): any {
     if (dto) {
       Object.keys(dto).forEach(key => {
         let value = dto[key];
@@ -71,8 +73,20 @@ export abstract class DataService<T> {
           value = Object.assign({}, value);
           dto[key] = this.prepareDto(value);
         }
+        if (Array.isArray(value)) {
+          value = value.map(v => this.prepareDto(v));
+          dto[key] = value;
+        }
+        if (!value && key === 'id') {
+          dto.id = Guid.create().toString();
+        }
+        if (value === undefined) {
+          value = null;
+          dto[key] = value;
+        }
       });
     }
+    dto = Object.assign({}, dto);
     return dto;
   }
 

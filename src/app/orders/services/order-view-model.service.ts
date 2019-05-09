@@ -11,7 +11,7 @@ import { OrderService } from './order.service';
 @Injectable()
 export class OrderViewModelService extends BasePageViewModel {
 
-  entitySchemaName: 'Order';
+  entitySchemaName = 'Order';
   entity = new Order();
   orderTypes: Array<{ name: string, value: string }> = [
     { value: OrderType.Inbound.toString(), name: 'Inbound' },

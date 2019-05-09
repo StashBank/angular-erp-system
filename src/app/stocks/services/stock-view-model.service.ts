@@ -9,7 +9,7 @@ import { StockStatus } from '../enums/stock-status.enum';
 @Injectable()
 export class StockViewModelService extends BasePageViewModel {
 
-  entitySchemaName: 'Stock';
+  entitySchemaName = 'Stock';
   entity = new Stock();
   stockStatuses: Array<{ name: string, value: string }> = [
     { value: StockStatus.Available.toString(), name: 'stocks.enums.status.available' },

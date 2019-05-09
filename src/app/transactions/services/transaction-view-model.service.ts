@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class TransactionViewModelService extends BasePageViewModel {
 
-  entitySchemaName: 'Transaction';
+  entitySchemaName = 'Transaction';
   entity = new Transaction();
 
   public get subTitle$(): Observable<string> {
