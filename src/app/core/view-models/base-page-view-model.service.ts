@@ -112,16 +112,18 @@ export abstract class BasePageViewModel extends BaseViewModel {
     const formGroupConfig = properties
       .reduce((config, propertyName) => {
         const propertyDescriptor = entitySchema.getPropertyDescriptor(propertyName) || {} as ModelPropertyDescriptor;
-        const validators = propertyDescriptor && propertyDescriptor.validators || [];
-        if (propertyDescriptor && propertyDescriptor.required) {
-          validators.push(Validators.required);
+        if (!propertyDescriptor.hidden) {
+          const validators = propertyDescriptor && propertyDescriptor.validators || [];
+          if (propertyDescriptor && propertyDescriptor.required) {
+            validators.push(Validators.required);
+          }
+          config[propertyName] = propertyDescriptor.dataValueType === DataValueType.Array
+            ? this.formBuilder.array([])
+            : [{
+              value: propertyDescriptor.defaultValue,
+              disabled: propertyDescriptor.readOnly
+            }, validators];
         }
-        config[propertyName] = propertyDescriptor.dataValueType === DataValueType.Array
-          ? this.formBuilder.array([])
-          : [{
-            value: propertyDescriptor.defaultValue,
-            disabled: propertyDescriptor.readOnly
-          }, validators];
         return config;
       }, {});
     return this.formBuilder.group(formGroupConfig);

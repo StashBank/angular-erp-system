@@ -13,13 +13,14 @@ export class ItemFeature extends BaseModel {
   @ModelProperty({
     caption: 'common.id',
     dataValueType: DataValueType.Text,
+    hidden: true
   })
   id: string;
 
   @ModelProperty({
     caption: 'item-features.caption.item',
     dataValueType: DataValueType.Text,
-    required: true
+    // required: true
   })
   itemId: string;
 

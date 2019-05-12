@@ -47,6 +47,7 @@ export class ModelPropertyDescriptor {
   dataValueTypeConfig?: LookupConfig | DropDownConfig | DecimalConfig | IntegerConfig | DateConfig;
   required?: boolean;
   readOnly?: boolean;
+  hidden?: boolean;
   validators?: Array<ValidatorFn>;
   defaultValue?: any;
   dataLocalizationPath?: string;

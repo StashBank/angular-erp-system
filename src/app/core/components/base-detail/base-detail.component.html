@@ -1,0 +1,21 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ vm.subTitle$ | async }}
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-action-row>
+    <div style="width: 100%; display: flex; justify-content: flex-end">
+      <button mat-button color="primary" (click)="vm.add()">{{ 'common.add-button' | translate }}</button>
+    </div>
+  </mat-action-row>
+  <mat-action-row *ngFor="let control of vm.controlList; let i = index" [formGroup]="vm.controlList[i]">
+    <mat-form-field *ngFor="let controlName of vm.visibleFields;">
+      <input matInput
+        [placeholder]="vm.getEntitySchemaPropertyByName(controlName).caption | translate"
+        [formControlName]="controlName" />
+    </mat-form-field>
+  </mat-action-row>
+</mat-expansion-panel>

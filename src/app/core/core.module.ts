@@ -34,6 +34,7 @@ import { AppTranslateService } from '../app-translate.service';
 import { LookupDialogComponent } from './lookup-dialog/lookup-dialog.component';
 
 import { environment } from '../../environments/environment';
+import { BaseDetailComponent } from './components/base-detail/base-detail.component';
 
 @NgModule({
   imports: [
@@ -93,8 +94,9 @@ import { environment } from '../../environments/environment';
     BaseSectionComponent,
     BasePageComponent,
     LookupDialogComponent,
+    BaseDetailComponent,
   ],
-  declarations: [BaseSectionComponent, BasePageComponent, LookupDialogComponent],
+  declarations: [BaseSectionComponent, BasePageComponent, LookupDialogComponent, BaseDetailComponent],
   entryComponents: [LookupDialogComponent],
   providers: [
     { provide: TranslateService, useClass: AppTranslateService }

@@ -64,28 +64,7 @@
     </mat-grid-list>
 
     <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ vm.getEntitySchemaPropertyByName('features').caption | translate }}
-          </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-action-row>
-          <div style="width: 100%; display: flex; justify-content: flex-end">
-            <button mat-button color="primary" (click)="vm.addFeature()">{{ 'common.add-button' | translate }}</button>
-          </div>
-         </mat-action-row>
-        <mat-action-row *ngFor="let control of vm.featureControlList; let i = index" [formGroup]="vm.featureControlList[i]">
-          <mat-form-field>
-            <input matInput [placeholder]="'item-features.caption.name' | translate" formControlName="name" />
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput [placeholder]="'item-features.caption.value' | translate" formControlName="value" />
-          </mat-form-field>
-        </mat-action-row>
-      </mat-expansion-panel>
+      <app-item-features [formArray]="vm.form.get('features')"></app-item-features>
     </mat-accordion>
   </form>
 </app-base-page>

@@ -9,6 +9,7 @@ import { ItemsRoutingModule } from './items-routing.module';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemPageComponent } from './components/item-page/item-page.component';
 import { AppTranslateService } from '../app-translate.service';
+import { ItemFeaturesComponent } from './components/item-features/item-features.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -22,9 +23,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       // isolate: true
     })
   ],
-  declarations: [ItemListComponent, ItemPageComponent],
+  declarations: [ItemListComponent, ItemPageComponent, ItemFeaturesComponent],
   providers: [
     { provide: TranslateService, useExisting: AppTranslateService }
-  ]
+  ],
+  exports: [ItemFeaturesComponent]
 })
 export class ItemsModule { }

@@ -33,23 +33,8 @@ export class ItemViewModelService extends BasePageViewModel {
       : this.translate.get('common.create-new');
   }
 
-  get featureControlList(): Array<AbstractControl> {
-    const featureFormArray = this.form.get('features') as FormArray;
-    return featureFormArray.controls;
-  }
-
   constructor(injector: Injector, protected itemService: ItemService) {
     super(injector);
-  }
-
-  addFeature() {
-    const schema = this.entitySchema.getPropertyDescriptor('features');
-    const config = schema.dataValueTypeConfig as LookupConfig;
-    const refSchema = this.getEntitySchemaByName((config.refModel as Function).name);
-    const properties = refSchema.getProperties().map(x => x.name);
-    this.featureControlList.push(
-      this.createForm(properties, refSchema)
-    );
   }
 
 }
