@@ -141,7 +141,9 @@ export abstract class BasePageViewModel extends BaseViewModel {
             if (formArray) {
               const config = metadata.dataValueTypeConfig as DropDownConfig;
               // tslint:disable-next-line:ban-types
-              const refSchema = this.getEntitySchemaByName((config.refModel as Function).name);
+              const refSchema = this.getEntitySchemaByName(
+                this.getSchemaName(config.refModel as any)
+              );
               const properties = refSchema.getProperties().map(p => p.name);
               formArray.controls = arr.map(v => this.createForm(properties, refSchema));
             }

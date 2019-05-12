@@ -89,7 +89,7 @@ export abstract class BaseViewModel {
       if (valueType === DataValueType.Lookup) {
         const lookupConfig = propertyMetaData.dataValueTypeConfig as LookupConfig;
         const refSchema = lookupConfig && lookupConfig.refModel as Function;
-        const refSchemaName = refSchema && refSchema.name;
+        const refSchemaName = refSchema && this.getSchemaName(refSchema);
         if (refSchemaName && typeof value === 'object') {
           const refEntity = this.createEntity(refSchemaName);
           this.setEntityColumnsValues(refEntity, value);
@@ -107,14 +107,19 @@ export abstract class BaseViewModel {
         value = (Array.isArray(value) ? value : []) as Array<BaseModel>;
         const dropDownConfig = propertyMetaData.dataValueTypeConfig as DropDownConfig;
         const refSchema = dropDownConfig && dropDownConfig.refModel as Function;
+
         value = value.map(v => {
-          const e = this.createEntity(refSchema.name);
+          const e = this.createEntity(this.getSchemaName(refSchema));
           this.setEntityColumnsValues(e, v);
           return e;
         });
       }
       entity[key] = value;
     }
+  }
+
+  protected getSchemaName(schema: Function): string {
+    return Reflect.getMetadata('model', schema).name;
   }
 
 }
