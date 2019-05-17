@@ -10,6 +10,7 @@ import { OrdersRoutingModule } from './orders-routing.module';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { OrderPageComponent } from './components/order-page/order-page.component';
 import { AppTranslateService } from '../app-translate.service';
+import { OrderFeaturesComponent } from './components/order-features/order-features.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -24,7 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       // isolate: true
     })
   ],
-  declarations: [OrderListComponent, OrderPageComponent],
+  declarations: [OrderListComponent, OrderPageComponent, OrderFeaturesComponent],
   providers: [
     { provide: TranslateService, useExisting: AppTranslateService }
   ]

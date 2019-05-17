@@ -136,19 +136,23 @@ export abstract class BasePageViewModel extends BaseViewModel {
         .filter(metadata => metadata.dataValueType === DataValueType.Array)
         .forEach(metadata => {
           const arr = values[metadata.name];
-          if (Array.isArray(arr)) {
-            const formArray = this.form.get(metadata.name) as FormArray;
-            if (formArray) {
-              const config = metadata.dataValueTypeConfig as DropDownConfig;
-              // tslint:disable-next-line:ban-types
-              const refSchema = this.getEntitySchemaByName(
-                this.getSchemaName(config.refModel as any)
-              );
-              const properties = refSchema.getProperties().map(p => p.name);
-              formArray.controls = arr.map(v => this.createForm(properties, refSchema));
-            }
-          }
+          this.createFormArray(metadata, arr);
         });
+    }
+  }
+
+  protected createFormArray(metadata: ModelPropertyDescriptor, arr: Array<any>) {
+    if (Array.isArray(arr)) {
+      const formArray = this.form.get(metadata.name) as FormArray;
+      if (formArray) {
+        const config = metadata.dataValueTypeConfig as DropDownConfig;
+        // tslint:disable-next-line:ban-types
+        const refSchema = this.getEntitySchemaByName(
+          this.getSchemaName(config.refModel as any)
+        );
+        const properties = refSchema.getProperties().map(p => p.name);
+        formArray.controls = arr.map(v => this.createForm(properties, refSchema));
+      }
     }
   }
 

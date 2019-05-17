@@ -7,6 +7,7 @@ import { Model } from '../../core/decorators/model.decorator';
 import { BaseModel } from '../../core/models/base.model';
 import { ModelProperty, DataValueType, DropDownConfig, LookupConfig } from '../../core/decorators/property.decorator';
 import { Validators } from '@angular/forms';
+import { OrderFeature } from './order-feature';
 
 @Model({
   caption: 'orders.title',
@@ -98,5 +99,16 @@ export class Order extends BaseModel {
     validators: [Validators.min(0)]
   })
   qty: number;
+
+  @ModelProperty({
+    caption: 'order.caption.features',
+    dataValueType: DataValueType.Array,
+    dataValueTypeConfig: {
+      refModel: OrderFeature,
+      displayColumns: ['name', 'value'],
+      columns: ['name', 'value', 'type']
+    } as LookupConfig
+  })
+  features: Array<OrderFeature>;
 
 }
