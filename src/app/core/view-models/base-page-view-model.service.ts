@@ -23,6 +23,10 @@ export abstract class BasePageViewModel extends BaseViewModel {
 
   private mobileQueryListener: (ev: MediaQueryListEvent) => void;
 
+  get saveButtonEnabled(): boolean {
+    return this.form && this.form.valid;
+  }
+
   public get isMobile(): boolean {
     return this.mobileQuery && this.mobileQuery.matches;
   }
@@ -117,10 +121,11 @@ export abstract class BasePageViewModel extends BaseViewModel {
           if (propertyDescriptor && propertyDescriptor.required) {
             validators.push(Validators.required);
           }
+          const defVal = propertyDescriptor.defaultValue;
           config[propertyName] = propertyDescriptor.dataValueType === DataValueType.Array
             ? this.formBuilder.array([])
             : [{
-              value: propertyDescriptor.defaultValue,
+              value: defVal && defVal.constructor === Function ? defVal() : defVal,
               disabled: propertyDescriptor.readOnly
             }, validators];
         }

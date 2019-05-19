@@ -69,21 +69,20 @@ export abstract class DataService<T> {
     if (dto) {
       Object.keys(dto).forEach(key => {
         let value = dto[key];
+        if (value === undefined) {
+          value = null;
+        }
         if (typeof value === 'object' && value instanceof BaseModel) {
           value = Object.assign({}, value);
-          dto[key] = this.prepareDto(value);
+          value = this.prepareDto(value);
         }
         if (Array.isArray(value)) {
           value = value.map(v => this.prepareDto(v));
-          dto[key] = value;
         }
         if (!value && key === 'id') {
-          dto.id = Guid.create().toString();
+          value = Guid.create().toString();
         }
-        if (value === undefined) {
-          value = null;
-          dto[key] = value;
-        }
+        dto[key] = value;
       });
     }
     dto = Object.assign({}, dto);

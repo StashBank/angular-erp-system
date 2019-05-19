@@ -1,5 +1,5 @@
 <app-base-page
-  [saveButtonDisabled]="vm.form?.invalid"
+  [saveButtonDisabled]="!vm.saveButtonEnabled"
   (save)="vm.save()">
   <span title>{{ 'orders.order-page' | translate }}</span>
   <span sub-title>{{ vm.subTitle$ | async }}</span>
