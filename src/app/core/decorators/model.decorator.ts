@@ -1,5 +1,6 @@
 // tslint:disable: ban-types
 import { ModelPropertyDescriptor, ModelProperty } from './property.decorator';
+import { ModelMethod, ModelMethodDescriptor } from './method.decorator';
 
 export class ModelDescriptor {
   name: string;
@@ -9,6 +10,8 @@ export class ModelDescriptor {
   displayPropertyName ? = 'name';
   imagePropertyName ? = 'image';
   getPropertyDescriptor?: (name) => ModelPropertyDescriptor;
+  getMethodDescriptor?: (name) => ModelMethodDescriptor;
+  getMethods?: () => Array<ModelMethodDescriptor>;
   getProperties?: () => Array<ModelPropertyDescriptor>;
 }
 
@@ -41,6 +44,10 @@ Model.getModelProperties = (target: Function): Array<string | symbol> => {
   return Reflect.getMetadata('modelProperties', target) as Array<string | symbol>;
 };
 
+Model.getModelMethods = (target: Function): Array<string | symbol> => {
+  return Reflect.getMetadata('modelMethods', target) as Array<string | symbol>;
+};
+
 Model.getDescriptor = (target: Function): ModelDescriptor => {
   return Reflect.getMetadata('model', target);
 };
@@ -51,9 +58,14 @@ Model.getModelDescriptor = (name: string): ModelDescriptor => {
   return {
     ... schema.descriptor,
     getPropertyDescriptor: (propertyName: string): ModelPropertyDescriptor => ModelProperty.getDescriptor(propertyName, schema.ctor),
+    getMethodDescriptor: (methodName: string): ModelMethodDescriptor => ModelMethod.getDescriptor(methodName, schema.ctor),
     getProperties: (): Array<ModelPropertyDescriptor> => Model.getModelProperties(schema.ctor)
     .map(
       (propertyName: string) => ModelProperty.getDescriptor(propertyName, schema.ctor)
-    )
+    ),
+    getMethods: (): Array<ModelMethodDescriptor> => Model.getModelMethods(schema.ctor)
+    .map(
+      (propertyName: string) => ModelMethod.getDescriptor(propertyName, schema.ctor)
+    ),
   };
 };

@@ -51,7 +51,7 @@ export class OrderViewModelService extends BasePageViewModel {
   subscribeOnItemChange() {
     this.form.get('item').valueChanges.subscribe(
       item => this.onItemChange(item)
-    )
+    );
   }
 
   onItemChange(item: Item) {

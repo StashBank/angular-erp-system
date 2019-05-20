@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Optional } from '@angular/core';
 import { Location } from '@angular/common';
+import { BasePageViewModel } from '../view-models/base-page-view-model.service';
 
 @Component({
   selector: 'app-base-page',
@@ -14,7 +15,8 @@ export class BasePageComponent implements OnInit {
   @Output() save = new EventEmitter();
 
   constructor(
-    private location: Location
+    @Optional() public vm: BasePageViewModel,
+    private location: Location,
   ) { }
 
   ngOnInit() {

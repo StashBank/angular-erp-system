@@ -11,14 +11,29 @@
     <ng-content></ng-content>
   </mat-card-content>
   <mat-card-actions>
-    <button
-      mat-button
-      color="primary"
-      (click)="onBackButtonClick()">{{ 'common.back-button' | translate }}</button>
-    <button *ngIf="!saveButtonHidden"
-      mat-raised-button
-      color="primary"
-      [disabled]="saveButtonDisabled"
-      (click)="onSaveButtonClick()">{{ 'common.save-button' | translate }}</button>
+    <mat-action-row>
+      <button
+        mat-button
+        color="primary"
+        (click)="onBackButtonClick()">{{ 'common.back-button' | translate }}</button>
+      <button *ngIf="!saveButtonHidden"
+        mat-raised-button
+        color="primary"
+        [disabled]="saveButtonDisabled"
+        (click)="onSaveButtonClick()">{{ 'common.save-button' | translate }}</button>
+      <div spacer></div>
+      <div style="flex-grow: 0.2">
+      <button mat-icon-button [matMenuTriggerFor]="actionsMenu" *ngIf="vm?.actions?.length">
+        <span>{{ 'common.caption.actions' | translate }}</span>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #actionsMenu="matMenu">
+        <button  *ngFor="let action of vm?.actions" mat-menu-item (click)="vm?.invokeAction(action)">
+          <mat-icon *ngIf="action.config?.icon">{{ action.config?.icon }}</mat-icon>
+          <span>{{ action.config?.caption | translate }}</span>
+        </button>
+      </mat-menu>
+      </div>
+    </mat-action-row>
   </mat-card-actions>
 </mat-card>

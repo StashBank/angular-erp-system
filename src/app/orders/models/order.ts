@@ -8,6 +8,8 @@ import { BaseModel } from '../../core/models/base.model';
 import { ModelProperty, DataValueType, DropDownConfig, LookupConfig } from '../../core/decorators/property.decorator';
 import { Validators } from '@angular/forms';
 import { OrderFeature } from './order-feature';
+import { ModelMethod, ModelMethodType, ModelMethodAction } from 'src/app/core/decorators/method.decorator';
+import { OrderViewModelService } from '../services/order-view-model.service';
 
 @Model({
   caption: 'orders.title',
@@ -110,5 +112,15 @@ export class Order extends BaseModel {
     } as LookupConfig
   })
   features: Array<OrderFeature>;
+
+  @ModelMethod({
+    config: {
+      caption: 'orders.action.proceed',
+      icon: 'trip_origin'
+    } as ModelMethodAction
+  })
+  proceed() {
+    console.log('proceed');
+  }
 
 }

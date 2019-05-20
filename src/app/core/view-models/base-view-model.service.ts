@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
 import { EnumDescriptor } from '../decorators/enum.decorator';
 import { SchemaDescriptor, Model, ModelDescriptor } from '../decorators/model.decorator';
+import { ModelMethodAction, ModelMethodDescriptor, ModelMethodType } from '../decorators/method.decorator';
 
 export abstract class BaseViewModel {
 
@@ -24,8 +25,18 @@ export abstract class BaseViewModel {
   protected dialog: MatDialog;
   protected snackBar: MatSnackBar;
 
+  protected entity: BaseModel;
   protected entitySchemaName: string;
   protected entitySchema: ModelDescriptor;
+
+  get actions(): Array<ModelMethodDescriptor> {
+    let result: Array<ModelMethodDescriptor> = null;
+    if (this.entitySchema) {
+      result = this.entitySchema.getMethods()
+        .filter(x => x.type === ModelMethodType.Action);
+    }
+    return result;
+  }
 
   constructor(
     protected injector: Injector
@@ -47,6 +58,10 @@ export abstract class BaseViewModel {
 
   getEntitySchemaPropertyByName(propertyName: string): ModelPropertyDescriptor {
     return this.entitySchema.getPropertyDescriptor(propertyName);
+  }
+
+  invokeAction(action: ModelMethodDescriptor) {
+    this.entity[action.name]();
   }
 
   protected setUpDeps() {
@@ -86,33 +101,40 @@ export abstract class BaseViewModel {
     const propertyMetaData = entity.getPropertyDescriptor(key);
     if (propertyMetaData) {
       const valueType = propertyMetaData.dataValueType;
-      if (valueType === DataValueType.Lookup) {
-        const lookupConfig = propertyMetaData.dataValueTypeConfig as LookupConfig;
-        const refSchema = lookupConfig && lookupConfig.refModel as Function;
-        const refSchemaName = refSchema && this.getSchemaName(refSchema);
-        if (refSchemaName && typeof value === 'object') {
-          const refEntity = this.createEntity(refSchemaName);
-          this.setEntityColumnsValues(refEntity, value);
-          value = refEntity;
+      switch (valueType) {
+        case DataValueType.Lookup: {
+          const lookupConfig = propertyMetaData.dataValueTypeConfig as LookupConfig;
+          const refSchema = lookupConfig && lookupConfig.refModel as Function;
+          const refSchemaName = refSchema && this.getSchemaName(refSchema);
+          if (refSchemaName && typeof value === 'object') {
+            const refEntity = this.createEntity(refSchemaName);
+            this.setEntityColumnsValues(refEntity, value);
+            value = refEntity;
+          }
+          break;
         }
-      } else if (valueType === DataValueType.DropDown) {
-        const dropDownConfig = propertyMetaData.dataValueTypeConfig as DropDownConfig;
-        const refSchema = dropDownConfig && dropDownConfig.refModel as any;
-        if (refSchema && refSchema.getMetaData) {
-          const enumMetaData = refSchema.getMetaData() as EnumDescriptor;
-          value = `${enumMetaData.translatePath}.${value}`;
+        case DataValueType.DropDown: {
+          /*const dropDownConfig = propertyMetaData.dataValueTypeConfig as DropDownConfig;
+          const refSchema = dropDownConfig && dropDownConfig.refModel as any;
+          if (refSchema && refSchema.getMetaData) {
+            const enumMetaData = refSchema.getMetaData() as EnumDescriptor;
+            value = `${enumMetaData.translatePath}.${value}`;
+          }*/
+          break;
         }
-      } else if (valueType === DataValueType.Array) {
-        // TODO: map each element ot create inner entity;
-        value = (Array.isArray(value) ? value : []) as Array<BaseModel>;
-        const dropDownConfig = propertyMetaData.dataValueTypeConfig as DropDownConfig;
-        const refSchema = dropDownConfig && dropDownConfig.refModel as Function;
+        case DataValueType.Array: {
+          // TODO: map each element ot create inner entity;
+          value = (Array.isArray(value) ? value : []) as Array<BaseModel>;
+          const dropDownConfig = propertyMetaData.dataValueTypeConfig as DropDownConfig;
+          const refSchema = dropDownConfig && dropDownConfig.refModel as Function;
 
-        value = value.map(v => {
-          const e = this.createEntity(this.getSchemaName(refSchema));
-          this.setEntityColumnsValues(e, v);
-          return e;
-        });
+          value = value.map(v => {
+            const e = this.createEntity(this.getSchemaName(refSchema));
+            this.setEntityColumnsValues(e, v);
+            return e;
+          });
+          break;
+        }
       }
       entity[key] = value;
     }

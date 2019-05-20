@@ -65,10 +65,10 @@ export function ModelProperty(descriptor: ModelPropertyDescriptor): PropertyDeco
     if (!modelProperties.includes(propertyKey)) {
       modelProperties.push(propertyKey);
     }
-    Reflect.defineMetadata(`model->${propertyKey.toString()}`, { ...descriptor, name: propertyKey }, target.constructor);
+    Reflect.defineMetadata(`model_property_${propertyKey.toString()}`, { ...descriptor, name: propertyKey }, target.constructor);
   };
 }
 
 ModelProperty.getDescriptor = (propertyKey: string | symbol, target): ModelPropertyDescriptor => {
-  return Reflect.getMetadata(`model->${propertyKey.toString()}`, target);
+  return Reflect.getMetadata(`model_property_${propertyKey.toString()}`, target);
 };
