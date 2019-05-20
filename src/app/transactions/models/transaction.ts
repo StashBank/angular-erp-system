@@ -43,21 +43,28 @@ export class Transaction extends BaseModel {
 
   @ModelProperty({
     caption: 'transactions.caption.from',
-    dataValueType: DataValueType.Custom,
+    dataValueType: DataValueType.Lookup,
     readOnly: true
   })
   from: Store;
 
   @ModelProperty({
     caption: 'transactions.caption.to',
-    dataValueType: DataValueType.Custom,
+    dataValueType: DataValueType.Lookup,
     readOnly: true
   })
-  to: Store | Customer;
+  to: Customer;
 
   @ModelProperty({
     caption: 'transactions.caption.order',
     dataValueType: DataValueType.Custom,
+    readOnly: true
+  })
+  orderId: string;
+
+  @ModelProperty({
+    caption: 'transactions.caption.order',
+    dataValueType: DataValueType.Lookup,
     readOnly: true
   })
   order: Order;

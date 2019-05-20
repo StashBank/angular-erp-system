@@ -12,7 +12,7 @@ export abstract class DataService<T> {
   abstract collectionName: string;
 
   constructor(
-    private firestore: AngularFirestore
+    protected firestore: AngularFirestore
   ) { }
 
   getAll(): Observable<Array<T>> {
@@ -43,6 +43,9 @@ export abstract class DataService<T> {
 
   create(dto: any): Observable<string> {
     dto = this.prepareDto(dto);
+    if (!dto.id) {
+      dto.id = Guid.create().toString()
+    }
     return from(
       this.firestore.collection(this.collectionName).doc(dto.id).set(dto)
     ).pipe(

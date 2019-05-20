@@ -10,6 +10,12 @@ import { OrderFeature } from '../models/order-feature';
 import { Item } from 'src/app/items/models/item';
 import { Guid } from 'guid-typescript';
 import { OrderFeatureType } from '../enums/order-feature-type.enum';
+import { TransactionService } from 'src/app/transactions/services/transaction.service';
+import { OrderStatus } from '../enums/order-status.enum';
+import { Transaction } from 'src/app/transactions/models/transaction';
+import { TransactionType } from 'src/app/transactions/enums/transaction-type.enum';
+import { TransactionStatus } from 'src/app/transactions/enums/transaction-status.enum';
+import { switchMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class OrderViewModelService extends BasePageViewModel {
@@ -39,7 +45,11 @@ export class OrderViewModelService extends BasePageViewModel {
       : this.translate.get('common.create-new');
   }
 
-  constructor(injector: Injector, protected orderService: OrderService) {
+  constructor(
+    injector: Injector,
+    protected orderService: OrderService,
+    protected transactionService: TransactionService
+  ) {
     super(injector);
   }
 
@@ -65,6 +75,54 @@ export class OrderViewModelService extends BasePageViewModel {
     const metadata = this.getEntitySchemaPropertyByName('features');
     this.createFormArray(metadata, features);
     this.form.patchValue({ features });
+  }
+
+  proceed() {
+    const order = this.form.getRawValue() as Order;
+    this.transactionService.create({
+      date: new Date(),
+      from: order.store,
+      to: order.customer,
+      orderId: order.id,
+      qty: order.qty,
+      type: TransactionType.Output,
+      status: TransactionStatus.Pending
+    } as Transaction).subscribe(transactionId => {
+      this.form.patchValue({ status: OrderStatus.InProgress, transactionId });
+      this.save();
+    });
+  }
+
+  close() {
+    const order = this.form.getRawValue() as Order;
+    this.transactionService.getById(order.transactionId)
+    .pipe(
+      map(transaction => {
+        transaction.status = TransactionStatus.Closed;
+        transaction.date = new Date();
+        return transaction;
+      }),
+      switchMap(transaction => this.transactionService.update(transaction.id, transaction))
+    ).subscribe(transactionId => {
+      this.form.patchValue({ status: OrderStatus.Closed, transactionId });
+      this.save();
+    });
+  }
+
+  canceled() {
+    const order = this.form.getRawValue() as Order;
+    this.transactionService.getById(order.transactionId)
+      .pipe(
+        map(transaction => {
+          transaction.status = TransactionStatus.Canceled;
+          transaction.date = new Date();
+          return transaction;
+        }),
+        switchMap(transaction => this.transactionService.update(transaction.id, transaction))
+      ).subscribe(transactionId => {
+        this.form.patchValue({ status: OrderStatus.Canceled, transactionId });
+        this.save();
+      });
   }
 
 }

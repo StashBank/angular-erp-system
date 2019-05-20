@@ -61,7 +61,11 @@ export abstract class BaseViewModel {
   }
 
   invokeAction(action: ModelMethodDescriptor) {
-    this.entity[action.name]();
+    if (this[action.name]) {
+      this[action.name]();
+    } else {
+      this.entity[action.name]();
+    }
   }
 
   protected setUpDeps() {

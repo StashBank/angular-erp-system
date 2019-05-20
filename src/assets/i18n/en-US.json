@@ -101,6 +101,8 @@
   "orders.caption.store": "Store",
   "orders.order-page": "Order Page",
   "orders.action.proceed": "Proceed",
+  "orders.action.close": "Close",
+  "orders.action.cancel": "Cancel",
   "order-feature.title": "Features",
   "order-features.caption.item": "Order",
   "order-features.caption.name": "Name",

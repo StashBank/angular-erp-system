@@ -103,6 +103,8 @@
   "orders.caption.item": "Товар",
   "orders.caption.store": "Склад",
   "orders.action.proceed": "Продовжити",
+  "orders.action.close": "Закрити",
+  "orders.action.cancel": "Відмінити",
   "order-feature.title": "Характеристики",
   "order-features.caption.item": "Замовленя",
   "order-features.caption.name": "Назва",

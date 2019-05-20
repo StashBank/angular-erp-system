@@ -113,6 +113,13 @@ export class Order extends BaseModel {
   })
   features: Array<OrderFeature>;
 
+  @ModelProperty({
+    caption: 'order.caption.transaction',
+    dataValueType: DataValueType.Custom,
+    readOnly: true
+  })
+  transactionId: string;
+
   @ModelMethod({
     config: {
       caption: 'orders.action.proceed',
@@ -121,6 +128,26 @@ export class Order extends BaseModel {
   })
   proceed() {
     console.log('proceed');
+  }
+
+  @ModelMethod({
+    config: {
+      caption: 'orders.action.close',
+      icon: 'trip_origin'
+    } as ModelMethodAction
+  })
+  close() {
+    console.log('close');
+  }
+
+  @ModelMethod({
+    config: {
+      caption: 'orders.action.cancel',
+      icon: 'trip_origin'
+    } as ModelMethodAction
+  })
+  canceled() {
+    console.log('cancel');
   }
 
 }

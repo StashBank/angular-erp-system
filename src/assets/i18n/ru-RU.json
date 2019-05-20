@@ -99,6 +99,8 @@
   "orders.caption.item": "Товар",
   "orders.caption.store": "Склад",
   "orders.action.proceed": "Продолжить",
+  "orders.action.close": "Закрыть",
+  "orders.action.cancel": "Отменить",
   "order-feature.title": "Характеристики заказа",
   "order-features.caption.item": "Заказ",
   "order-features.caption.name": "Название",
