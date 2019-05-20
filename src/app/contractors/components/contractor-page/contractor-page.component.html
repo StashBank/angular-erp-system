@@ -28,7 +28,7 @@
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile>
+      <mat-grid-tile [colspan]="vm.isMobile ? null : 2">
         <mat-form-field>
           <input matInput [placeholder]="'contractors.caption.address' | translate" formControlName="address" />
         </mat-form-field>
