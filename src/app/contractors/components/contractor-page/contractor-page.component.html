@@ -1,0 +1,45 @@
+<app-base-page [saveButtonDisabled]="vm.form?.invalid" (save)="vm.save()">
+  <span title>{{ 'contractors.contractor-page' | translate }}</span>
+  <span sub-title>{{ vm.subTitle$ | async }}</span>
+  <form [formGroup]="vm.form">
+    <mat-grid-list [cols]="vm.isMobile ? 1 : 2" rowHeight="64px">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput [placeholder]="'contractors.caption.number' | translate" formControlName="number" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput [placeholder]="'contractors.caption.name' | translate" formControlName="name" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput [placeholder]="'contractors.caption.phone' | translate" formControlName="phone" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput [placeholder]="'contractors.caption.email' | translate" formControlName="email" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput [placeholder]="'contractors.caption.address' | translate" formControlName="address" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="vm.isMobile ? null : 2">
+        <mat-form-field style="width: 100%; padding: 3p 0 3px 0">
+          <input matInput [placeholder]="'contractors.caption.notes' | translate" formControlName="notes" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </form>
+</app-base-page>

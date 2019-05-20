@@ -6,6 +6,7 @@ import { ModelProperty, DataValueType, LookupConfig, DropDownConfig } from '../.
 import { BaseModel } from '../../core/models/base.model';
 import { Validators } from '@angular/forms';
 import { CustomerType } from '../../customers/enums/customer-type.enum';
+import { Contractor } from 'src/app/contractors/models/contractor';
 
 @Model({
   caption: 'items.title',
@@ -72,7 +73,7 @@ export class Item extends BaseModel {
       filters: [['type', '===', CustomerType.Company]]
     } as LookupConfig
   })
-  contractor: Customer;
+  contractor: Contractor;
 
   @ModelProperty({
     caption: 'items.caption.image',
