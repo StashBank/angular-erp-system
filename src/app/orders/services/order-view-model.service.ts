@@ -15,7 +15,8 @@ import { OrderStatus } from '../enums/order-status.enum';
 import { Transaction } from 'src/app/transactions/models/transaction';
 import { TransactionType } from 'src/app/transactions/enums/transaction-type.enum';
 import { TransactionStatus } from 'src/app/transactions/enums/transaction-status.enum';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, take } from 'rxjs/operators';
+import { ViewModelAction } from 'src/app/core/decorators/view-model-action.decorator';
 
 @Injectable()
 export class OrderViewModelService extends BasePageViewModel {
@@ -77,6 +78,10 @@ export class OrderViewModelService extends BasePageViewModel {
     this.form.patchValue({ features });
   }
 
+  @ViewModelAction({
+    caption: 'orders.action.proceed',
+    icon: 'trip_origin'
+  })
   proceed() {
     const order = this.form.getRawValue() as Order;
     this.transactionService.create({
@@ -87,39 +92,54 @@ export class OrderViewModelService extends BasePageViewModel {
       qty: order.qty,
       type: TransactionType.Output,
       status: TransactionStatus.Pending
-    } as Transaction).subscribe(transactionId => {
+    } as Transaction).pipe(
+      take(1),
+    )
+    .subscribe(transactionId => {
       this.form.patchValue({ status: OrderStatus.InProgress, transactionId });
       this.save();
     });
   }
 
+  @ViewModelAction({
+    caption: 'orders.action.close',
+    icon: 'trip_origin'
+  })
   close() {
     const order = this.form.getRawValue() as Order;
     this.transactionService.getById(order.transactionId)
     .pipe(
+      take(1),
       map(transaction => {
         transaction.status = TransactionStatus.Closed;
         transaction.date = new Date();
         return transaction;
       }),
       switchMap(transaction => this.transactionService.update(transaction.id, transaction))
-    ).subscribe(transactionId => {
+    )
+    .subscribe(transactionId => {
       this.form.patchValue({ status: OrderStatus.Closed, transactionId });
       this.save();
     });
   }
 
-  canceled() {
+  @ViewModelAction({
+    caption: 'orders.action.cancel',
+    icon: 'trip_origin'
+  })
+  cancel() {
     const order = this.form.getRawValue() as Order;
     this.transactionService.getById(order.transactionId)
       .pipe(
+        take(1),
         map(transaction => {
           transaction.status = TransactionStatus.Canceled;
           transaction.date = new Date();
           return transaction;
         }),
         switchMap(transaction => this.transactionService.update(transaction.id, transaction))
-      ).subscribe(transactionId => {
+      )
+      .subscribe(transactionId => {
         this.form.patchValue({ status: OrderStatus.Canceled, transactionId });
         this.save();
       });

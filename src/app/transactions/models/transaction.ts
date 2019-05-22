@@ -57,7 +57,7 @@ export class Transaction extends BaseModel {
 
   @ModelProperty({
     caption: 'transactions.caption.order',
-    dataValueType: DataValueType.Custom,
+    dataValueType: DataValueType.Text,
     readOnly: true
   })
   orderId: string;

@@ -1,5 +1,5 @@
-import { MatSnackBar } from '@angular/material';
 // tslint:disable:ban-types
+import { MatSnackBar } from '@angular/material';
 import { Injector } from '@angular/core';
 import { BaseModel } from '../models/base.model';
 import { DataValueType, LookupConfig, DropDownConfig, ModelPropertyDescriptor } from '../decorators/property.decorator';
@@ -9,9 +9,8 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
-import { EnumDescriptor } from '../decorators/enum.decorator';
-import { SchemaDescriptor, Model, ModelDescriptor } from '../decorators/model.decorator';
-import { ModelMethodAction, ModelMethodDescriptor, ModelMethodType } from '../decorators/method.decorator';
+import { Model, ModelDescriptor } from '../decorators/model.decorator';
+import { ViewModelActionDescriptor, ViewModelAction } from '../decorators/view-model-action.decorator';
 
 export abstract class BaseViewModel {
 
@@ -29,12 +28,9 @@ export abstract class BaseViewModel {
   protected entitySchemaName: string;
   protected entitySchema: ModelDescriptor;
 
-  get actions(): Array<ModelMethodDescriptor> {
-    let result: Array<ModelMethodDescriptor> = null;
-    if (this.entitySchema) {
-      result = this.entitySchema.getMethods()
-        .filter(x => x.type === ModelMethodType.Action);
-    }
+  get actions(): Array<ViewModelActionDescriptor> {
+    const actions = Reflect.getMetadata('viewModelActions', this) as Array<string>;
+    const result: Array<ViewModelActionDescriptor> = actions.map(name => ViewModelAction.getDescriptor(name, this));
     return result;
   }
 
@@ -60,11 +56,9 @@ export abstract class BaseViewModel {
     return this.entitySchema.getPropertyDescriptor(propertyName);
   }
 
-  invokeAction(action: ModelMethodDescriptor) {
+  invokeAction(action: ViewModelActionDescriptor) {
     if (this[action.name]) {
       this[action.name]();
-    } else {
-      this.entity[action.name]();
     }
   }
 

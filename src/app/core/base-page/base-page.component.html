@@ -29,8 +29,8 @@
       </button>
       <mat-menu #actionsMenu="matMenu">
         <button  *ngFor="let action of vm?.actions" mat-menu-item (click)="vm?.invokeAction(action)">
-          <mat-icon *ngIf="action.config?.icon">{{ action.config?.icon }}</mat-icon>
-          <span>{{ action.config?.caption | translate }}</span>
+          <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
+          <span>{{ action.caption | translate }}</span>
         </button>
       </mat-menu>
       </div>

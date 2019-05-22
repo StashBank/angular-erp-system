@@ -120,34 +120,4 @@ export class Order extends BaseModel {
   })
   transactionId: string;
 
-  @ModelMethod({
-    config: {
-      caption: 'orders.action.proceed',
-      icon: 'trip_origin'
-    } as ModelMethodAction
-  })
-  proceed() {
-    console.log('proceed');
-  }
-
-  @ModelMethod({
-    config: {
-      caption: 'orders.action.close',
-      icon: 'trip_origin'
-    } as ModelMethodAction
-  })
-  close() {
-    console.log('close');
-  }
-
-  @ModelMethod({
-    config: {
-      caption: 'orders.action.cancel',
-      icon: 'trip_origin'
-    } as ModelMethodAction
-  })
-  canceled() {
-    console.log('cancel');
-  }
-
 }
