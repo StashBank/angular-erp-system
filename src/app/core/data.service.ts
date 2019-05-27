@@ -44,22 +44,22 @@ export abstract class DataService<T> {
   create(dto: any): Observable<string> {
     dto = this.prepareDto(dto);
     if (!dto.id) {
-      dto.id = Guid.create().toString()
+      dto.id = Guid.create().toString();
     }
-    return from(
-      this.firestore.collection(this.collectionName).doc(dto.id).set(dto)
-    ).pipe(
-      map(() => dto.id)
-    );
+    const docRef = this.firestore.collection(this.collectionName).doc(dto.id);
+    return from(docRef.set(dto))
+      .pipe(
+        map(() => dto.id)
+      );
   }
 
   update(id: string, dto: T): Observable<any> {
     dto = this.prepareDto(dto);
-    return from(
-      this.firestore.collection(this.collectionName).doc(id).set(dto)
-    ).pipe(
-      map(() => id)
-    );
+    const docRef = this.firestore.collection(this.collectionName).doc(id);
+    return from(docRef.set(dto))
+      .pipe(
+        map(() => id)
+      );
   }
 
   remove(id: string): Observable<any> {
