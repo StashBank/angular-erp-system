@@ -1,18 +1,12 @@
-import { ChangeDetectorRef, Injector } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { TranslateService } from '@ngx-translate/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { MatDialog } from '@angular/material';
-import { LookupDialogComponent, DialogData } from '../lookup-dialog/lookup-dialog.component';
-import { DataService } from '../data.service';
+import { FormGroup, Validators, FormArray } from '@angular/forms';
+import { LookupDialogComponent, DialogData } from '../components/lookup-dialog/lookup-dialog.component';
 import { BaseModel } from '../models/base.model';
 import { Observable } from 'rxjs';
-import { DataValueType, LookupConfig, ModelPropertyDescriptor, DropDownConfig } from '../decorators/property.decorator';
+import { DataValueType, ModelPropertyDescriptor, DropDownConfig } from '../decorators/property.decorator';
 import { BaseViewModel } from './base-view-model.service';
-import { ModelDescriptor, Model, SchemaDescriptor } from '../decorators/model.decorator';
-import { Guid } from 'guid-typescript';
+import { ModelDescriptor } from '../decorators/model.decorator';
 
 export abstract class BasePageViewModel extends BaseViewModel {
 

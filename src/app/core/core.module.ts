@@ -28,10 +28,10 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
 } from '@angular/material';
-import { BaseSectionComponent } from './base-section/base-section.component';
-import { BasePageComponent } from './base-page/base-page.component';
+import { BaseSectionComponent } from './components/base-section/base-section.component';
+import { BasePageComponent } from './components/base-page/base-page.component';
 import { AppTranslateService } from '../app-translate.service';
-import { LookupDialogComponent } from './lookup-dialog/lookup-dialog.component';
+import { LookupDialogComponent } from './components/lookup-dialog/lookup-dialog.component';
 
 import { environment } from '../../environments/environment';
 import { BaseDetailComponent } from './components/base-detail/base-detail.component';

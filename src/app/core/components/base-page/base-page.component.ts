@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, Optional } from '@angular/core';
 import { Location } from '@angular/common';
-import { BasePageViewModel } from '../view-models/base-page-view-model.service';
+
+import { BasePageViewModel } from '../../view-models/base-page-view-model.service';
 
 @Component({
   selector: 'app-base-page',

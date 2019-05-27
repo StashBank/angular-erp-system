@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DataService } from '../data.service';
+import { DataService } from '../../data.service';
 
 @Injectable()
 export class LookupDataService extends DataService<any> {
@@ -8,5 +8,5 @@ export class LookupDataService extends DataService<any> {
   setCollectionName(name: string): LookupDataService {
     this.collectionName = name;
     return this;
-  } 
+  }
 }

@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
 import { Model, ModelDescriptor } from '../decorators/model.decorator';
 import { ViewModelActionDescriptor, ViewModelAction } from '../decorators/view-model-action.decorator';
+import { EntitySchemaManagerService } from '../services/entity-schema-namager.service';
 
 export abstract class BaseViewModel {
 
@@ -27,10 +28,10 @@ export abstract class BaseViewModel {
   protected entity: BaseModel;
   protected entitySchemaName: string;
   protected entitySchema: ModelDescriptor;
+  protected esm: EntitySchemaManagerService;
 
   get actions(): Array<ViewModelActionDescriptor> {
-    const actions = Reflect.getMetadata('viewModelActions', this) as Array<string>;
-    const result: Array<ViewModelActionDescriptor> = actions.map(name => ViewModelAction.getDescriptor(name, this));
+    const result = this.esm.getActions(this);
     return result;
   }
 
@@ -49,7 +50,8 @@ export abstract class BaseViewModel {
   }
 
   getEntitySchemaByName(entitySchemaName: string): ModelDescriptor {
-    return Model.getModelDescriptor(entitySchemaName);
+    const result = this.esm.getEntitySchemaByName(entitySchemaName)
+    return result;
   }
 
   getEntitySchemaPropertyByName(propertyName: string): ModelPropertyDescriptor {
@@ -63,6 +65,7 @@ export abstract class BaseViewModel {
   }
 
   protected setUpDeps() {
+    this.esm = this.injector.get(EntitySchemaManagerService);
     this.dataService = this.injector.get(DataService);
     this.translate = this.injector.get(TranslateService);
     this.formBuilder = this.injector.get(FormBuilder);
@@ -74,10 +77,8 @@ export abstract class BaseViewModel {
   }
 
   protected createEntity(entitySchemaName: string): BaseModel {
-    const models = Reflect.getMetadata('models', Object.prototype) as Array<any>;
-    const model = models.find(x => x.name === entitySchemaName);
-    const entity = Object.create(model.ctor.prototype);
-    return entity as BaseModel;
+    const entity = this.esm.createEntity(entitySchemaName);
+    return entity;
   }
 
   protected setEntityColumnsValues(entity: BaseModel, values) {
