@@ -27,7 +27,8 @@ export class Order extends BaseModel {
   @ModelProperty({
     caption: 'orders.caption.number',
     dataValueType: DataValueType.Text,
-    readOnly: true
+    readOnly: true,
+    defaultValue: () => new Date().valueOf()
   })
   number: string;
 

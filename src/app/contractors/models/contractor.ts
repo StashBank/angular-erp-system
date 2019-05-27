@@ -26,7 +26,8 @@ export class Contractor extends BaseModel {
   @ModelProperty({
     caption: 'contractors.caption.number',
     dataValueType: DataValueType.Text,
-    readOnly: true
+    readOnly: true,
+    defaultValue: () => new Date().valueOf()
   })
   number: string;
 
