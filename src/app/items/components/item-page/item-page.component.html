@@ -42,16 +42,7 @@
       </mat-grid-tile>
 
       <mat-grid-tile>
-        <mat-form-field>
-          <input matInput [placeholder]="'items.caption.contractor' | translate" formControlName="contractor" />
-          <button mat-button matSuffix mat-icon-button *ngIf="vm.form?.get('contractor').value"
-            (click)="vm.form.get('contractor').setValue(null)">
-            <mat-icon>clear</mat-icon>
-          </button>
-          <button mat-button matSuffix mat-icon-button (click)="vm.openLookup('Contractor', 'contractor', vm.contractorDisplayColumns)">
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-form-field>
+        <app-lookup-control formControlName="contractor" propertyName="contractor"></app-lookup-control>
       </mat-grid-tile>
   
       <mat-grid-tile [colspan]="vm.isMobile ? 1 : 2">

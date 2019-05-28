@@ -101,6 +101,18 @@ export abstract class BasePageViewModel extends BaseViewModel {
     });
   }
 
+  public openLookupDialog(entity: BaseModel, displayedColumns: Array<{ path: string, title: string }>): Observable<any> {
+    const collectionName = entity.getCollectionName();
+    const dialogRef = this.dialog.open(LookupDialogComponent, {
+      width: this.isMobile ? '320px' : '800px',
+      data: {
+        collectionName,
+        displayedColumns
+      } as DialogData
+    });
+    return dialogRef.afterClosed();
+  }
+
   protected initForm() {
     const properties = this.entity.getModelProperties().map(x => x.toString());
     this.form = this.createForm(properties, this.entitySchema);

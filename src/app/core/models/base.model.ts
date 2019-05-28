@@ -14,7 +14,7 @@ export class BaseModel {
   toString(): string {
     const displayColumnName = this.getDisplayColumnName();
     const stringValue = this[displayColumnName];
-    return stringValue;
+    return stringValue || '';
   }
 
   getModelDescriptor(): ModelDescriptor {

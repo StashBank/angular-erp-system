@@ -67,8 +67,8 @@ export class Order extends BaseModel {
     dataValueType: DataValueType.Lookup,
     dataValueTypeConfig: {
       refModel: Customer,
-      displayColumns: ['code', 'phone', 'email'],
-      columns: ['code', 'phone', 'email'],
+      displayColumns: ['name', 'phone', 'email'],
+      columns: ['name', 'phone', 'email'],
     } as LookupConfig
   })
   customer: Customer;

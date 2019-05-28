@@ -1,11 +1,8 @@
 import { ItemFeature } from './item-feature';
 import { ItemType } from '../enums/item-type.enum';
-import { Customer } from '../../customers/models/customer';
 import { Model } from '../../core/decorators/model.decorator';
 import { ModelProperty, DataValueType, LookupConfig, DropDownConfig } from '../../core/decorators/property.decorator';
 import { BaseModel } from '../../core/models/base.model';
-import { Validators } from '@angular/forms';
-import { CustomerType } from '../../customers/enums/customer-type.enum';
 import { Contractor } from 'src/app/contractors/models/contractor';
 
 @Model({
@@ -67,10 +64,9 @@ export class Item extends BaseModel {
     caption: 'items.caption.contractor',
     dataValueType: DataValueType.Lookup,
     dataValueTypeConfig: {
-      refModel: Customer,
-      displayColumns: ['code', 'phone', 'email'],
-      columns: ['code', 'phone', 'email'],
-      filters: [['type', '===', CustomerType.Company]]
+      refModel: Contractor,
+      displayColumns: ['phone', 'email', 'address'],
+      columns: ['phone', 'email']
     } as LookupConfig
   })
   contractor: Contractor;

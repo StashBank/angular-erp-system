@@ -7,29 +7,11 @@
     <mat-grid-list [cols]="vm.isMobile ? 1 : 2" rowHeight="64px">
 
       <mat-grid-tile>
-        <mat-form-field>
-          <input matInput [placeholder]="'stocks.caption.item' | translate" formControlName="item" />
-          <button mat-button matSuffix mat-icon-button *ngIf="vm.form?.get('item').value"
-            (click)="vm.form.get('item').setValue(null)">
-            <mat-icon>clear</mat-icon>
-          </button>
-          <button mat-button matSuffix mat-icon-button (click)="vm.openLookup('items', 'item', vm.itemsDisplayedColumns)">
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-form-field>
+        <app-lookup-control formControlName="item" propertyName="item"></app-lookup-control>
       </mat-grid-tile>
 
       <mat-grid-tile>
-        <mat-form-field>
-          <input matInput [placeholder]="'stocks.caption.store' | translate" formControlName="store" />
-          <button mat-button matSuffix mat-icon-button *ngIf="vm.form?.get('store').value"
-            (click)="vm.form.get('store').setValue(null)">
-            <mat-icon>clear</mat-icon>
-          </button>
-          <button mat-button matSuffix mat-icon-button (click)="vm.openLookup('stores', 'store', vm.storesDisplayedColumns)">
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-form-field>
+        <app-lookup-control formControlName="store" propertyName="store"></app-lookup-control>
       </mat-grid-tile>
       
       <mat-grid-tile>

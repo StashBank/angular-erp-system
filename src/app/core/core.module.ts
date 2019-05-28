@@ -35,6 +35,8 @@ import { LookupDialogComponent } from './components/lookup-dialog/lookup-dialog.
 
 import { environment } from '../../environments/environment';
 import { BaseDetailComponent } from './components/base-detail/base-detail.component';
+import { LookupControlComponent } from './components/lookup-control/lookup-control.component';
+import { DropDownControlComponent } from './components/drop-down-control/drop-down-control.component';
 
 @NgModule({
   imports: [
@@ -95,8 +97,17 @@ import { BaseDetailComponent } from './components/base-detail/base-detail.compon
     BasePageComponent,
     LookupDialogComponent,
     BaseDetailComponent,
+    LookupControlComponent,
+    DropDownControlComponent,
   ],
-  declarations: [BaseSectionComponent, BasePageComponent, LookupDialogComponent, BaseDetailComponent],
+  declarations: [
+    BaseSectionComponent,
+    BasePageComponent,
+    LookupDialogComponent,
+    BaseDetailComponent,
+    LookupControlComponent,
+    DropDownControlComponent,
+  ],
   entryComponents: [LookupDialogComponent],
   providers: [
     { provide: TranslateService, useClass: AppTranslateService }

@@ -1,0 +1,10 @@
+<mat-form-field>
+  <input matInput [placeholder]="entitySchemaColumn?.caption | translate" [value]="value" />
+  <button mat-button matSuffix mat-icon-button *ngIf="value" (click)="setValue(null)">
+    <mat-icon>clear</mat-icon>
+  </button>
+  <button mat-button matSuffix mat-icon-button (click)="openLookup()">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
+    
