@@ -7,14 +7,7 @@
     <mat-grid-list [cols]="vm.isMobile ? 1 : 3" rowHeight="64px">
 
       <mat-grid-tile>
-        <mat-form-field>
-          <mat-label>{{ 'orders.caption.type' | translate }}</mat-label>
-          <mat-select formControlName="type">
-            <mat-option *ngFor="let type of vm.orderTypes" [value]="type.value">
-              {{type.name | translate}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <app-drop-down-control formControlName="type" propertyName="type"></app-drop-down-control>
       </mat-grid-tile>
 
       <mat-grid-tile>

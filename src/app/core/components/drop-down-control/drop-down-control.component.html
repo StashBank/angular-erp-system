@@ -1,3 +1,8 @@
-<p>
-  drop-down-control works!
-</p>
+<mat-form-field>
+  <mat-label>{{entitySchemaColumn?.caption | translate}}</mat-label>
+  <mat-select [(value)]="selected">
+    <mat-option *ngFor="let enum of enums" [value]="enum.value">
+      <span>{{enum.name | translate}}</span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -36,7 +36,8 @@ export class Customer extends BaseModel {
     caption: 'customers.caption.type',
     dataValueType: DataValueType.DropDown,
     dataValueTypeConfig: {
-      refModel: CustomerType
+      refModel: CustomerType,
+      translatePath: 'customers.enums.type'
     } as DropDownConfig,
     required: true
   })

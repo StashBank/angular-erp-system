@@ -22,6 +22,7 @@ export class DropDownConfig {
   refModel: Function | Object;
   filters?: any;
   columns?: Array<string>;
+  translatePath?: string;
 }
 
 export class LookupConfig extends DropDownConfig {

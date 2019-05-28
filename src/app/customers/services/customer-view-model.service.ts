@@ -11,11 +11,6 @@ export class CustomerViewModelService extends BasePageViewModel {
   protected entitySchemaName = 'Customer';
   protected entity = new Customer();
 
-  customerTypes: Array<{ name: string, value: string }> = [
-    { value: CustomerType.Company.toString(), name: 'customers.enums.type.company' },
-    { value: CustomerType.Person.toString(), name: 'customers.enums.type.person' },
-  ];
-
   public get subTitle$(): Observable<string> {
     return this.id
       ? this.translate.get('common.edit', { value: this.entity && this.entity.name })

@@ -14,12 +14,6 @@ export class ItemViewModelService extends BasePageViewModel {
 
   protected entitySchemaName = 'Item';
   protected entity = new Item();
-  private featureEntity = new ItemFeature();
-
-  itemTypes: Array<{ name: string, value: string }> = [
-    { value: ItemType.Goods.toString(), name: 'items.enums.type.goods' },
-    { value: ItemType.Services.toString(), name: 'items.enums.type.services' },
-  ];
 
   public get subTitle$(): Observable<string> {
     return this.id

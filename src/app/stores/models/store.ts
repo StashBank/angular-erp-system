@@ -2,7 +2,7 @@ import { StoreType } from '../enums/store-type.enum';
 import { Stock } from '../../stocks/models/stock';
 import { Model } from '../../core/decorators/model.decorator';
 import { BaseModel } from '../../core/models/base.model';
-import { ModelProperty, DataValueType, DropDownConfig } from '../../core/decorators/property.decorator';
+import { ModelProperty, DataValueType, DropDownConfig, LookupConfig } from '../../core/decorators/property.decorator';
 import { Validators } from '@angular/forms';
 
 @Model({
@@ -59,7 +59,10 @@ export class Store extends BaseModel {
 
   @ModelProperty({
     caption: 'stores.caption.stocks',
-    dataValueType: DataValueType.Array
+    dataValueType: DataValueType.Array,
+    dataValueTypeConfig: {
+      refModel: Stock
+    } as LookupConfig
   })
   stocks?: Array<Stock>;
 

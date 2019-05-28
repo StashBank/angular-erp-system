@@ -23,10 +23,6 @@ export class OrderViewModelService extends BasePageViewModel {
 
   entitySchemaName = 'Order';
   entity = new Order();
-  orderTypes: Array<{ name: string, value: string }> = [
-    { value: OrderType.Inbound.toString(), name: 'Inbound' },
-    { value: OrderType.Outbound.toString(), name: 'Outbound' },
-  ];
 
   public get subTitle$(): Observable<string> {
     return this.id
