@@ -49,7 +49,7 @@ export class EntitySchemaManagerService {
 
   // TODO: refactoring
   public setEntityColumnValue(entity: BaseModel, key: string, value) {
-    if (value && value.constructor.name === 'Timestamp') {
+    if (value && value.toDate && value.toDate.constructor === Function) {
       value = value.toDate();
     }
     const propertyMetaData = entity.getPropertyDescriptor(key);

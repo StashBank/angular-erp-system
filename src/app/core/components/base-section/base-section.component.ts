@@ -1,5 +1,6 @@
 import { BaseSectionViewModel } from '../../view-models/base-section-view-model.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-base-section',
@@ -8,12 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseSectionComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(
     public vm: BaseSectionViewModel
   ) { }
 
   ngOnInit() {
     this.vm.init();
+    this.vm.sort = this.sort;
   }
 
 }

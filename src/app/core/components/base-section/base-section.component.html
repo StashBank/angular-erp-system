@@ -11,11 +11,11 @@
 <div style="padding-left: 24px; font-size: x-large">
   <div class="mat-elevation-z8">
     <!-- TODO: try use https://stackblitz.com/edit/mat-table-responsive -->
-    <mat-table [dataSource]="vm.dataSource">
+    <mat-table [dataSource]="vm.dataSource" matSort>
       <!-- Columns -->
       <div *ngFor="let column of vm.columnsToDisplay">
         <ng-container [matColumnDef]="column">
-          <mat-header-cell *matHeaderCellDef>{{ vm.getColumnCaption(column) | async }}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>{{ vm.getColumnCaption(column) | async }}</mat-header-cell>
           <mat-cell *matCellDef="let element" [attr.data-label]="vm.getColumnCaption(column) | async" (dblclick)="vm.edit(element)">
             <span *ngIf="vm.isDate(element[column]); then dateSpan else span"></span>
             <ng-template  #span>{{(element[column] || '').toString() | translate }}</ng-template>

@@ -27,6 +27,7 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
+  MatSortModule,
 } from '@angular/material';
 import { BaseSectionComponent } from './components/base-section/base-section.component';
 import { BasePageComponent } from './components/base-page/base-page.component';
@@ -61,6 +62,7 @@ import { DropDownControlComponent } from './components/drop-down-control/drop-do
     MatSelectModule,
     MatDialogModule,
     MatExpansionModule,
+    MatSortModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -89,6 +91,7 @@ import { DropDownControlComponent } from './components/drop-down-control/drop-do
     MatSelectModule,
     MatDialogModule,
     MatExpansionModule,
+    MatSortModule,
 
     AngularFireModule,
     AngularFirestoreModule,

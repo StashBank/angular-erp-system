@@ -1,5 +1,5 @@
 import { BaseViewModel } from './base-view-model.service';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSort } from '@angular/material';
 import { BaseModel } from '../models/base.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,6 +9,7 @@ export abstract class BaseSectionViewModel extends BaseViewModel {
   dataSource: MatTableDataSource<BaseModel>;
   saveButtonHidden: boolean;
   displayedColumns: Array<string>;
+  sort: MatSort;
 
   get columnsToDisplay(): Array<string> {
     // tslint:disable-next-line:no-non-null-assertion
@@ -37,9 +38,10 @@ export abstract class BaseSectionViewModel extends BaseViewModel {
         })
       )
     )
-    .subscribe(
-      data => this.dataSource = new MatTableDataSource(data)
-    );
+    .subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.sort = this.sort;
+    });
   }
 
   onNewButtonClick() {
