@@ -44,6 +44,9 @@ export class Transaction extends BaseModel {
   @ModelProperty({
     caption: 'transactions.caption.from',
     dataValueType: DataValueType.Lookup,
+    dataValueTypeConfig: {
+      refModel: Store
+    } as LookupConfig,
     readOnly: true
   })
   from: Store;
@@ -51,6 +54,9 @@ export class Transaction extends BaseModel {
   @ModelProperty({
     caption: 'transactions.caption.to',
     dataValueType: DataValueType.Lookup,
+    dataValueTypeConfig: {
+      refModel: Customer
+    } as LookupConfig,
     readOnly: true
   })
   to: Customer;
@@ -65,6 +71,9 @@ export class Transaction extends BaseModel {
   @ModelProperty({
     caption: 'transactions.caption.order',
     dataValueType: DataValueType.Lookup,
+    dataValueTypeConfig: {
+      refModel: Order
+    } as LookupConfig,
     readOnly: true
   })
   order: Order;
