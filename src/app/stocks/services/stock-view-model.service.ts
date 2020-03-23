@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Inject } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
@@ -33,7 +33,7 @@ export class StockViewModelService extends BasePageViewModel {
       : this.translate.get('common.create-new');
   }
 
-  constructor(injector: Injector, protected stockService: StockService) {
+  constructor(@Inject(Injector) injector: Injector, protected stockService: StockService) {
     super(injector);
   }
 

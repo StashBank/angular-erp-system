@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Inject } from '@angular/core';
 import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
 import { Transaction } from '../models/transaction';
 import { TransactionService } from './transaction.service';
@@ -14,7 +14,7 @@ export class TransactionViewModelService extends BasePageViewModel {
     return this.translate.get('common.view');
   }
 
-  constructor(injector: Injector, protected transactionService: TransactionService) {
+  constructor(@Inject(Injector) injector: Injector, protected transactionService: TransactionService) {
     super(injector);
   }
 

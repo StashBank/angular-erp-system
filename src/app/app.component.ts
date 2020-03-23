@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 })
 export class AppComponent implements OnDestroy {
 
-  @ViewChild('snav') snavRef: MatSidenav;
+  @ViewChild('snav', { static: true }) snavRef: MatSidenav;
 
   mobileQuery: MediaQueryList;
   fillerContent = 'test';
@@ -24,6 +24,7 @@ export class AppComponent implements OnDestroy {
     { title: 'common.menu.stores', path: 'stores' },
     { title: 'common.menu.stocks', path: 'stocks' },
     { title: 'common.menu.transactions', path: 'transactions' },
+    { title: 'common.menu.profile', path: 'profile' },
   ];
   langs: Array<{ title: string, value: string }> = [
     { title: 'EN', value: 'en-US' },

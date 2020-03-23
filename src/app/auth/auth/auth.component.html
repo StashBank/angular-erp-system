@@ -1,0 +1,5 @@
+
+<app-login *ngIf="!loggedIn; else profile"></app-login>
+<ng-template #profile>
+  <app-profile ></app-profile>
+</ng-template>

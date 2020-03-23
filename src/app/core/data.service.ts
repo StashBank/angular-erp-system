@@ -2,70 +2,38 @@ import { Injectable } from '@angular/core';
 import { Observable, of as observableOf, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { AngularFirestore } from '@angular/fire/firestore';
 import { BaseModel } from './models/base.model';
 import { Guid } from 'guid-typescript';
+import { FirebaseService } from './firebase/firebase.service';
 
 @Injectable()
-export abstract class DataService<T> {
+export abstract class DataService<T> extends FirebaseService<T> {
 
   abstract collectionName: string;
 
-  constructor(
-    protected firestore: AngularFirestore
-  ) { }
-
   getAll(): Observable<Array<T>> {
-    return this.firestore.collection(this.collectionName)
-    .snapshotChanges()
-    .pipe(
-      map(
-        data =>  data.map(i => {
-          return {
-            ...i.payload.doc.data(),
-            id: i.payload.doc.id,
-          } as any;
-        })
-      )
-    );
+    return super.getAll();
   }
 
   getById(id: string): Observable<T> {
-    return this.firestore.doc<T>(`${this.collectionName}/${id}`).valueChanges().pipe(
-      map((item: any) => {
-        if (item) {
-          item.id = id;
-        }
-        return item;
-      })
-    );
+    return super.getById(id);
   }
 
-  create(dto: any): Observable<string> {
+  create(dto: any): Observable<T> {
     dto = this.prepareDto(dto);
     if (!dto.id) {
       dto.id = Guid.create().toString();
     }
-    const docRef = this.firestore.collection(this.collectionName).doc(dto.id);
-    return from(docRef.set(dto))
-      .pipe(
-        map(() => dto.id)
-      );
+    return super.create(dto);
   }
 
   update(id: string, dto: T): Observable<any> {
     dto = this.prepareDto(dto);
-    const docRef = this.firestore.collection(this.collectionName).doc(id);
-    return from(docRef.set(dto))
-      .pipe(
-        map(() => id)
-      );
+    return super.update(id, dto);
   }
 
   remove(id: string): Observable<any> {
-    return from(
-      this.firestore.doc<T>(`${this.collectionName}/${id}`).delete()
-    );
+    return super.remove(id);
   }
 
   protected prepareDto(dto): any {

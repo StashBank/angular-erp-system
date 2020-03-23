@@ -9,7 +9,7 @@ import { MatSort } from '@angular/material';
 })
 export class BaseSectionComponent implements OnInit {
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     public vm: BaseSectionViewModel

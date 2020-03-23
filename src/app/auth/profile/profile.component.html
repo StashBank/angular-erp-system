@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-content>
+    <div class="wrap">
+      <div class="col img">
+        <div class="profile-item" *ngIf="profile.photoURL">
+          <div name="photo">
+            <img [src]="profile.photoURL" />
+          </div>
+        </div>
+      </div>
+      <div class="col profile-info">
+        <div class="profile-item">
+          <label for="displayName">{{ 'profile.label.display-name' | translate }}</label>
+          <div name="displayName"> {{ profile.displayName }}</div>
+        </div>
+        <div class="profile-item">
+          <label for="email">{{ 'profile.label.email' | translate }}</label>
+          <div name="email"> {{ profile.email }}</div>
+        </div>
+        <div class="profile-item">
+          <label for="phoneNumber">{{ 'profile.label.phone-number' | translate }}</label>
+          <div name="phoneNumber"> {{ profile.phoneNumber }}</div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="signOut()">{{ 'common.sign-out-button' | translate }}</button>
+  </mat-card-actions>
+</mat-card>

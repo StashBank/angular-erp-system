@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Inject } from '@angular/core';
 import { Validators, FormArray, FormGroup, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -21,7 +21,7 @@ export class ItemViewModelService extends BasePageViewModel {
       : this.translate.get('common.create-new');
   }
 
-  constructor(injector: Injector, protected itemService: ItemService) {
+  constructor(@Inject(Injector) injector: Injector, protected itemService: ItemService) {
     super(injector);
   }
 

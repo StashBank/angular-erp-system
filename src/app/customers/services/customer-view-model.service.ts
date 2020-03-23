@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Inject } from '@angular/core';
 import { BasePageViewModel } from '../../core/view-models/base-page-view-model.service';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer';
@@ -17,7 +17,7 @@ export class CustomerViewModelService extends BasePageViewModel {
       : this.translate.get('common.create-new');
   }
 
-  constructor(injector: Injector, protected customerService: CustomerService) {
+  constructor(@Inject(Injector) injector: Injector, protected customerService: CustomerService) {
     super(injector);
   }
 

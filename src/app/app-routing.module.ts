@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'stocks', loadChildren: './stocks/stocks.module#StocksModule' },
   { path: 'stores', loadChildren: './stores/stores.module#StoresModule' },
   { path: 'transactions', loadChildren: './transactions/transactions.module#TransactionsModule' },
+  { path: 'profile', loadChildren: './auth/auth.module#AuthModule' },
 ];
 
 @NgModule({

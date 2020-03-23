@@ -13,16 +13,15 @@ export class TransactionService extends DataService<Transaction> {
   getById(id: string): Observable<Transaction> {
     const query = super.getById(id);
     return query.pipe(
-      switchMap(transaction => {
-        return this.firestore.doc<Order>(`orders/${transaction.orderId}`)
-          .valueChanges()
-          .pipe(
-            map(order => {
-              transaction.order = order;
-              return transaction;
-            })
-        );
-      })
+      switchMap(transaction => this.db.collection('orders').doc(transaction.orderId).get()
+        .then(orderRef => {
+          const order = ({
+            id: orderRef.id,
+            ...orderRef.data()
+          } as unknown as Order);
+          transaction.order = order;
+          return transaction;
+        })),
     );
   }
 

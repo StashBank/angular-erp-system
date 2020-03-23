@@ -1,11 +1,8 @@
 import 'reflect-metadata';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -38,6 +35,11 @@ import { environment } from '../../environments/environment';
 import { BaseDetailComponent } from './components/base-detail/base-detail.component';
 import { LookupControlComponent } from './components/lookup-control/lookup-control.component';
 import { DropDownControlComponent } from './components/drop-down-control/drop-down-control.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/');
+}
 
 @NgModule({
   imports: [
@@ -64,9 +66,6 @@ import { DropDownControlComponent } from './components/drop-down-control/drop-do
     MatExpansionModule,
     MatSortModule,
 
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-
     TranslateModule.forRoot(),
   ],
   exports: [
@@ -92,9 +91,6 @@ import { DropDownControlComponent } from './components/drop-down-control/drop-do
     MatDialogModule,
     MatExpansionModule,
     MatSortModule,
-
-    AngularFireModule,
-    AngularFirestoreModule,
 
     BaseSectionComponent,
     BasePageComponent,

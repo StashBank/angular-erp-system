@@ -64,9 +64,9 @@ export abstract class BasePageViewModel extends BaseViewModel {
     if (this.id) {
       this.dataService.update(this.id, dto).subscribe(() => this.onSaved());
     } else {
-      this.dataService.create(dto).subscribe(id => {
+      this.dataService.create(dto).subscribe(x => {
         this.onSaved();
-        this.location.replaceState(`${this.collectionName}/edit/${id}`);
+        this.location.replaceState(`${this.collectionName}/edit/${x.id}`);
       });
     }
   }
